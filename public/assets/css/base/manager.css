@@ -1,0 +1,80 @@
+/*
+    Created on : Oct 02, 2015, 4:18:27 AM
+    Author     : phamtrong204
+*/
+
+.table_header {
+    background-color: #EFF3F8;
+    padding-top: 7px;
+}
+
+.select2-container .select2-selection {
+    border-radius: 0px;
+}
+
+.select2-search:after {
+    position: absolute;
+    top: 9px;
+    right: 10px;
+    left: auto;
+    width: 16px;
+    text-align: center;
+}
+
+.select2-selection.select2-selection--multiple .select2-search:after {
+    top: 3px;
+    right: 7px;
+}
+
+.select2-container.select2-container--focus .select2-selection {
+    border: 1px solid #f59942;
+    outline: 0;
+}
+
+.select2-container .select2-selection--multiple {
+    height: 28px;
+    min-height: 28px;
+}
+
+.select2-container .select2-search--inline .select2-search__field {
+    margin-top: 3px;
+}
+
+.select2-container .select2-selection--multiple .select2-selection__choice {
+    margin-top: 2px;
+}
+
+.select2-container .select2-selection--multiple .select2-selection__choice {
+    background-image: none;
+    background-color: #91b8d0;
+    color: #FFFFFF;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: normal;
+    margin-right: 3px;
+    line-height: 22px;
+    padding: 0px 8px 0px 0px;
+    position: relative;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease 0s;
+    vertical-align: baseline;
+    white-space: nowrap;
+    border: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-radius: 0;
+}
+
+.select2-container .select2-selection--multiple .select2-selection__choice__remove {
+    color: #fff;
+    font-size: 17px;
+    line-height: 17px;
+    vertical-align: -1px;
+    margin: 1px;
+    padding: 1px 2px 2px 2px;
+}
+
+.select2-container .select2-selection--multiple .select2-selection__choice__remove:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #fff;
+}

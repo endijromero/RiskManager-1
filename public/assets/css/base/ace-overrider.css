@@ -1,0 +1,24 @@
+.btn.active.focus,
+.btn.active:focus,
+.btn.active:hover,
+.btn:active.focus,
+.btn:active:focus,
+.btn:active:hover,
+.open > .dropdown-toggle.btn.focus,
+.open > .dropdown-toggle.btn:focus,
+.open > .dropdown-toggle.btn:hover {
+    border-color: transparent;
+}
+
+.jGrowl-notification .jGrowl-close {
+    position: absolute;
+    right: 11px;
+    top: 11px;
+}
+
+.jGrowl-closer,
+.jGrowl-notification {
+    opacity: 1;
+    box-shadow: 1px 1px 2px 0px #666;
+    border-radius: 1px;
+}
