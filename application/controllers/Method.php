@@ -8,19 +8,19 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Class Risk_type
+ * Class Method
  */
-class Risk_type extends Manager_base {
+class Method extends Manager_base {
     public function __construct() {
         parent::__construct();
     }
 
     public function setting_class() {
         $this->name = Array(
-            "class"  => "risk_type",
-            "view"   => "risk_type",
-            "model"  => "m_risk_type",
-            "object" => "Loại Rủi Ro",
+            "class"  => "method",
+            "view"   => "method",
+            "model"  => "m_method",
+            "object" => "Phương pháp xử lí Rủi Ro",
         );
     }
 }

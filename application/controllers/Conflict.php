@@ -20,7 +20,7 @@ class Conflict extends Manager_base {
             "class"  => "conflict",
             "view"   => "conflict",
             "model"  => "m_conflict",
-            "object" => "Xung đột",
+            "object" => "Xung Đột",
         );
     }
 }

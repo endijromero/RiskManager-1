@@ -52,16 +52,6 @@ class M_risk extends Crud_manager {
             ],
             'table'    => TRUE,
         ],
-        'method_quantity'    => [
-            'field'    => 'method_quantity',
-            'db_field' => 'method_quantity',
-            'label'    => 'SL phương pháp ',
-            'rules'    => '',
-            'form'     => [
-                'type' => 'number',
-            ],
-            'table'    => TRUE,
-        ],
         'description'      => [
             'field'    => 'description',
             'db_field' => 'description',

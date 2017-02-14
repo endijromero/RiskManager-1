@@ -24,20 +24,10 @@ class M_project extends Crud_manager
             'field' => 'name',
             'db_field' => 'name',
             'label' => 'Tên dự án',
-            'rules' => '',
+            'rules' => 'required',
             'form' => TRUE,
             'filter' => [
                 'type' => 'text',
-            ],
-            'table' => TRUE,
-        ],
-        'risk_quantity' => [
-            'field' => 'risk_quantity',
-            'db_field' => 'risk_quantity',
-            'label' => 'SL rủi ro',
-            'rules' => '',
-            'form' => [
-                'type' => 'number',
             ],
             'table' => TRUE,
         ],

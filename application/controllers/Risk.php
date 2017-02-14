@@ -20,7 +20,7 @@ class Risk extends Manager_base {
             "class"  => "risk",
             "view"   => "risk",
             "model"  => "m_risk",
-            "object" => "Rủi ro",
+            "object" => "Rủi Ro",
         );
     }
 }

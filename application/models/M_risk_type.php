@@ -24,7 +24,7 @@ class M_risk_type extends Crud_manager
             'field' => 'name',
             'db_field' => 'name',
             'label' => 'Tên loại rủi ro',
-            'rules' => '',
+            'rules' => 'required',
             'form' => TRUE,
             'filter' => [
                 'type' => 'text',
