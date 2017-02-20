@@ -10,7 +10,7 @@ class M_conflict extends Crud_manager
 {
     protected $_table = 'conflicts';
     public $schema = [
-        'project_id	' => [
+        'project_id' => [
             'field' => 'project_id',
             'label' => 'Mã dự án',
             'db_field' => 'project_id',
