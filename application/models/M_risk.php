@@ -9,7 +9,7 @@
 class M_risk extends Crud_manager {
     protected $_table = 'risks';
     public $schema = [
-        'project_id	'   => [
+        'project_id'   => [
             'field'    => 'project_id',
             'label'    => 'Mã dự án',
 //            'db_field' => 'project_id',
@@ -22,7 +22,7 @@ class M_risk extends Crud_manager {
             ],
             'table'    => TRUE,
         ],
-        'risk_type_id	' => [
+        'risk_type_id' => [
             'field'    => 'risk_type_id',
             'label'    => 'Mã loại rủi ro',
 //            'db_field' => 'risk_type_id',
