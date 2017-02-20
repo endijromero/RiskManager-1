@@ -4,48 +4,37 @@
             <h5 class="widget-title bigger-125">
                 <i class="ace-icon fa fa-table"></i>
                 Chi Tiết Dự Án
+                <?php echo $detail_risk->name ?>
             </h5>
             <div class="widget-toolbar">
                 <a href="#" data-action="collapse">
                     <i class="ace-icon fa fa-chevron-up"></i>
                 </a>
             </div>
-
             <div class="widget-toolbar actions_content e_actions_content">
-                <a href="<?php echo site_url('hint') ?>" class="btn btn-success btn-sm">
-                    <i class="ace-icon fa fa-leaf"></i>
-                    Đưa ra gợi ý
-                </a>
-            </div>
-            <div class="widget-toolbar actions_content e_actions_content">
-                <a href="<?php echo site_url('risk_type') ?>" class="btn btn-success btn-sm">
-                    <i class="ace-icon fa fa-leaf"></i>
-                    Quản lí loại rủi ro
-                </a>
-            </div> <div class="widget-toolbar actions_content e_actions_content">
-                <a href="<?php echo site_url('risk') ?>" class="btn btn-success btn-sm">
-                    <i class="ace-icon fa fa-leaf"></i>
-                    Quản lí rủi ro
+                <a href="<?php echo site_url('method') ?>" class="btn btn-success btn-sm">
+                    <i class="ace-icon fa fa-dashboard"></i>
+                    Quản lí phương án xử lí rủi ro
                 </a>
             </div>
         </div>
         </br>
         <div class="widget-body">
             <div class="form-group">
-                <label class="col-xs-4 contact-label-title row-title">Mã dự án</label>
-                <input type="text" class="shadow_input contact_input" name="code">
+                <label class="col-xs-4 contact-label-title row-title">Mã rủi ro</label>
+                <span><?php echo $detail_risk->code; ?></span>
             </div>
             <div class="form-group">
-                <label class="col-xs-4 contact-label-title row-title">Tên dự án</label>
-                <input type="text" class="shadow_input contact_input" name="name">
+                <label class="col-xs-4 contact-label-title row-title">Tên rủi ro</label>
+                <span><?php echo $detail_risk->name; ?></span>
             </div>
             <div class="form-group">
-                <label class="col-xs-4 ">Số lượng rủi ro</label>
-                <input type="text" class="shadow_input contact_input" name="risk_quantity">
+                <label class="col-xs-4 ">Số phương án xử lí</label>
+                <span><?php echo $detail_risk->method_quantity == NULL ? 0 : $detail_risk->method_quantity; ?></span>
             </div>
             <div class="form-group">
                 <label class="col-xs-4 contact-label-title row-title">Mô tả</label>
-                <input type="text" class="shadow_input contact_input" name="description">
+                <span><?php echo $detail_risk->description; ?></span>
             </div>
 
         </div>

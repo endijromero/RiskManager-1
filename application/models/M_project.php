@@ -18,7 +18,10 @@ class M_project extends Crud_manager
             'filter' => [
                 'type' => 'text',
             ],
-            'table' => TRUE,
+            'table'  => [
+                'callback_render_data' => "add_link",
+            ],
+
         ],
         'name' => [
             'field' => 'name',
@@ -29,7 +32,17 @@ class M_project extends Crud_manager
             'filter' => [
                 'type' => 'text',
             ],
-            'table' => TRUE,
+            'table'  => [
+                'callback_render_data' => "add_link",
+            ],
+        ],
+        'risk_quantity	'      => [
+            'field'    => 'risk_quantity',
+            'db_field' => 'risk_quantity',
+            'label'    => 'Số lượng rủi ro',
+            'rules'    => '',
+//            'form'     => TRUE,
+            'table'    => TRUE,
         ],
         'description' => [
             'field' => 'description',

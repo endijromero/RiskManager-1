@@ -15,7 +15,7 @@ class M_conflict extends Crud_manager
             'label' => 'Mã dự án',
             'db_field' => 'project_id',
             'rules' => 'required',
-            'form' => TRUE,
+//            'form' => TRUE,
             'filter' => [
                 'type' => 'text',
             ],
@@ -53,7 +53,7 @@ class M_conflict extends Crud_manager
         'method_1_id' => [
             'field' => 'method_1_id',
             'db_field' => 'method_1_id',
-            'label' => 'Phương pháp',
+            'label' => 'Phương pháp 1',
             'rules' => '',
             'form' => TRUE,
             'table' => TRUE,
@@ -61,7 +61,7 @@ class M_conflict extends Crud_manager
         'method_2_id' => [
             'field' => 'method_2_id',
             'db_field' => 'method_2_id',
-            'label' => 'Phương pháp',
+            'label' => 'Phương pháp 2',
             'rules' => '',
             'form' => TRUE,
             'table' => TRUE,
@@ -78,5 +78,6 @@ class M_conflict extends Crud_manager
     {
         parent::__construct();
 //        $this->before_get['join_all'] = "join_user_table";
+
     }
 }

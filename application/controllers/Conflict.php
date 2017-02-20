@@ -23,4 +23,8 @@ class Conflict extends Manager_base {
             "object" => "Xung Đột",
         );
     }
+    public function add($data = Array(), $data_return = Array()) {
+        $data["view_file"] = 'admin/font/conflict_add_form';
+        return parent::add($data, $data_return);
+    }
 }

@@ -8,7 +8,7 @@
  */
 class M_risk_type extends Crud_manager
 {
-    protected $_table = 'projects';
+    protected $_table = 'risk_types';
     public $schema = [
         'code' => [
             'field' => 'code',

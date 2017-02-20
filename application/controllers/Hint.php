@@ -8,22 +8,25 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Class Home
+ * Class Hint
  */
-class Home extends Manager_base {
+class Hint extends Manager_base {
     public function __construct() {
         parent::__construct();
     }
 
     public function setting_class() {
         $this->name = Array(
-            "class"  => "home",
-            "view"   => "home",
-            "model"  => "m_project",
+            "class"  => "hint",
+            "view"   => "hint",
+            "model"  => "",
             "object" => "Dự Án",
         );
     }
-    public function add_link($origin_column_value, $column_name, &$record, $column_data, $caller) {
-        return '<a href="projects/detail/'.$record->id.'">'.$origin_column_value.'</a>';
+
+    public function project($id) {
+        $data=NULL;
+        $content = $this->load->view("admin/font/hint", $data, TRUE);
+        $this->show_page($content);
     }
 }

@@ -15,7 +15,7 @@ class M_method extends Crud_manager
             'db_field' => 'risk_id',
             'label' => 'Mã rủi ro',
             'rules' => '',
-            'form' => TRUE,
+//            'form' => TRUE,
             'filter' => [
                 'type' => 'text',
             ],

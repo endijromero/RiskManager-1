@@ -22,7 +22,7 @@
         <!-- #section:basics/navbar.layout.brand -->
         <a href="#" class="navbar-brand">
             <small>
-                <i class="ace-icon fa fa-dashboard green"></i>
+                <i class="ace-icon fa fa-leaf"></i>
                 Risk Manager System
             </small>
         </a>

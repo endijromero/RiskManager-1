@@ -314,7 +314,7 @@ abstract class Manager_base extends Admin_layout {
         $default_data["add_link"] = $this->url["add"];
         $default_data["delete_list_link"] = site_url($this->url["delete"]);
         $default_data["ajax_data_link"] = site_url($this->name["class"] . "/ajax_list_data");
-        $default_data["title"] = "Quản lý " . $this->name["object"];
+        $default_data["title"] = "Quản Lý " . $this->name["object"];
         $default_data["view_file"] = $this->path_theme_view . "base_manager/manager_container";
         $data = array_merge($default_data, $data);
         $view_file = $data["view_file"];

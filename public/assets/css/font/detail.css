@@ -1,0 +1,19 @@
+.form-group {
+    margin-bottom: 7px;
+}
+.shadow_input {
+    line-height: 30px;
+    box-shadow: inset 1px 1px 2px 0px #CCCCCC;
+    border: 1px solid #C4C4C4;
+    padding-left: 7px;
+    padding-right: 7px;
+}
+.add-form-contact .contact_input {
+    width: 100%;
+}
+.label-title{
+    background-color: #0aa5df;
+}
+.select_button_list_risk {
+    width: 166px;
+}

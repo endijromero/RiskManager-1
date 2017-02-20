@@ -5,12 +5,12 @@
                 <div class="login-container">
                     <div class="center">
                         <h1>
-                            <i class="ace-icon fa fa-dashboard green"></i>
+                            <i class="ace-icon fa fa-leaf></i>
                             <span class="white" id="id-text2">Risk Manager System</span>
                         </h1>
                         <!--<h4 class="blue" id="id-company-text">&copy; 3TBK JSC</h4>-->
                     </div>
-
+                    ace-icon fa fa-dashboard green
                     <div class="space-6"></div>
 
                     <div class="position-relative">

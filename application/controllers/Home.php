@@ -23,4 +23,7 @@ class Home extends Manager_base {
             "object" => "Dự Án",
         );
     }
+    public function add_link($origin_column_value, $column_name, &$record, $column_data, $caller) {
+        return '<a href="projects/detail/'.$record->id.'">'.$origin_column_value.'</a>';
+    }
 }
