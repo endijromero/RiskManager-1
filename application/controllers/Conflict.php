@@ -9,10 +9,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * Class Conflict
+ *
+ * @property M_conflict model
+ * @property M_risk     m_risk
+ * @property M_method   m_method
  */
-class Conflict extends Manager_base {
+class Conflict extends Abs_child_manager {
     public function __construct() {
         parent::__construct();
+        $this->load_more_css("assets/css/font/detail.css");
+        $this->load_more_js("assets/js/front/conflict.js");
+        $this->load->model('m_risk');
+        $this->load->model('m_method');
     }
 
     public function setting_class() {
@@ -23,8 +31,19 @@ class Conflict extends Manager_base {
             "object" => "Xung Đột",
         );
     }
+
     public function add($data = Array(), $data_return = Array()) {
-        $data["view_file"] = 'admin/font/conflict_add_form';
+        $id = 1;
+        $data['list_risk'] = $this->m_risk->get_many_by(['project_id' => $id]);
+        $data["view_file"] = $this->name['view'] . '/conflict_add_form';
         return parent::add($data, $data_return);
+    }
+
+    public function get_method_child($id) {
+        $list_method = $this->m_method->get_many_by(['risk_id' => $id]);
+        echo json_encode([
+            'state' => 1,
+            'data'  => $list_method,
+        ]);
     }
 }

@@ -16,13 +16,9 @@
                     Thêm
                 </button>
             </div>
-
-            <div class="widget-toolbar actions_content e_actions_content">
-                <a href="<?php echo site_url('conflict') ?>" class="btn btn-success btn-sm">
-                    <i class="ace-icon fa fa-leaf"></i>
-                    Quản lí xung đột
-                </a>
-            </div>
+            <?php if (isset($toolbar)) {
+                echo $toolbar;
+            } ?>
         </div>
         <div class="widget-body">
             <div class="e_filter clearfix padding-10">

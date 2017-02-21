@@ -303,7 +303,6 @@ abstract class Manager_base extends Admin_layout {
         //TODO: in developing
     }
 
-
     /**
      * Show manager table of manager object
      *
@@ -368,6 +367,7 @@ abstract class Manager_base extends Admin_layout {
             } else {
                 $data_return["callback"] = "get_manager_data_response";
             }
+            $data_return['record'] = $this->db->last_query();
             $data_return["state"] = 1;
 //            $data_return["data"] = $data;
             $data_return["html"] = $content;

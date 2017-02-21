@@ -76,7 +76,6 @@
 <script src="<?php echo base_url("assets/plugins-bower/autosize/dist/autosize.min.js"); ?>"></script>
 
 <script src="<?php echo base_url("assets/plugins-bower/moment/min/moment-with-locales.min.js"); ?>"></script>
-<script src="<?php echo base_url("assets/plugins-bower/moment-timezone/moment-timezone.js"); ?>"></script>
 <script src="<?php echo base_url("assets/plugins-bower/jquery.hotkeys/jquery.hotkeys.js"); ?>"></script>
 <script src="<?php echo base_url("assets/plugins-bower/gauge.js/dist/gauge.min.js"); ?>"></script>
 <script src="<?php echo base_url("assets/plugins-bower/bootbox.js/bootbox.js"); ?>"></script>
@@ -102,8 +101,7 @@
 <script src="<?php echo base_url("assets/plugins-bower/jqGrid/js/jquery.jqGrid.min.js"); ?>"></script>
 <script src="<?php echo base_url("assets/plugins-bower/jquery.maskedinput/dist/jquery.maskedinput.min.js"); ?>"></script>
 <script src="<?php echo base_url("assets/plugins-bower/jquery.nicescroll/dist/jquery.nicescroll.min.js"); ?>"></script>
-<script src="<?php echo base_url("assets/plugins-bower/jquery.sparkline/dist/jquery.sparkline.min.js"); ?>"></script>
-<script src="<?php echo base_url("assets/plugins-bower/jquery-colorbox/jquery.colorbox-min.js"); ?>"></script>
+ <script src="<?php echo base_url("assets/plugins-bower/jquery-colorbox/jquery.colorbox-min.js"); ?>"></script>
 <script src="<?php echo base_url("assets/plugins-bower/jquery-inputlimiter/jquery.inputlimiter.js"); ?>"></script>
 <script src="<?php echo base_url("assets/plugins-bower/jquery-knob/dist/jquery.knob.min.js"); ?>"></script>
 <script src="<?php echo base_url("assets/plugins-bower/jquery-mousewheel/jquery.mousewheel.min.js"); ?>"></script>

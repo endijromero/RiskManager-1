@@ -33,4 +33,5 @@ class Projects extends Manager_base {
         $this->load_more_css("assets/css/font/detail.css");
         $this->show_page($content);
     }
+
 }
