@@ -13,11 +13,11 @@ class M_method extends Abs_child_model {
         'risk_id'     => [
             'field'    => 'risk_id',
             'db_field' => 'risk_id',
-            'label'    => 'Mã rủi ro',
+            'label'    => 'id rủi ro',
             'rules'    => '',
-            'filter'   => [
-                'type' => 'text',
-            ],
+//            'filter'   => [
+//                'type' => 'text',
+//            ],
         ],
         'risk_code'   => [
             'field'    => 'risk_code',

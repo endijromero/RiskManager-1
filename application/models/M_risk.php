@@ -12,26 +12,26 @@ class M_risk extends Abs_child_model {
     public $schema = [
         'project_id'  => [
             'field'    => 'project_id',
-            'label'    => 'Mã dự án',
+            'label'    => 'id dự án',
 //            'db_field' => 'project_id',
             'rules'    => 'required',
-            'filter'   => [
-                'type' => 'text',
-            ],
+//            'filter'   => [
+//                'type' => 'text',
+//            ],
         ],
         'project_code'      => [
             'field'    => 'project_code',
             'label'    => 'Mã dự án',
             'db_field' => 'project_code',
             'rules'    => '',
-            'filter'   => [
-                'type' => 'text',
-            ],
+//            'filter'   => [
+//                'type' => 'text',
+//            ],
             'table'    => TRUE,
         ],
         'risk_type_id'    => [
             'field'  => 'risk_type_id',
-            'label'  => 'Mã loại rủi ro',
+            'label'  => 'id loại rủi ro',
             'db_field' => 'risk_type_id',
             'rules'  => '',
             'form'   => [

@@ -13,6 +13,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Home extends Manager_base {
     public function __construct() {
         parent::__construct();
+        $this->load->model('m_risk');
     }
 
     public function setting_class() {

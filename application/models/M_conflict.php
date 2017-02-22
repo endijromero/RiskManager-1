@@ -12,12 +12,12 @@ class M_conflict extends Abs_child_model {
     public $schema = [
         'project_id'      => [
             'field'    => 'project_id',
-            'label'    => 'Mã dự án',
+            'label'    => 'id dự án',
 //            'db_field' => 'project_id',
             'rules'    => '',
-            'filter'   => [
-                'type' => 'text',
-            ],
+//            'filter'   => [
+//                'type' => 'text',
+//            ],
         ],
         'project_code'    => [
             'field'    => 'project_code',
@@ -44,6 +44,9 @@ class M_conflict extends Abs_child_model {
             'rules'    => '',
             'form'     => TRUE,
             'table'    => TRUE,
+            'filter'   => [
+                'type' => 'text',
+            ],
         ],
         'description' => [
             'field'    => 'description',

@@ -36,9 +36,9 @@ class M_project extends Crud_manager
                 'callback_render_data' => "add_link",
             ],
         ],
-        'risk_quantity	'      => [
+        'risk_quantity'      => [
             'field'    => 'risk_quantity',
-            'db_field' => 'risk_quantity',
+//            'db_field' => 'risk_quantity',
             'label'    => 'Số lượng rủi ro',
             'rules'    => '',
 //            'form'     => TRUE,
@@ -58,11 +58,24 @@ class M_project extends Crud_manager
             'rules' => '',
             'table' => FALSE,
         ],
+        'project_id'=>[
+            'field' =>'project_id',
+            'db_field'=>'r.id',
+            'label'  => 'id dự án',
+            'rules'    => '',
+        ],
     ];
 
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
-//        $this->before_get['join_all'] = "join_user_table";
+        $this->before_get['default_before_get']='default_before_get';
+    }
+
+    public function default_before_get(){
+//        $this->db->query("select COUNT('r.id') as 'm.risk_quantity'");
+//        $this->db->group_by('m.id');
+//        $this->db->join('risks as r','m.id=r.project_id');
+
+
     }
 }
