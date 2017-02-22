@@ -51,14 +51,14 @@
                                 data-url="<?php echo site_url('conflict/get_method_child') ?>">
                             <option value="" selected disabled hidden>Chọn rủi ro</option>
                             <?php foreach ($list_risk as $item) { ?>
-                                <option value="<?php echo $item->id; ?>"><?php echo $item->name; ?></option>
+                                <option value="<?php echo $item->id; ?>"><?php echo $item->code; ?></option>
                             <?php } ?>
                         </select>
                         <select  name="method_2_id" class="e_select_method_child" style="display: none">
                             <option value="" selected disabled hidden>Chọn phương thức</option>
                             <?php if (isset($list_risk_child)) {
                                 foreach ($list_risk_child as $item) { ?>
-                                    <option value="<?php echo $item->id; ?>"><?php echo $item->name; ?></option>
+                                    <option value="<?php echo $item->id; ?>"><?php echo $item->code; ?></option>
                                 <?php }
                             } ?>
                         </select>

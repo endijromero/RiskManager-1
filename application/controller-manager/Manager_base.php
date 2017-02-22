@@ -159,6 +159,9 @@ abstract class Manager_base extends Admin_layout {
             }
             $data_return["data"] = $data;
             $data_return["error"] = $this->model->get_validate_error();
+            echo '<pre>';
+            var_dump($data_return);
+            exit();
             echo json_encode($data_return);
             return FALSE;
         }

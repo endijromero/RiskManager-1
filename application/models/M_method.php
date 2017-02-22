@@ -6,91 +6,96 @@
  * Date: 2/14/2017
  * Time: 6:19 PM
  */
-class M_method extends Crud_manager
-{
+class M_method extends Abs_child_model {
+    protected $_parent_field = 'risk_id';
     protected $_table = 'methods';
     public $schema = [
-        'risk_id' => [
-            'field' => 'risk_id',
+        'risk_id'     => [
+            'field'    => 'risk_id',
             'db_field' => 'risk_id',
-            'label' => 'Mã rủi ro',
-            'rules' => '',
-            'form' => TRUE,
+            'label'    => 'Mã rủi ro',
+            'rules'    => '',
+            'filter'   => [
+                'type' => 'text',
+            ],
+        ],
+        'risk_code'   => [
+            'field'    => 'risk_code',
+            'db_field' => 'risk_code',
+            'label'    => 'Mã rủi ro',
+            'rules'    => '',
+            'table'    => TRUE,
+        ],
+        'code'        => [
+            'field'  => 'code',
+            'label'  => 'Mã phương pháp',
+            'rules'  => 'required',
+            'form'   => TRUE,
             'filter' => [
                 'type' => 'text',
             ],
-            'table' => TRUE,
+            'table'  => TRUE,
         ],
-        'code' => [
-            'field' => 'code',
-            'label' => 'Mã phương pháp',
-            'rules' => 'required',
-            'form' => TRUE,
-            'filter' => [
-                'type' => 'text',
-            ],
-            'table' => TRUE,
-        ],
-        'name' => [
-            'field' => 'name',
+        'name'        => [
+            'field'    => 'name',
             'db_field' => 'name',
-            'label' => 'Tên phương pháp',
-            'rules' => '',
-            'form' => TRUE,
-            'filter' => [
+            'label'    => 'Tên phương pháp',
+            'rules'    => '',
+            'form'     => TRUE,
+            'filter'   => [
                 'type' => 'text',
             ],
-            'table' => FALSE,
+            'table'    => FALSE,
         ],
-        'cost' => [
-            'field' => 'cost',
+        'cost'        => [
+            'field'    => 'cost',
             'db_field' => 'cost',
-            'label' => 'Chi phí',
-            'rules' => '',
-            'form' => [
+            'label'    => 'Chi phí',
+            'rules'    => '',
+            'form'     => [
                 'type' => 'number',
             ],
-            'table' => TRUE,
+            'table'    => TRUE,
         ],
-        'diff' => [
-            'field' => 'diff',
+        'diff'        => [
+            'field'    => 'diff',
             'db_field' => 'diff',
-            'label' => 'Độ khó',
-            'rules' => '',
-            'form' => [
+            'label'    => 'Độ khó',
+            'rules'    => '',
+            'form'     => [
                 'type' => 'number',
             ],
-            'table' => TRUE,
+            'table'    => TRUE,
         ],
-        'priority' => [
-            'field' => 'priority',
+        'priority'    => [
+            'field'    => 'priority',
             'db_field' => 'priority',
-            'label' => 'Độ ưu tiên',
-            'rules' => '',
-            'form' => [
+            'label'    => 'Độ ưu tiên',
+            'rules'    => '',
+            'form'     => [
                 'type' => 'number',
             ],
-            'table' => TRUE,
+            'table'    => TRUE,
         ],
-        'time' => [
-            'field' => 'time',
+        'time'        => [
+            'field'    => 'time',
             'db_field' => 'time',
-            'label' => 'Thời gian xử lí - giờ',
-            'rules' => '',
-            'form' => [
+            'label'    => 'Thời gian xử lí - giờ',
+            'rules'    => '',
+            'form'     => [
                 'type' => 'number',
             ],
-            'table' => TRUE,
+            'table'    => TRUE,
         ],
         'description' => [
-            'field' => 'description',
+            'field'    => 'description',
             'db_field' => 'description',
-            'label' => 'Mô tả',
-            'rules' => '',
-            'form' => TRUE,
-            'table' => TRUE,
+            'label'    => 'Mô tả',
+            'rules'    => '',
+            'form'     => TRUE,
+            'table'    => TRUE,
         ],
-        'createdAt' => [
+        'createdAt'   => [
             'field' => 'createdAt',
             'label' => 'Ngày tạo',
             'rules' => '',
@@ -98,9 +103,13 @@ class M_method extends Crud_manager
         ],
     ];
 
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
-//        $this->before_get['join_all'] = "join_user_table";
+        $this->before_get['default_before_get'] = 'default_before_get';
+    }
+
+    public function default_before_get() {
+        $this->db->select($this->_table_alias . '.*, r.code as risk_code');
+        $this->db->join('risks as r', 'r.deleted=0 AND r.id=m.risk_id');
     }
 }

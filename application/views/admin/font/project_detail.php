@@ -13,19 +13,19 @@
             </div>
 
             <div class="widget-toolbar actions_content e_actions_content">
-                <a href="<?php echo site_url('hint/project/'.$detail_project->id) ?>" class="btn btn-success btn-sm  add_button">
+                <a href="<?php echo site_url('hint/manage/'.$detail_project->id) ?>" class="btn btn-success btn-sm  add_button">
                     <i class="ace-icon fa fa-plus-circle"></i>
                     Đưa ra gợi ý
                 </a>
             </div>
             <div class="widget-toolbar actions_content e_actions_content">
-                <a href="<?php echo site_url('risk_type') ?>" class="btn btn-success btn-sm">
+                <a href="<?php echo site_url('risk_type/manage/'.$detail_project->id) ?>" class="btn btn-success btn-sm">
                     <i class="fa fa-pied-piper"></i>
                     Quản lí loại rủi ro
                 </a>
             </div>
             <div class="widget-toolbar actions_content e_actions_content">
-                <a href="<?php echo site_url('risk') ?>" class="btn btn-success btn-sm">
+                <a href="<?php echo site_url('risk/manage/'.$detail_project->id) ?>" class="btn btn-success btn-sm">
                     <i class="ace-icon fa fa-dashboard"></i>
                     Quản lí rủi ro
                 </a>

@@ -12,7 +12,7 @@
                 </a>
             </div>
             <div class="widget-toolbar actions_content e_actions_content">
-                <a href="<?php echo site_url('method') ?>" class="btn btn-success btn-sm">
+                <a href="<?php echo site_url('method/manage/'.$risk_id) ?>" class="btn btn-success btn-sm">
                     <i class="ace-icon fa fa-dashboard"></i>
                     Quản lí phương án xử lí rủi ro
                 </a>

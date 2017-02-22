@@ -7,22 +7,32 @@
  * Time: 6:19 PM
  */
 class M_risk extends Abs_child_model {
+    protected $_parent_field = 'project_id';
     protected $_table = 'risks';
     public $schema = [
-        'project_id'      => [
-            'field'  => 'project_id',
-            'label'  => 'Mã dự án',
+        'project_id'  => [
+            'field'    => 'project_id',
+            'label'    => 'Mã dự án',
 //            'db_field' => 'project_id',
-            'rules'  => '',
-            'filter' => [
+            'rules'    => 'required',
+            'filter'   => [
                 'type' => 'text',
             ],
-            'table'  => TRUE,
+        ],
+        'project_code'      => [
+            'field'    => 'project_code',
+            'label'    => 'Mã dự án',
+            'db_field' => 'project_code',
+            'rules'    => '',
+            'filter'   => [
+                'type' => 'text',
+            ],
+            'table'    => TRUE,
         ],
         'risk_type_id'    => [
             'field'  => 'risk_type_id',
             'label'  => 'Mã loại rủi ro',
-//            'db_field' => 'risk_type_id',
+            'db_field' => 'risk_type_id',
             'rules'  => '',
             'form'   => [
                 'type' => 'number',
@@ -30,7 +40,14 @@ class M_risk extends Abs_child_model {
             'filter' => [
                 'type' => 'text',
             ],
-            'table'  => TRUE,
+
+        ],
+        'risk_type_code'    => [
+            'field'    => 'risk_type_code',
+            'label'    => 'Mã loại rủi ro',
+            'db_field' => 'risk_type_code',
+            'rules'    => '',
+            'table'    => TRUE,
         ],
         'code'            => [
             'field'  => 'code',
@@ -88,4 +105,18 @@ class M_risk extends Abs_child_model {
             'table' => FALSE,
         ],
     ];
+
+    public function __construct() {
+        parent::__construct();
+        $this->before_get['default_before_get']='default_before_get';
+//        var_dump($this->_parent_field);
+//        exit();
+    }
+
+    public function default_before_get(){
+        $this->db->select($this->_table_alias.'.*, p.code as project_code, r.code as risk_type_code');
+        $this->db->join('projects as p','p.deleted=0 AND p.id=m.project_id');
+        $this->db->join('risk_types as r', 'r.deleted=0 AND r.id=m.risk_type_id');
+    }
+
 }

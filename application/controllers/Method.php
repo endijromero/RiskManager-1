@@ -9,11 +9,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * Class Method
+ *
+ * @property M_method model
  */
-class Method extends Manager_base {
-    public function __construct() {
-        parent::__construct();
-    }
+class Method extends Abs_child_manager {
+    protected $_parent_field = 'risk_id';
 
     public function setting_class() {
         $this->name = Array(
