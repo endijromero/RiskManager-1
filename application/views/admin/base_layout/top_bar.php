@@ -44,7 +44,7 @@
                     <i class="fa fa-user fa-2x nav-user-photo" aria-hidden="true"></i>
                     <span class="user-info">
                         <small>Welcome,</small>
-                        Jason
+                        NguyenThuy
                     </span>
                     <i class="ace-icon fa fa-caret-down"></i>
                 </a>

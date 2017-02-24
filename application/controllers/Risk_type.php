@@ -11,6 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Class Risk_type
  */
 class Risk_type extends Abs_child_manager {
+    protected $_parent_field = 'project_id';
     public function __construct() {
         parent::__construct();
     }

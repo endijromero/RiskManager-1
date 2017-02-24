@@ -7,6 +7,7 @@
  * Time: 6:19 PM
  */
 class M_risk_type extends Abs_child_model {
+    protected $_parent_field = 'project_id';
     protected $_table = 'risk_types';
     public $schema = [
         'project_id'      => [
