@@ -14,6 +14,7 @@
  */
 abstract class Abs_child_manager extends Manager_base {
     protected $_parent_field = 'project_id';
+
     public function __construct() {
         parent::__construct();
         $this->url["add"] = site_url($this->name["class"] . "/create");
@@ -43,9 +44,9 @@ abstract class Abs_child_manager extends Manager_base {
     }
 
     public function ajax_list_data_by_project_id($parent_value, $data = Array()) {
-        $this->model-> set_parent($parent_value);
+        $this->model->set_parent($parent_value);
         $result = $this->ajax_list_data($data);
-        $this->model->set_parent(0);
+        $this->model->remove_parent();
         return $result;
     }
 }

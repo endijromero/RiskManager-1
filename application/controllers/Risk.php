@@ -39,7 +39,7 @@ class Risk extends Abs_child_manager {
         $data['toolbar'] = '<div class="widget-toolbar actions_content e_actions_content">
                 <a href="' . site_url('conflict/manage/' . $parent_value) . '" class="btn btn-success btn-sm">
                     <i class="ace-icon fa fa-leaf"></i>
-                    Quản lí xung đột
+                    Quản lý xung đột
                 </a>
             </div>';
         parent::manage($parent_value, $data);

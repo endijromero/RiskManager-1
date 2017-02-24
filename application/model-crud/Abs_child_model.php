@@ -8,10 +8,10 @@
  */
 class Abs_child_model extends Crud_manager {
     protected $_parent_value = 0;
-    protected $_parent_field = 'project_id';
+    protected $_parent_field = '';
 
     public function standard_filter_data($post_filter) {
-        if ($this->_parent_field) {
+        if ($this->_parent_field && $this->_parent_value) {
             $post_filter[$this->_parent_field] = $this->_parent_value;
         }
         return parent::standard_filter_data($post_filter);
@@ -19,5 +19,15 @@ class Abs_child_model extends Crud_manager {
 
     public function set_parent($parent_value) {
         $this->_parent_value = $parent_value;
+        $this->schema[$this->_parent_field]['filter'] = TRUE;
+    }
+
+    public function remove_parent() {
+        $this->_parent_value = 0;
+        unset($this->schema[$this->_parent_field]['filter']);
+    }
+
+    public function get_parent_value() {
+        return $this->_parent_value;
     }
 }

@@ -72,9 +72,9 @@ class M_project extends Crud_manager
     }
 
     public function default_before_get(){
-//        $this->db->query("select COUNT('r.id') as 'm.risk_quantity'");
-//        $this->db->group_by('m.id');
-//        $this->db->join('risks as r','m.id=r.project_id');
+//        $this->db->query("select COUNT('r.id')as risk_quantity");
+//        $this->db->group_by('r.id');
+//        $this->db->join('risks as r','r.deleted=0 AND r.id=m.project_id');
 
 
     }

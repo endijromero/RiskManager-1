@@ -23,7 +23,7 @@
                         <label class="col-xs-4 contact-label-title row-title">Mã loại rủi ro</label>
                         <select  name="risk_type_id" class="e_select_risk_type"
                                  data-url="<?php echo site_url('conflict/get_method_child') ?>">
-                            <option value="" selected disabled hidden>Chọn rủi ro</option>
+                            <option value="" selected disabled hidden>Chọn loaị rủi ro</option>
                             <?php foreach ($list_risk_type as $item) { ?>
                                 <option value="<?php echo $item->id; ?>"><?php echo $item->code; ?></option>
                             <?php } ?>
