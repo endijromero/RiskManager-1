@@ -3,7 +3,7 @@
         <div class="widget-header">
             <h5 class="widget-title bigger-125">
                 <i class="ace-icon fa fa-table"></i>
-                Chi Tiết Dự Án
+                Chi Tiết Rủi Ro
                 <?php echo $detail_risk->name ?>
             </h5>
             <div class="widget-toolbar">
@@ -16,7 +16,7 @@
                     <i class="ace-icon fa fa-dashboard"></i>
                     Quản lí phương án xử lí rủi ro
                 </a>
-            </div>
+            </div>s
         </div>
         </br>
         <div class="widget-body">

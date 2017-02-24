@@ -8,19 +8,18 @@
  */
 class M_risk extends Abs_child_model {
     protected $_parent_field = 'project_id';
-    protected $_parent_value = 0;
     protected $_table = 'risks';
     public $schema = [
-        'project_id'      => [
-            'field' => 'project_id',
-            'label' => 'id dự án',
+        'project_id'  => [
+            'field'    => 'project_id',
+            'label'    => 'id dự án',
 //            'db_field' => 'project_id',
-            'rules' => 'required',
+            'rules'    => 'required',
 //            'filter'   => [
 //                'type' => 'text',
 //            ],
         ],
-        'project_code'    => [
+        'project_code'      => [
             'field'    => 'project_code',
             'label'    => 'Mã dự án',
             'db_field' => 'project_code',
@@ -31,19 +30,19 @@ class M_risk extends Abs_child_model {
             'table'    => TRUE,
         ],
         'risk_type_id'    => [
-            'field'    => 'risk_type_id',
-            'label'    => 'id loại rủi ro',
+            'field'  => 'risk_type_id',
+            'label'  => 'id loại rủi ro',
             'db_field' => 'risk_type_id',
-            'rules'    => '',
-            'form'     => [
+            'rules'  => '',
+            'form'   => [
                 'type' => 'number',
             ],
-            'filter'   => [
+            'filter' => [
                 'type' => 'text',
             ],
 
         ],
-        'risk_type_code'  => [
+        'risk_type_code'    => [
             'field'    => 'risk_type_code',
             'label'    => 'Mã loại rủi ro',
             'db_field' => 'risk_type_code',
@@ -81,7 +80,7 @@ class M_risk extends Abs_child_model {
         ],
         'method_quantity' => [
             'field' => 'method_quantity',
-//            'db_field' => 'method_quantity',
+            'db_field' => 'method_quantity',
             'label' => 'Số phương án xử lí',
             'rules' => '',
 //            'form'   => [
@@ -109,15 +108,17 @@ class M_risk extends Abs_child_model {
 
     public function __construct() {
         parent::__construct();
-        $this->before_get['default_before_get'] = 'default_before_get';
+        $this->before_get['default_before_get']='default_before_get';
 //        var_dump($this->_parent_field);
 //        exit();
     }
 
-    public function default_before_get() {
-        $this->db->select($this->_table_alias . '.*, p.code as project_code, r.code as risk_type_code');
-        $this->db->join('projects as p', 'p.deleted=0 AND p.id=m.project_id');
+    public function default_before_get(){
+        $this->db->select($this->_table_alias.'.*, p.code as project_code, r.code as risk_type_code,count(me .id) as method_quantity');
+        $this->db->join('projects as p','p.deleted=0 AND p.id=m.project_id');
         $this->db->join('risk_types as r', 'r.deleted=0 AND r.id=m.risk_type_id');
+        $this->db->group_by('m.id');
+        $this->db->join('methods as me', 'me.deleted=0 AND me.risk_id=m.id', 'LEFT');
     }
 
 }
