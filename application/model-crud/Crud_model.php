@@ -351,7 +351,6 @@ class Crud_model extends CI_Model {
 
         $this->_set_where($where);
 
-
         if ($this->soft_delete) {
             $result = $this->_database->update($this->_table . " AS " . $this->_table_alias,
                 array($this->_table_alias . "." . $this->soft_delete_key => TRUE));
@@ -385,7 +384,6 @@ class Crud_model extends CI_Model {
 
         return $affected_rows;
     }
-
 
     /**
      * Truncates the table
@@ -467,7 +465,7 @@ class Crud_model extends CI_Model {
     /**
      * Retrieve and generate a form_dropdown friendly array
      *
-     * @param        $value_field       field using for value in option, if only pass one argument,
+     * @param string $value_field       field using for value in option, if only pass one argument,
      *                                  it will be display_field and primary_key will be value_field
      * @param string $display_field     field using for display in option
      *
