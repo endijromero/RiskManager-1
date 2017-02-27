@@ -32,7 +32,7 @@
             </div>
         </div>
         </br>
-        <div class="widget-body">
+        <div class="widget-body" id="title-text-font">
             <div class="form-group">
                 <label class="col-xs-4 contact-label-title row-title">Mã dự án</label>
                 <span><?php echo $detail_project->code; ?></span>

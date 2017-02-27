@@ -17,3 +17,10 @@
 .select_button_list_risk {
     width: 166px;
 }
+.table_text_font{
+    font-size: 14px;
+    margin-left: 5%;
+}
+#title-text-font{
+    color: blue;
+}

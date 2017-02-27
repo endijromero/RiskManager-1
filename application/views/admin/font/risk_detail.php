@@ -19,7 +19,7 @@
             </div>s
         </div>
         </br>
-        <div class="widget-body">
+        <div class="widget-body" id="title-text-font">
             <div class="form-group">
                 <label class="col-xs-4 contact-label-title row-title">Mã rủi ro</label>
                 <span><?php echo $detail_risk->code; ?></span>

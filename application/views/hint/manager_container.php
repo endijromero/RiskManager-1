@@ -12,40 +12,34 @@
             </div>
 
             <div class="widget-toolbar actions_content e_actions_content">
-                <a href=" " class="btn btn-success btn-sm  add_button">
+                <a href="<?php echo site_url('hint/manage/' . $project->id) ?>"
+                   class="btn btn-success btn-sm  add_button">
                     <i class="ace-icon fa fa-plus-circle"></i>
                     Gợi ý lại
                 </a>
             </div>
         </div>
-        <div class="widget-body padding-10">
-            Các Rủi ro của dự án <?php echo $project->name ?>
-            <ul>
-                <?php foreach ($methods_in_risks as $risk_id => $risk) {
-                    echo "<li>" . $risk['name'] . "<br/><ul>";
-                    $methods = $risk['methods'];
-                    foreach ($methods as $method_id => $method) { ?>
-                        <li>
-                            <span><?php echo $method->name ?></span>
-                            -
-                            <span><?php echo $method->cost ?></span>
-                        </li>
-                    <?php }
-                    echo "</ul></li>";
-                } ?>
-            </ul>
-        </div>
-        <div class="widget-body padding-10">
-            Các xung đột của dự án <?php echo $project->name ?>
-            <ul>
-                <?php foreach ($table_data as $conflict) { ?>
-                    <li>
-                        <span><?php echo $conflict->method_1_id ?></span>
-                        -
-                        <span><?php echo $conflict->method_2_id ?></span>
-                    </li>
-                <?php } ?>
-            </ul>
+        <div class="table_text_font" id="title-text-font">
+            <div class="widget-body padding-10">
+                Quản lí rủi ro <?php echo $project->name ?> khi có các xung đột giữa các phương pháp xử lí của các rủi
+                ro khác nhau.
+            </div>
+
+            <?php
+            echo "<table style=\"width:50%\">
+           <tr>
+            <th>Tên Rủi Ro</th>
+            <th>Gợi ý Phương pháp xử lí</th>
+           </tr>";
+            foreach ($results['recommend'] as $recommend_item) {
+                echo "<tr>";
+
+                echo "<td>{$recommend_item['risk']->name} (Code: {$recommend_item['risk']->code})</td>";
+                echo "<td>{$recommend_item['method']->name} (Code: {$recommend_item['method']->code })</td>";
+                echo "<tr>";
+            }
+            echo "</table>";
+            ?>
         </div>
     </div>
 </div>
