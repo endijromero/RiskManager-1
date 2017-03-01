@@ -37,17 +37,16 @@ class M_risk extends Abs_child_model {
             'form'   => [
                 'type' => 'number',
             ],
-            'filter' => [
-                'type' => 'text',
-            ],
+
 
         ],
         'risk_type_code'    => [
             'field'    => 'risk_type_code',
             'label'    => 'Mã loại rủi ro',
-            'db_field' => 'risk_type_code',
-            'rules'    => '',
+//            'db_field' => 'risk_type_code',
+            'rules'  => 'required',
             'table'    => TRUE,
+
         ],
         'code'            => [
             'field'  => 'code',

@@ -14,6 +14,7 @@ class Home extends Manager_base {
     public function __construct() {
         parent::__construct();
         $this->load->model('m_risk');
+        $this->url["add"] = site_url($this->name["class"] . "/create");
     }
 
     public function setting_class() {
@@ -26,5 +27,26 @@ class Home extends Manager_base {
     }
     public function add_link($origin_column_value, $column_name, &$record, $column_data, $caller) {
         return '<a href="projects/detail/'.$record->id.'">'.$origin_column_value.'</a>';
+    }
+    public function create($data = Array(), $data_return = Array()) {
+        if (!isset($data["save_link"])) {
+            $data["save_link"] = site_url($this->name["class"] . "/create_save/" );
+        }
+        return $this->add($data, $data_return);
+    }
+    public function create_save($data = Array(), $data_return = Array(), $skip_validate = FALSE) {
+        if (sizeof($data) == 0) {
+            $data = $this->input->post();
+        }
+        if($data['code']==null ||$data['name']==null ||$data['description'] ==null)
+        {
+            echo json_encode([
+                'state' => 0,
+                'msg' => 'Dữ liệu không hợp lệ!
+                Cần nhập đầy đủ thông tin các trường.',
+            ]);;
+            return 0;
+        }
+        return $this->add_save($data, $data_return, $skip_validate);
     }
 }

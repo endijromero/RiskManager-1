@@ -24,7 +24,6 @@ class M_project extends Crud_manager {
         ],
         'name'          => [
             'field'    => 'name',
-            'db_field' => 'name',
             'label'    => 'Tên dự án',
             'rules'    => 'required',
             'form'     => TRUE,

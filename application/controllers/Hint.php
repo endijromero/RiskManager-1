@@ -70,7 +70,10 @@ class Hint extends Manager_base {
 
         }
 //        exit();
+//        echo'<pre>';
         $result = $this->_result($population[0]);
+//        var_dump($population[0]);
+//        exit();
         return $result;
     }
 

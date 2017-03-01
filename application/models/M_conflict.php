@@ -7,8 +7,8 @@
  * Time: 6:19 PM
  */
 class M_conflict extends Abs_child_model {
-    protected $_table = 'conflicts';
     public $_parent_field = 'project_id';
+    protected $_table = 'conflicts';
     public $schema = [
         'project_id'      => [
             'field'    => 'project_id',
@@ -28,9 +28,8 @@ class M_conflict extends Abs_child_model {
         ],
         'code'        => [
             'field'    => 'code',
-            'db_field' => 'name',
             'label'    => 'Mã xung đột',
-            'rules'    => '',
+            'rules'    => 'required',
             'form'     => TRUE,
             'filter'   => [
                 'type' => 'text',
@@ -39,7 +38,6 @@ class M_conflict extends Abs_child_model {
         ],
         'name'        => [
             'field'    => 'name',
-            'db_field' => 'risk_quantity',
             'label'    => 'Tên xung đột',
             'rules'    => '',
             'form'     => TRUE,

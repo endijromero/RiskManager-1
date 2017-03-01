@@ -38,7 +38,6 @@ class M_method extends Abs_child_model {
         ],
         'name'        => [
             'field'    => 'name',
-            'db_field' => 'name',
             'label'    => 'Tên phương pháp',
             'rules'    => '',
             'form'     => TRUE,
