@@ -26,7 +26,13 @@ class Home extends Manager_base {
         );
     }
     public function add_link($origin_column_value, $column_name, &$record, $column_data, $caller) {
-        return '<a href="projects/detail/'.$record->id.'">'.$origin_column_value.'</a>';
+        return '<a href="home/detail/'.$record->id.'">'.$origin_column_value.'</a>';
+    }
+    function detail($id) {
+        $data['detail_project'] = $this->model->get($id);
+        $content = $this->load->view("admin/font/project_detail", $data, TRUE);
+        $this->load_more_css("assets/css/font/detail.css");
+        $this->show_page($content);
     }
     public function create($data = Array(), $data_return = Array()) {
         if (!isset($data["save_link"])) {
@@ -49,4 +55,5 @@ class Home extends Manager_base {
         }
         return $this->add_save($data, $data_return, $skip_validate);
     }
+
 }

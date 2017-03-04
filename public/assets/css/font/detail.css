@@ -1,6 +1,7 @@
 .form-group {
     margin-bottom: 7px;
 }
+
 .shadow_input {
     line-height: 30px;
     box-shadow: inset 1px 1px 2px 0px #CCCCCC;
@@ -8,19 +9,33 @@
     padding-left: 7px;
     padding-right: 7px;
 }
+
 .add-form-contact .contact_input {
     width: 100%;
 }
-.label-title{
+
+.label-title {
     background-color: #0aa5df;
 }
+
 .select_button_list_risk {
     width: 166px;
 }
-.table_text_font{
+
+.table_text_font {
     font-size: 14px;
     margin-left: 5%;
 }
-#title-text-font{
+
+#title-text-font {
     color: blue;
+}
+
+.title-hint {
+    font-size: 20px;
+    margin-left: 35px;
+}
+
+.risk-panel > h4 {
+    padding: 12px 20px;
 }

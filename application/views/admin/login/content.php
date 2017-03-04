@@ -86,23 +86,23 @@
                                     </div>
                                 </div><!-- /.widget-main -->
 
-                                <div class="toolbar clearfix ">
-                                    <div>
-                                        <a href="#" data-target="#forgot-box" class="forgot-password-link">
-                                            <i class="ace-icon fa fa-arrow-left"></i>
-                                            I forgot my password
-                                        </a>
-                                    </div>
-
-                                    <div>
-                                        <a href="#" data-target="#signup-box" class="user-signup-link">
-                                            I want to register
-                                            <i class="ace-icon fa fa-arrow-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div><!-- /.widget-body -->
-                        </div><!-- /.login-box -->
+<!--                                <div class="toolbar clearfix ">-->
+<!--                                    <div>-->
+<!--                                        <a href="#" data-target="#forgot-box" class="forgot-password-link">-->
+<!--                                            <i class="ace-icon fa fa-arrow-left"></i>-->
+<!--                                            I forgot my password-->
+<!--                                        </a>-->
+<!--                                    </div>-->
+<!---->
+<!--                                    <div>-->
+<!--                                        <a href="#" data-target="#signup-box" class="user-signup-link">-->
+<!--                                            I want to register-->
+<!--                                            <i class="ace-icon fa fa-arrow-right"></i>-->
+<!--                                        </a>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+                            </div>
+                        </div>
 
                         <div id="forgot-box" class="forgot-box widget-box no-border">
                             <div class="widget-body">
@@ -155,33 +155,31 @@
 
                                     <div class="space-6"></div>
                                     <p> Enter your details to begin: </p>
-
-                                    <form>
-                                        <fieldset>
+                                        <form method="POST" class="e_ajax_submit" action="<?php echo $register_url; ?>">
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
-                                                    <input type="email" class="form-control" placeholder="Email"/>
+                                                    <input name="email" type="email" class="form-control" placeholder="Email"/>
                                                     <i class="ace-icon fa fa-envelope"></i>
                                                 </span>
                                             </label>
 
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
-                                                    <input type="text" class="form-control" placeholder="Username"/>
+                                                    <input name="username" type="text" class="form-control" placeholder="Username"/>
                                                     <i class="ace-icon fa fa-user"></i>
                                                 </span>
                                             </label>
 
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
-                                                    <input type="password" class="form-control" placeholder="Password"/>
+                                                    <input name="password" type="password" class="form-control" placeholder="Password"/>
                                                     <i class="ace-icon fa fa-lock"></i>
                                                 </span>
                                             </label>
 
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
-                                                    <input type="password" class="form-control"
+                                                    <input name="password-confirm" type="password" class="form-control"
                                                            placeholder="Repeat password"/>
                                                     <i class="ace-icon fa fa-retweet"></i>
                                                 </span>
@@ -204,11 +202,9 @@
                                                     <span class="bigger-110">Reset</span>
                                                 </button>
 
-                                                <button type="button"
-                                                        class="width-65 pull-right btn btn-sm btn-success">
-                                                    <span class="bigger-110">Register</span>
-
+                                                <button type="submit" class="width-65 pull-right btn btn-sm btn-success">
                                                     <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+                                                    <span class="bigger-110">Register</span>
                                                 </button>
                                             </div>
                                         </fieldset>

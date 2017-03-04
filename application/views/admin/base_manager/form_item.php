@@ -5,9 +5,10 @@
     </label>
     <div class="col-sm-8 col-xs-12">
         <?php
+        $placeholder = isset($form_item['form']['placeholder']) ? $form_item['form']['placeholder'] : $form_item['label'];
         $type = isset($form_item['form']['type']) ? $form_item['form']['type'] : "text";
         $class = isset($form_item['form']['class']) ? $form_item['form']['class'] : "";
-        $form_attr = " id='$form_item[field]_$form_id' placeholder='$form_item[label]' ";
+        $form_attr = " id='$form_item[field]_$form_id' placeholder='$placeholder' ";
         $form_attr .= isset($form_item['form']['attr']) ? $form_item['form']['attr'] : "";
         $form_item['rules'] = is_array($form_item['rules']) ? implode("|", $form_item['rules']) : $form_item['rules'];
         $form_attr .= " rules='$form_item[rules]' ";
@@ -55,7 +56,6 @@
             default:
                 echo "<input value='" . htmlentities($value, ENT_QUOTES) . "' name='$form_item[field]' type='$type' class='col-xs-12 $class' $form_attr/>";
                 break;
-
         } ?>
     </div>
 </div>

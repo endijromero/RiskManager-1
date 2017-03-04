@@ -49,10 +49,11 @@ class M_method extends Abs_child_model {
         'cost'        => [
             'field'    => 'cost',
             'db_field' => 'cost',
-            'label'    => 'Chi phí',
+            'label'    => 'Chi phí tiền',
             'rules'    => '',
             'form'     => [
                 'type' => 'number',
+                'placeholder'    => 'Chi phí tiền (usd)',
             ],
             'table'    => TRUE,
         ],
@@ -63,6 +64,7 @@ class M_method extends Abs_child_model {
             'rules'    => '',
             'form'     => [
                 'type' => 'number',
+                'placeholder' => "Độ khó tăng dần từ 1->5"
             ],
             'table'    => TRUE,
         ],
@@ -73,16 +75,18 @@ class M_method extends Abs_child_model {
             'rules'    => '',
             'form'     => [
                 'type' => 'number',
+                'placeholder' => "Độ ưu tiên tăng dần từ 1->5"
             ],
             'table'    => TRUE,
         ],
         'time'        => [
             'field'    => 'time',
             'db_field' => 'time',
-            'label'    => 'Thời gian xử lí - giờ',
+            'label'    => 'Thời gian xử lí',
             'rules'    => '',
             'form'     => [
                 'type' => 'number',
+                'placeholder' => "Thời gian xử lí (giờ)"
             ],
             'table'    => TRUE,
         ],

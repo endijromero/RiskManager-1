@@ -159,9 +159,6 @@ abstract class Manager_base extends Admin_layout {
             }
             $data_return["data"] = $data;
             $data_return["error"] = $this->model->get_validate_error();
-            echo '<pre>';
-            var_dump($data_return);
-            exit();
             echo json_encode($data_return);
             return FALSE;
         }
@@ -312,20 +309,22 @@ abstract class Manager_base extends Admin_layout {
      * @param array $data More data pass to <b>view</b>, using on override or call from other function
      */
     public function manager($data = Array()) {
-        $default_data = Array();
-        $default_data["add_link"] = $this->url["add"];
-        $default_data["delete_list_link"] = site_url($this->url["delete"]);
-        $default_data["ajax_data_link"] = site_url($this->name["class"] . "/ajax_list_data");
-        $default_data["title"] = "Quản Lý " . $this->name["object"];
-        $default_data["view_file"] = $this->path_theme_view . "base_manager/manager_container";
-        $data = array_merge($default_data, $data);
-        $view_file = $data["view_file"];
-        unset($data["view_file"]);
-        $data['filter_html'] = $this->get_filter_html($data);
-        $data['table_header'] = $this->get_table_header($data);
-        $content = $this->load->view($view_file, $data, TRUE);
-        $this->set_html_part('title', "Quản lý " . $this->name["object"]);
-        $this->show_page($content);
+        if ($this->session->userdata("user_id")) {
+            $default_data = Array();
+            $default_data["add_link"] = $this->url["add"];
+            $default_data["delete_list_link"] = site_url($this->url["delete"]);
+            $default_data["ajax_data_link"] = site_url($this->name["class"] . "/ajax_list_data");
+            $default_data["title"] = "Quản Lý " . $this->name["object"];
+            $default_data["view_file"] = $this->path_theme_view . "base_manager/manager_container";
+            $data = array_merge($default_data, $data);
+            $view_file = $data["view_file"];
+            unset($data["view_file"]);
+            $data['filter_html'] = $this->get_filter_html($data);
+            $data['table_header'] = $this->get_table_header($data);
+            $content = $this->load->view($view_file, $data, TRUE);
+            $this->set_html_part('title', "Quản lý " . $this->name["object"]);
+            $this->show_page($content);
+        } else  redirect(site_url("login"));
     }
 
     /**
@@ -370,6 +369,7 @@ abstract class Manager_base extends Admin_layout {
             } else {
                 $data_return["callback"] = "get_manager_data_response";
             }
+            $data_return['count_rows'] = count($record);
             $data_return['record'] = $this->db->last_query();
             $data_return["state"] = 1;
 //            $data_return["data"] = $data;
@@ -562,7 +562,9 @@ abstract class Manager_base extends Admin_layout {
 
     protected function get_form_html($data = Array(), $record = NULL) {
         $data['form_id'] = uniqid();
-        $data['form_title'] = "Thêm " . $this->name['object'];
+        if (!isset($data['form_title'])) {
+            $data['form_title'] = "Thêm " . $this->name['object'];
+        }
         $data['form'] = $this->model->get_form();
         $data['is_edit'] = ($record === NULL) ? "0" : "1";
         foreach ($data['form'] as $key => &$item) {
@@ -693,10 +695,6 @@ abstract class Manager_base extends Admin_layout {
         } else {
             return $origin_column_value;
         }
-    }
-
-    protected function is_in_group($group_name) {
-        return $this->model->is_in_group($group_name);
     }
 }
 

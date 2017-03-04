@@ -17,7 +17,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Hint extends Manager_base {
 
     public function __construct() {
-
         define('GA_POPSIZE', 50);        // ga population size
         define('GA_MAXITER', 100);
         define('GA_ELITRATE', 0.10);
@@ -29,6 +28,7 @@ class Hint extends Manager_base {
         $this->load->model('M_risk', 'risk');
         $this->load->model('m_method', 'method');
         $this->load->model('M_conflict', 'conflict');
+        $this->load->model('M_fitness', 'fitness');
     }
 
     public function setting_class() {
@@ -42,6 +42,8 @@ class Hint extends Manager_base {
 
     function manage($project_id) {
         $data['project'] = $this->model->get($project_id);
+        $data['risk'] = $this->risk->get_many_by('project_id', $project_id);
+        $data['methods_in_risks'] = $this->_get_methods_in_risks($project_id);
         $data['results'] = $this->_get_table_data($project_id);
         $content = $this->load->view("hint/manager_container", $data, TRUE);
         $this->load_more_css("assets/css/font/detail.css");
@@ -55,16 +57,17 @@ class Hint extends Manager_base {
         $pop_gama = array();
         $methods_in_risks = $this->_get_methods_in_risks($project_id);
         $conflict_records = $this->conflict->get_many_by('project_id', $project_id);
+        $fitness_records = $this->fitness->get_many_by('project_id', $project_id);
         $conflict_risks = $this->_define_risk_conf($methods_in_risks, $conflict_records);
         $group_conflict = $this->_group_conflict($conflict_risks);
         $population = $this->_init_population($pop_beta, $pop_gama, $group_conflict, $methods_in_risks, $conflict_records);
         $buffer = $pop_gama;
         for ($i = 0; $i < GA_MAXITER; $i++) {
-            $population = $this->_calc_fitness($population, $methods_in_risks);        // calculate fitness
+            $population = $this->_calc_fitness($population, $methods_in_risks,$fitness_records);        // calculate fitness
             $population = $this->_sort_by_fitness($population);    // sort them
             $buffer = $this->_mate($population, $buffer, $conflict_records, $methods_in_risks);        // mate the population together
             $this->_swap($population, $buffer);        // swap buffers
-            $this->_calc_fitness($population, $methods_in_risks);        // calculate fitness
+            $this->_calc_fitness($population, $methods_in_risks,$fitness_records);        // calculate fitness
             $this->_sort_by_fitness($population);
 //            $fits = $this->_print_best($population);
 
@@ -72,7 +75,7 @@ class Hint extends Manager_base {
 //        exit();
 //        echo'<pre>';
         $result = $this->_result($population[0]);
-//        var_dump($population[0]);
+//        var_dump($population);
 //        exit();
         return $result;
     }
@@ -227,29 +230,35 @@ class Hint extends Manager_base {
         return 0;
     }
 
-    private function _calc_fitness($population, $methods_in_risks) {
+    private function _calc_fitness($population, $methods_in_risks,$fitness_records) {
         $group_risk = array();
         $fit = 0;
         for ($i = 0; $i < GA_POPSIZE; $i++) {
             $fit = 0;
             $group_risk = $population[$i]['ga_gen'];
             for ($j = 0; $j < count($group_risk); $j++) {
-                $fit += $this->_calcfitness($group_risk[$j], $methods_in_risks);
+                $fit += $this->_calcfitness($group_risk[$j], $methods_in_risks,$fitness_records);
             }
             $population[$i]['fit'] = $fit;
         }
         return $population;
     }
 
-    private function _calcfitness($group_risk_confs, $methods_in_risks) {
+    private function _calcfitness($group_risk_confs, $methods_in_risks,$fitness_records) {
         $fit = 0;
+//        echo'<pre>';
+//        var_dump($fitness_records[0]->{'cost'});
+//        exit();
         for ($i = 0; $i < count($group_risk_confs); $i++) {
             $a = array_values($group_risk_confs)[$i];
             foreach ($methods_in_risks as $id => $methods_in_risk) {
                 $pop_alpha = $methods_in_risk['methods'];
                 foreach ($pop_alpha as $id => $pop_al) {
                     if ($pop_al->{'id'} == $a)
-                        $fit += $pop_al->{'cost'};
+                        if(count($fitness_records)>0)
+                        $fit += $pop_al->{'cost'}*$fitness_records[0]->{'cost'}+$pop_al->{'diff'}*$fitness_records[0]->{'diff'}+$pop_al->{'priority'}*$fitness_records[0]->{'priority'}+$pop_al->{'time'}*$fitness_records[0]->{'time'};
+                       else
+                           $fit += $pop_al->{'cost'};
                 }
             }
         }
@@ -381,6 +390,7 @@ class Hint extends Manager_base {
     }
 
     private function _print_best($gav) {
+        echo'<pre>';
         var_dump($gav[0]['ga_gen']);
         echo("Best Fitness:");
         var_dump($gav[0]['fit']);

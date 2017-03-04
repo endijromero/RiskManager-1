@@ -958,6 +958,20 @@ class Ion_auth_model extends CI_Model {
 
         return FALSE;
     }
+    public function get_user($identity) {
+        $user = [];
+        $query = $this->db->select($this->identity_column . ', email, id, password, active, last_login')
+            ->where($this->identity_column, $identity)
+            ->where('deleted', 0)
+            ->limit(1)
+            ->order_by('id', 'desc')
+            ->get($this->tables['users']);
+        if ($query->num_rows() === 1) {
+            $user = $query->row();
+        }
+
+        return $user;
+    }
 
     /**
      * is_max_login_attempts_exceeded

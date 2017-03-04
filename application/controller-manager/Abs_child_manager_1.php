@@ -8,11 +8,11 @@
  */
 
 /**
- * Class Abs_child_manager
+ * Class Abs_child_manager_1
  *
  * @property Abs_child_model model
  */
-abstract class Abs_child_manager extends Manager_base {
+abstract class Abs_child_manager_1 extends Manager_base {
     protected $_parent_field = 'project_id';
 
     public function __construct() {
@@ -37,14 +37,15 @@ abstract class Abs_child_manager extends Manager_base {
 
     public function manage($parent_value, $data = Array()) {
         if ($this->session->userdata("user_id")) {
-            $data["add_link"] = $this->url["add"] . '/' . $parent_value;
-            $data["view_file"] = "child/manager_container";
-            $data["ajax_data_link"] = site_url($this->name["class"] . "/ajax_list_data_by_project_id/" . $parent_value);
-            $data['project_id'] = $parent_value;
-            $this->manager($data);
+        $data["add_link"] = $this->url["add"] . '/' . $parent_value;
+        $data["view_file"] = "child/manager_container_1";
+        $data["ajax_data_link"] = site_url($this->name["class"] . "/ajax_list_data_by_project_id/" . $parent_value);
+        $data['project_id'] = $parent_value;
+        $this->manager($data);
         }
         else  redirect(site_url("login"));
     }
+
 
     public function ajax_list_data_by_project_id($parent_value, $data = Array()) {
         $this->model->set_parent($parent_value);

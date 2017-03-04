@@ -9,7 +9,6 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-
 abstract class Admin_layout extends Base_layout {
 
     protected $role_allow = 'admin';
@@ -22,10 +21,17 @@ abstract class Admin_layout extends Base_layout {
     }
 
     private function _set_side_bar_left() {
-        $menu[] = Array(
-            "text" => "Trang chủ",
-            "icon" => "i-screen",
-            "url" => site_url(),
+        $menu = Array(
+            Array(
+                "text" => "Trang chủ",
+                "icon" => "fa-dashboard",
+                "url"  => site_url('home'),
+            ),
+            Array(
+                "text" => "Người dùng",
+                "icon" => "fa-users",
+                "url"  => site_url('user'),
+            ),
         );
         $data = Array(
             'view_file' => "admin/base_layout/side_bar_left",
@@ -58,5 +64,4 @@ abstract class Admin_layout extends Base_layout {
         $this->session->set_flashdata("msg", "<div class='alert alert-warning'>Required login!</div>");
         redirect($login_link);
     }
-
 }

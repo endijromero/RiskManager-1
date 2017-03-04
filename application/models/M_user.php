@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Created by IntelliJ IDEA.
  * User: phamtrong
@@ -7,26 +6,25 @@
  * Time: 15:33
  */
 class M_user extends Crud_manager {
-
     protected $_table = 'users';
     public $schema = [
         'email'         => [
             'field'  => 'email',
             'label'  => 'Email',
-            'rules'  => 'required|valid_email|is_unique[users.email,deleted=0]|min_length[6]', //As config of Form Validation Class in CodeIngiter
-            'errors' => [
+            'rules'  => 'required|valid_email|is_unique[users.email,deleted=0]|min_length[6]',
+            'errors' => Array(
                 'is_unique' => "Địa chỉ email đã được sử dụng.",
-            ],
+            ),
             'form'   => [
                 'type' => 'email',
             ],
-            'filter' => [
-                'type'        => 'text',
-                'search_type' => 'like',
-            ],
-            'table'  => [
-                'callback_render_data' => "add_link",
-            ],
+//            'filter' => [
+//                'type'        => 'text',
+//                'search_type' => 'like',
+//            ],
+//            'table'  => [
+//                'callback_render_data' => "add_link",
+//            ],
         ],
         'name'          => [
             'field'  => 'name',
@@ -44,29 +42,6 @@ class M_user extends Crud_manager {
                 'label' => 'Tên',
             ],
         ],
-        'avatar'        => [
-            'field'    => 'avatar',
-            'db_field' => 'm.avatar',
-            'label'    => 'Avatar',
-            'rules'    => 'required',
-            'form'     => [
-                'type'   => 'file', //multiple_file
-                'class'  => 'ace_file_input',//Use ACE theme for file input
-//                'attr'         => 'data-disable_client_validate=1',//Disable validate in client
-                'upload' => [//As config of File Upload Class in codeingiter
-                    'upload_path'      => 'upload/demo/avatars',
-                    'allowed_types'    => 'gif|jpg|png|jpeg',
-                    'max_size'         => '2048',
-//                    'min_size'         => '100',
-                    'min_width'        => 300,
-                    'min_height'       => 400,
-//                    'max_width'        => 1200,
-//                    'max_height'       => 1600,
-                    'encrypt_name'     => TRUE,
-                    'file_ext_tolower' => TRUE,
-                ],
-            ],
-        ],
         'role_id'       => [
             'field'    => 'role_id',
             'db_field' => 'g.id',
@@ -74,10 +49,9 @@ class M_user extends Crud_manager {
             'rules'    => 'required',
             'form'     => [
                 'type'            => 'select',
-                'class'           => 'select2',
-                'target_model'    => 'M_demo_role',
+                'target_model'    => 'M_role',
                 'target_function' => 'dropdown',
-                'target_arg'      => ['id', 'name'],
+                'target_arg'      => ['id', 'description'],
             ],
             'filter'   => [
                 'type' => 'multiple_select',
@@ -85,7 +59,7 @@ class M_user extends Crud_manager {
         ],
         'role_name'     => [
             'field'    => 'role_name',
-            'db_field' => 'g.name',
+            'db_field' => 'g.description',
             'label'    => 'Quyền',
             'rules'    => 'required',
             'table'    => TRUE,
@@ -93,19 +67,19 @@ class M_user extends Crud_manager {
         'active'        => [
             'field'  => 'active',
             'label'  => 'Trạng thái',
-            'rules'  => 'required',
+            'rules'  => ['required'],
             'form'   => [
                 'type'            => 'select',
                 'target_model'    => 'this',
                 'target_function' => 'get_status',
-                'class'           => 'inline_select',
+                'class'           => '',
             ],
             'filter' => [
                 'type' => 'multiple_select',
             ],
             'table'  => [
                 'callback_render_data' => "get_status_text",
-                'class'                => "hidden-480 disable_sort",
+                'class'                => "hidden-480",
             ],
         ],
         'password'      => [
@@ -136,26 +110,103 @@ class M_user extends Crud_manager {
             ],
         ],
     ];
-
-
     public function __construct() {
         parent::__construct();
-        $this->before_get[] = "join_role_table";
+        $this->before_get['join_all'] = "join_role_table";
     }
-
+    public function include_my_profile() {
+        $this->before_get['include_my_profile'] = "get_my_profile_callback";
+    }
+    public function get_my_profile_callback() {
+        $this->db->or_where("m.id", $this->session->userdata("user_id"));
+    }
     public function join_role_table() {
-        $this->db->select($this->_table_alias . ".*, g.name as role_name, g.id as role_id");
+        $this->db->select($this->_table_alias . ".*, g.name as role, g.description as role_name, g.id as role_id");
         $this->db->join("ion_users_groups as ug", $this->_table_alias . ".id=ug.user_id");
         $this->db->join("ion_groups as g", "ug.group_id=g.id");
+//        if ($this->is_in_group("admin")) {
+//            $this->db->where("g.name", 'corporation');
+//        }
+//        if ($this->is_in_group("corporation")) {
+//            $this->db->where_in("g.name", [
+//                'warehouse_manager', 'ppc', 'producer', 'quality_manager',
+//            ]);
+//            $this->db->where('m.parent_id', $this->session->userdata("user_id"));
+//        }
     }
-
+    public function get_user_in_company_for_dropdown($value_field, $display_field = NULL) {
+        $this->db->select(array($value_field, $display_field));
+        $user_id = $this->session->userdata("user_id");
+        $company_id = $this->session->userdata("company_id");
+        if ($company_id) {
+            $this->db->where([
+                'parent_id' => $company_id,
+                'deleted'   => 0,
+            ]);
+            $this->db->or_where("id", $company_id);
+            if ($user_id) {
+                $this->db->or_where("id", $user_id);
+            }
+        } else if ($user_id) {
+            $this->db->where([
+                'id'      => $user_id,
+                'deleted' => 0,
+            ]);
+        } else {
+            $records = Array();
+        }
+        if (!isset($records)) $records = $this->db->get('users')->result();
+        $options = Array();
+        foreach ($records as $item) {
+            $options[$item->{$value_field}] = $item->{$display_field};
+        }
+        return $options;
+    }
+    public function get_current_company_for_dropdown_in_basic_form($value_field, $display_field = NULL) {
+        $id = $this->session->userdata("user_id");
+        $parent = $this->db->select("parent_id")
+            ->where("id", $id)
+            ->get("users")
+            ->result();
+        if (count($parent) <= 0) return FALSE;
+        if ($parent[0]->parent_id == 1) {
+            $child = $this->db->select(array($value_field, $display_field))
+                ->where("id", $id)
+                ->get("users")->result();
+        } else {
+            $child = $this->db->select(array($value_field, $display_field))
+                ->where("id", $parent[0]->parent_id)
+                ->get("users")->result();
+        }
+        $options = Array();
+        foreach ($child as $item) {
+            $options[$item->{$value_field}] = $item->{$display_field};
+        }
+        return $options;
+    }
+    /**
+     * to get user in multil group in company include current company
+     * @param $company_id
+     * @param $group
+     * @return array
+     */
+    public function get_group_user_in_company($company_id, $group) {
+        $group_user = $this->db->select("users.id")
+            ->from("users")
+            ->join("ion_users_groups as u_gr", "u_gr.user_id=users.id")
+            ->join("ion_groups as gr", "u_gr.group_id=gr.id")
+            ->where("parent_id", $company_id)
+            ->where_in("gr.name", $group)
+            ->get()
+            ->result();
+        return $group_user;
+    }
     public function get_status() {
         return [
             '1' => 'Kich hoat',
             '0' => 'Khoa',
         ];
     }
-
     public function get_status_text($id) {
         $status = $this->get_status();
         if (isset($status[$id])) {
@@ -164,13 +215,13 @@ class M_user extends Crud_manager {
             return $id;
         }
     }
-
     public function insert($data, $skip_validation = FALSE) {
         if ($skip_validation === FALSE) {
             $data = $this->validate($data);
         }
         if ($data !== FALSE) {
             $data = $this->trigger('before_create', $data);
+            $data['parent_id'] = $this->session->userdata("user_id");
             $insert_id = $this->ion_auth->register($data['email'], $data['password'], $data['email'], $data, [$data['role_id']]);
             $this->trigger('after_create', $insert_id);
             return $insert_id;
@@ -178,7 +229,24 @@ class M_user extends Crud_manager {
             return FALSE;
         }
     }
-
+    public function get_current_parent_company_id() {
+        $id = $this->session->userdata("user_id");
+        // get parent id cua user hien tai
+        if (!$this->is_in_group('corporation')) {
+            $parent = $this->db->select("id,parent_id")
+                ->where("id", $id)
+                ->get("users")
+                ->result();
+            if (count($parent) != 0) {
+                $parent_id = $parent[0]->parent_id;
+            } else {
+                $parent_id = $id;
+            }
+        } else {
+            $parent_id = $id;
+        }
+        return $parent_id;
+    }
     public function update($id, $data, $skip_validation = FALSE) {
         $validate = $this->get_validate_from_schema();
         if ($data['password'] == "" && $data['password_conf'] == "") {
@@ -187,11 +255,18 @@ class M_user extends Crud_manager {
             unset($validate['password']);
             unset($validate['password_conf']);
         }
-        $validate = $this->get_validate_for_update($id, $validate);
+        $validate['email']['rules'] = str_replace(
+            'is_unique[users.email,deleted=0]',
+            "is_unique[users.email,deleted=0,id!=$id]",
+            $validate['email']['rules']
+        );
         if ($skip_validation === FALSE) {
             $data = $this->validate($data, $validate);
         }
-        $new_group = isset($data['role_id']) ? $data['role_id'] : NULL;
+        if (!$data) {
+            return FALSE;
+        }
+        $new_group = isset($data['role_id']) ? $data['role_id'] : FALSE;
         unset($data['role_id']);
         unset($data['password_conf']);
         $update_result = parent::update($id, $data, TRUE);
@@ -203,9 +278,7 @@ class M_user extends Crud_manager {
             $this->ion_auth->reset_password($data[$identity_column], $data['password']);
         }
         return $update_result;
-
     }
-
     public function update_group($id, $new_group) {
         $old_group = $this->ion_auth->get_users_groups($id);
         $change = TRUE;
@@ -220,7 +293,6 @@ class M_user extends Crud_manager {
             $this->ion_auth->add_to_group($new_group, $id);
         }
     }
-
     public function delete_many($primary_values) {
         $result = parent::delete_many($primary_values);
         foreach ($primary_values as $id) {

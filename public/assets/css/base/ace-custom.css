@@ -149,6 +149,7 @@ input + .input-group-btn > .btn.btn-sm {
 
 .form-group {
     margin-bottom: 7px;
+    margin-left: 20px;
 }
 
 .no-bacground {

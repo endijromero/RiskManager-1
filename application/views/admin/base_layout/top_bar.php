@@ -44,7 +44,7 @@
                     <i class="fa fa-user fa-2x nav-user-photo" aria-hidden="true"></i>
                     <span class="user-info">
                         <small>Welcome,</small>
-                        NguyenThuy
+                        <?php echo($this->session->userdata('email')) ?>
                     </span>
                     <i class="ace-icon fa fa-caret-down"></i>
                 </a>
@@ -58,7 +58,7 @@
                     </li>
 
                     <li>
-                        <a href="profile.html">
+                        <a href="<?php echo site_url('user/profile') ?>" class="e_ajax_link">
                             <i class="ace-icon fa fa-user"></i>
                             Profile
                         </a>
@@ -67,7 +67,7 @@
                     <li class="divider"></li>
 
                     <li>
-                        <a href="#">
+                        <a href="<?php echo site_url('login/logout') ?>">
                             <i class="ace-icon fa fa-power-off"></i>
                             Logout
                         </a>

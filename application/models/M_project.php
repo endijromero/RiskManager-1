@@ -9,6 +9,11 @@
 class M_project extends Crud_manager {
     protected $_table = 'projects';
     public $schema = [
+        'user_id'       => [
+            'field' => 'user_id',
+            'label' => 'id người dùng',
+
+        ],
         'code'          => [
             'field'  => 'code',
             'label'  => 'Mã dự án',
@@ -23,14 +28,14 @@ class M_project extends Crud_manager {
 
         ],
         'name'          => [
-            'field'    => 'name',
-            'label'    => 'Tên dự án',
-            'rules'    => 'required',
-            'form'     => TRUE,
-            'filter'   => [
+            'field'  => 'name',
+            'label'  => 'Tên dự án',
+            'rules'  => 'required',
+            'form'   => TRUE,
+            'filter' => [
                 'type' => 'text',
             ],
-            'table'    => [
+            'table'  => [
                 'callback_render_data' => "add_link",
             ],
         ],
@@ -73,5 +78,6 @@ class M_project extends Crud_manager {
         $this->db->select($this->_table_alias . '.*, count(r.id) as risk_quantity');
         $this->db->group_by('m.id');
         $this->db->join('risks as r', 'r.deleted=0 AND r.project_id=m.id', 'LEFT');
+        $this->db->where('user_id', $this->session->userdata('user_id'));
     }
 }

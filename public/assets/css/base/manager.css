@@ -78,3 +78,11 @@
     background-color: rgba(0, 0, 0, 0.2);
     color: #fff;
 }
+
+.margin-top-10 {
+    margin-top: 10px;
+}
+
+.widget-box .widget-body .table:last-child {
+    margin-bottom: 0;
+}
