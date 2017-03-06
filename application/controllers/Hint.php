@@ -44,6 +44,9 @@ class Hint extends Manager_base {
         $data['project'] = $this->model->get($project_id);
         $data['risk'] = $this->risk->get_many_by('project_id', $project_id);
         $data['methods_in_risks'] = $this->_get_methods_in_risks($project_id);
+//        echo '<pre>';
+//        var_dump( $data['methods_in_risks']);
+//        exit();
         $data['results'] = $this->_get_table_data($project_id);
         $content = $this->load->view("hint/manager_container", $data, TRUE);
         $this->load_more_css("assets/css/font/detail.css");
@@ -255,7 +258,10 @@ class Hint extends Manager_base {
                 $pop_alpha = $methods_in_risk['methods'];
                 foreach ($pop_alpha as $id => $pop_al) {
                     if ($pop_al->{'id'} == $a)
-                        if(count($fitness_records)>0)
+                        if(count($fitness_records)==0){
+                            $fit += $pop_al->{'cost'}+$pop_al->{'diff'}+$pop_al->{'priority'}+$pop_al->{'time'};
+                        }
+                        else if(count($fitness_records)>0)
                         $fit += $pop_al->{'cost'}*$fitness_records[0]->{'cost'}+$pop_al->{'diff'}*$fitness_records[0]->{'diff'}+$pop_al->{'priority'}*$fitness_records[0]->{'priority'}+$pop_al->{'time'}*$fitness_records[0]->{'time'};
                        else
                            $fit += $pop_al->{'cost'};

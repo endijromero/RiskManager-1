@@ -14,14 +14,20 @@
 
             <div class="widget-toolbar actions_content e_actions_content">
                 <a href="<?php echo site_url('hint/manage/'.$detail_project->id) ?>" class="btn btn-success btn-sm  add_button">
-                    <i class="ace-icon fa fa-plus-circle"></i>
-                    Đưa ra gợi ý
+                    <i class="fa fa-lightbulb-o" ></i>
+                    Yêu cầu trợ giúp ra quyết định
                 </a>
             </div>
             <div class="widget-toolbar actions_content e_actions_content">
-                <a href="<?php echo site_url('risk_type/manage/'.$detail_project->id) ?>" class="btn btn-success btn-sm">
-                    <i class="fa fa-pied-piper"></i>
-                    Quản lí loại rủi ro
+                <a href="<?php echo site_url('fitness/manage/' .$detail_project->id) ?>" class="btn btn-success btn-sm">
+                    <i class="fa fa-cog""></i>
+                    Quản lí trọng số hàm thích nghi
+                </a>
+            </div>
+            <div class="widget-toolbar actions_content e_actions_content">
+                <a href="<?php echo site_url('conflict/manage/'.$detail_project->id) ?>" class="btn btn-success btn-sm">
+                    <i class="fa fa-rebel"></i>
+                    Quản lí xung đột
                 </a>
             </div>
             <div class="widget-toolbar actions_content e_actions_content">
@@ -30,17 +36,16 @@
                     Quản lí rủi ro
                 </a>
             </div>
+
+            <div class="widget-toolbar actions_content e_actions_content">
+                <a href="<?php echo site_url('risk_type/manage/'.$detail_project->id) ?>" class="btn btn-success btn-sm">
+                    <i class="fa fa-pied-piper"></i>
+                    Quản lí loại rủi ro
+                </a>
+            </div>
         </div>
         </br>
         <div class="widget-body" id="title-text-font">
-            <div class="form-group">
-                <label class="col-xs-4 contact-label-title row-title">Mã dự án</label>
-                <span><?php echo $detail_project->code; ?></span>
-            </div>
-            <div class="form-group">
-                <label class="col-xs-4 contact-label-title row-title">Loại rủi ro</label>
-                <span><?php echo $detail_project->code; ?></span>
-            </div>
             <div class="form-group">
                 <label class="col-xs-4 contact-label-title row-title">Mã dự án</label>
                 <span><?php echo $detail_project->code; ?></span>

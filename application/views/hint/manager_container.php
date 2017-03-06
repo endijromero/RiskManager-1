@@ -3,7 +3,7 @@
         <div class="widget-header">
             <h5 class="widget-title bigger-125">
                 <i class="ace-icon fa fa-table"></i>
-                Kết quả gợi ý dự án <?php echo $project->name ?>
+                Thông tin dự án <?php echo $project->name ?>
             </h5>
             <div class="widget-toolbar">
                 <a href="#" data-action="collapse">
@@ -17,22 +17,8 @@
                     Gợi ý lại
                 </a>
             </div>
-            <div class="widget-toolbar actions_content e_actions_content">
-                <a href="<?php echo site_url('fitness/manage/' . $project->id) ?>" class="btn btn-success btn-sm">
-                    <i class="ace-icon fa fa-plus-circle"></i>
-                    Thiết lập gía trị trọng số của hàm thích nghi
-                </a>
-            </div>
         </div>
         <div class="widget-body bgwhite padding-10">
-            <div class="form-group">
-                <label class="col-xs-4 contact-label-title row-title">Mã dự án</label>
-                <span><?php echo $project->code; ?></span>
-            </div>
-            <div class="form-group">
-                <label class="col-xs-4 contact-label-title row-title">Loại rủi ro</label>
-                <span><?php echo $project->code; ?></span>
-            </div>
             <div class="form-group">
                 <label class="col-xs-4 contact-label-title row-title">Mã dự án</label>
                 <span><?php echo $project->code; ?></span>
@@ -71,6 +57,7 @@
                 <tr>
                     <th>Mã Rủi Ro</th>
                     <th>Tên Rủi Ro</th>
+                    <th>Số phương án xử lí</th>
                     <th>Mô tả</th>
                 </tr>
                 </thead>
@@ -79,6 +66,7 @@
                     echo "<tr>";
                     echo "<td>{$risk_item->code}</td>";
                     echo "<td>{$risk_item->name}</td>";
+                    echo "<td>{$risk_item->method_quantity}</td>";
                     echo "<td>{$risk_item->description}</td>";
                     echo "<tr>";
                 } ?>
@@ -157,8 +145,8 @@
                 <tbody>
                 <?php foreach ($results['recommend'] as $recommend_item) {
                     echo "<tr>";
-                    echo "<td>{$recommend_item['risk']->name} (Code: {$recommend_item['risk']->code})</td>";
-                    echo "<td>{$recommend_item['method']->name} (Code: {$recommend_item['method']->code })</td>";
+                    echo "<td>Tên rủi ro: {$recommend_item['risk']->name} (Mã rủi ro: {$recommend_item['risk']->code})</td>";
+                    echo "<td>Tên phương pháp: {$recommend_item['method']->name} (Mã phương pháp: {$recommend_item['method']->code })</td>";
                     echo "</tr>";
                 }
                 echo "<tr><td colspan='2'>Fitness: {$results['fit']}</td></tr>"; ?>
