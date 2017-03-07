@@ -21,18 +21,53 @@ abstract class Admin_layout extends Base_layout {
     }
 
     private function _set_side_bar_left() {
-        $menu = Array(
-            Array(
-                "text" => "Trang chủ",
-                "icon" => "fa-dashboard",
-                "url"  => site_url('home'),
-            ),
-            Array(
-                "text" => "Người dùng",
-                "icon" => "fa-users",
-                "url"  => site_url('user'),
-            ),
+        $menu[] = Array(
+            "text" => "Trang chủ",
+            "icon" => "fa-dashboard",
+            "url"  => site_url('home'),
         );
+
+        $project_id = $this->session->userdata('project_id');
+        if ($project_id) {
+            $project_menu[] = Array(
+                "text" => "Quản lí loại rủi ro",
+                "icon" => "fa-dashboard",
+                "url"  => site_url('risk_type/manage/' . $project_id),
+            );
+            $project_menu[] = Array(
+                "text" => "Quản lí rủi ro",
+                "icon" => "fa-dashboard",
+                "url"  => site_url('risk/manage/' . $project_id),
+            );
+            $project_menu[] = Array(
+                "text" => "Quản lí xung đột",
+                "icon" => "fa-dashboard",
+                "url"  => site_url('conflict/manage/' . $project_id),
+            );
+            $project_menu[] = Array(
+                "text" => "Quản lí trọng số hàm thích nghi",
+                "icon" => "fa-dashboard",
+                "url"  => site_url('fitness/manage/' . $project_id),
+            );
+            $project_menu[] = Array(
+                "text" => "Yêu cầu trợ giúp ra quyết định",
+                "icon" => "fa-dashboard",
+                "url"  => site_url('hint/manage/' . $project_id),
+            );
+            $menu[] = Array(
+                "text"  => "Quản lí dự án",
+                "icon"  => "fa-table",
+                "url"   => site_url('hint/manage/' . $project_id),
+                "child" => $project_menu,
+            );
+        }
+
+        $menu[] = Array(
+            "text" => "Người dùng",
+            "icon" => "fa-users",
+            "url"  => site_url('user'),
+        );
+
         $data = Array(
             'view_file' => "admin/base_layout/side_bar_left",
             'menu_data' => $menu,
