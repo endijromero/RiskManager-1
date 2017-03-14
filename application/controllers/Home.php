@@ -9,6 +9,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * Class Home
+ *
+ * @property M_project model
  */
 class Home extends Manager_base {
     public function __construct() {
@@ -22,8 +24,13 @@ class Home extends Manager_base {
             "class"  => "home",
             "view"   => "home",
             "model"  => "m_project",
-            "object" => "Dự Án",
+            "object" => "Danh Sách Các Dự Án",
         );
+    }
+
+    public function ajax_list_data($data = Array()) {
+        $this->model->set_allowed_status('in_progress');
+        return parent::ajax_list_data($data);
     }
 
     public function add_link($origin_column_value, $column_name, &$record, $column_data, $caller) {
@@ -64,4 +71,69 @@ class Home extends Manager_base {
         return $this->add_save($data, $data_return, $skip_validate);
     }
 
+    protected function add_action_button($origin_column_value, $column_name, &$record, $column_data, $caller) {
+        $primary_key = $this->model->get_primary_key();
+        $custom_action = "<div class='action-buttons'>";
+//        $custom_action .= "<a class='e_ajax_link blue' href='" . site_url($this->url["view"] . $record->$primary_key) . "'><i class='ace-icon fa fa-search-plus bigger-130'></i></a>";
+        if ((!isset($record->disable_edit) || !$record->disable_edit)) {
+            $custom_action .= "<a class='e_ajax_link green' title=\"Sửa\"href='" .
+                site_url($this->url["edit"] . $record->$primary_key) .
+                "'><i class='ace-icon fa fa-pencil bigger-130'></i></a>";
+            $custom_action .= "<a class='e_ajax_link e_ajax_confirm blue' data-label-cancel='Hủy' 
+                data-label-submit='Kết thúc' title=\"Kết thúc dự án\"href='" .
+                site_url($this->name["class"] . '/finish/' . $record->$primary_key) .
+                "'><i class='fa fa-check-square-o bigger-130'></i></a>";
+            $custom_action .= "<a class='e_ajax_link e_ajax_confirm red'title=\"Xóa\" href='" .
+                site_url($this->url["delete"] . $record->$primary_key) .
+                "'><i class='ace-icon fa fa-trash-o bigger-130'></i></a>";
+        }
+        $custom_action .= "</div>";
+        return $custom_action;
+    }
+
+    public function finish($id = 0, $data = Array(), $data_return = Array()) {
+        if (!isset($data_return["callback"])) {
+            $data_return["callback"] = "delete_respone";
+        }
+        $id = intval($id);
+        if (!$id) {
+            $data_return["state"] = 0; /* state = 0 : invalid id */
+            $data_return["msg"] = "Dự án không tồn tại";
+            echo json_encode($data_return);
+            return FALSE;
+        }
+        if ($this->input->post() || $id > 0) {
+            if (isset($data["list_id"]) && sizeof($data["list_id"])) {
+                $list_id = $data["list_id"];
+            } else {
+                if ($this->input->post() && $id == "0") {
+                    $list_id = $this->input->post("list_id");
+                } elseif ($id > 0) {
+                    $list_id = Array($id);
+                }
+            }
+            $data['finished'] = '1';
+            $update = $this->model->update_many($list_id, $data, TRUE);
+            $data_return["list_id"] = [$id];
+            if ($update) {
+                $data_return["key_name"] = $this->model->get_primary_key();
+                $data_return["record"] = $this->standard_record_data($this->model->get($id));
+                $data_return["state"] = 1; /* state = 1 : insert success */
+                $data_return["msg"] = "Đã đánh dấu dự án hoàn thành.";
+                echo json_encode($data_return);
+                return TRUE;
+            } else {
+                $data_return["data"] = $data;
+                $data_return["state"] = 0; /* state = 0 : invalid data */
+                $data_return["msg"] = "Dự án đã hoàn thành hoặc không đủ điều kiện để hoàn thành.";
+                echo json_encode($data_return);
+                return FALSE;
+            }
+        }else{
+            $data_return["state"] = 0;
+            $data_return["msg"] = "Dự án không tồn tại";
+            echo json_encode($data_return);
+            return FALSE;
+        }
+    }
 }

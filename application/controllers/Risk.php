@@ -31,11 +31,17 @@ class Risk extends Abs_child_manager {
     }
     public function create($parent_value, $data = Array(), $data_return = Array()) {
         $id = $parent_value;
-        $data['list_risk_type'] = $this->m_risk_type->get_many_by(['project_id' => $id]);
+        $data['list_risk_type'] = $this->m_risk_type->get_all();
         $data["view_file"] = $this->name['view'] . '/risk_add_form';
         return parent::create($parent_value, $data, $data_return);
     }
-
+    public function get_method_child() {
+        $list_method = $this->m_risk_type->getall();
+        echo json_encode([
+            'state' => 1,
+            'data'  => $list_method,
+        ]);
+    }
     public function create_save($parent_value, $data = Array(), $data_return = Array(), $skip_validate = FALSE) {
         if (sizeof($data) == 0) {
             $data = $this->input->post();

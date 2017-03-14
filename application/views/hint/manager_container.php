@@ -12,7 +12,7 @@
             </div>
             <div class="widget-toolbar actions_content e_actions_content">
                 <a href="<?php echo site_url('hint/manage/' . $project->id) ?>"
-                   class="btn btn-success btn-sm  add_button">
+                   class="btn btn-success add_button">
                     <i class="ace-icon fa fa-plus-circle"></i>
                     Gợi ý lại
                 </a>
@@ -121,7 +121,34 @@
             <?php } ?>
         </div>
     </div>
-
+    <div class="widget-box margin-top-10">
+        <div class="widget-header">
+            <h5 class="widget-title bigger-125">
+                <i class="ace-icon fa fa-table"></i>
+                Các thông số của giái thuật di truyền
+            </h5>
+            <div class="widget-toolbar">
+                <a href="#" data-action="collapse">
+                    <i class="ace-icon fa fa-chevron-up"></i>
+                </a>
+            </div>
+        </div>
+        <div class="widget-body bgwhite">
+            <table class='table table-bordered table-hover no-footer'>
+                <tbody>
+                <?php {
+                    echo "<tr>";
+                    echo "<td>Kích thước quần thể: {$GA_POPSIZE} </td>";
+                    echo "<td>Số vòng lặp tối đa: {$GA_MAXITER} </td>";
+                    echo "<td>Xác suất lai ghép: {$GA_ELITRATE} </td>";
+                    echo "<td>Xác suất đột biến: {$GA_MUTATION} </td>";
+                    echo "</tr>";
+                }
+              ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
     <div class="widget-box margin-top-10">
         <div class="widget-header">
             <h5 class="widget-title bigger-125">
@@ -136,12 +163,6 @@
         </div>
         <div class="widget-body bgwhite">
             <table class='table table-bordered table-hover no-footer'>
-                <thead>
-                <tr>
-                    <th>Tên Rủi Ro</th>
-                    <th>Gợi ý Phương pháp xử lí</th>
-                </tr>
-                </thead>
                 <tbody>
                 <?php foreach ($results['recommend'] as $recommend_item) {
                     echo "<tr>";
@@ -149,7 +170,7 @@
                     echo "<td>Tên phương pháp: {$recommend_item['method']->name} (Mã phương pháp: {$recommend_item['method']->code })</td>";
                     echo "</tr>";
                 }
-                echo "<tr><td colspan='2'>Fitness: {$results['fit']}</td></tr>"; ?>
+                echo "<tr><td colspan='2'>Giá trị thích nghi: {$results['fit']}</td></tr>"; ?>
                 </tbody>
             </table>
         </div>

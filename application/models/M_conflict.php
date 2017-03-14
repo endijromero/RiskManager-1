@@ -9,57 +9,80 @@
 class M_conflict extends Abs_child_model {
     public $_parent_field = 'project_id';
     protected $_table = 'conflicts';
+    protected $before_dropdown = array();
     public $schema = [
-        'project_id'      => [
-            'field'    => 'project_id',
-            'label'    => 'id dự án',
-//            'db_field' => 'project_id',
-            'rules'    => '',
-//            'filter'   => [
-//                'type' => 'text',
-//            ],
+        'project_id'   => [
+            'field' => 'project_id',
+            'label' => 'id dự án',
+            'rules' => '',
         ],
-        'project_code'    => [
+        'project_code' => [
             'field'    => 'project_code',
             'label'    => 'Mã dự án',
             'db_field' => 'project_code',
             'rules'    => '',
             'table'    => TRUE,
         ],
-        'code'        => [
-            'field'    => 'code',
-            'label'    => 'Mã xung đột',
-            'rules'    => 'required',
-            'form'     => TRUE,
-            'filter'   => [
+        'code'         => [
+            'field'  => 'code',
+            'label'  => 'Mã xung đột',
+            'rules'  => 'required',
+            'form'   => TRUE,
+            'filter' => [
                 'type' => 'text',
             ],
-            'table'    => TRUE,
+            'table'  => TRUE,
         ],
-        'name'        => [
-            'field'    => 'name',
-            'label'    => 'Tên xung đột',
-            'rules'    => '',
-            'form'     => TRUE,
-            'table'    => TRUE,
-            'filter'   => [
+        'name'         => [
+            'field'  => 'name',
+            'label'  => 'Tên xung đột',
+            'rules'  => '',
+            'form'   => TRUE,
+            'table'  => TRUE,
+            'filter' => [
                 'type' => 'text',
             ],
         ],
-        'description' => [
+        'description'  => [
             'field'    => 'description',
             'db_field' => 'description',
             'label'    => 'Mô tả',
             'rules'    => '',
-            'form'     => TRUE,
+            'form'     => [
+                'type' => 'textarea',
+            ],
             'table'    => TRUE,
         ],
+        'method_1_id'  => [
+            'field'    => 'method_1_id',
+            'db_field' => 'method_1_id',
+            'label'    => 'Mã phương pháp 1',
+            'rules'    => '',
+            'form'     => [
+                'type'            => 'select',
+                'target_model'    => 'M_method',
+                'target_function' => 'custom_dropdown',
+                'target_arg'      => ['id', 'code'],
+            ],
+        ],
+        'method_2_id'  => [
+            'field'    => 'method_2_id',
+            'db_field' => 'method_2_id',
+            'label'    => 'Mã phương pháp 2',
+            'rules'    => '',
+            'form'     => [
+                'type'            => 'select',
+                'target_model'    => 'M_method',
+                'target_function' => 'custom_dropdown',
+                'target_arg'      => ['id', 'code'],
+            ],
+        ],
+
         'method_1_code' => [
             'field'    => 'method_1_code',
             'db_field' => 'method_1_code',
             'label'    => 'Mã phương pháp 1',
             'rules'    => '',
-            'form'     => TRUE,
             'table'    => TRUE,
         ],
         'method_2_code' => [
@@ -67,10 +90,9 @@ class M_conflict extends Abs_child_model {
             'db_field' => 'method_2_code',
             'label'    => 'Mã phương pháp 2',
             'rules'    => '',
-            'form'     => TRUE,
             'table'    => TRUE,
         ],
-        'createdAt'   => [
+        'createdAt'     => [
             'field' => 'createdAt',
             'label' => 'Ngày tạo',
             'rules' => '',
@@ -80,13 +102,14 @@ class M_conflict extends Abs_child_model {
 
     public function __construct() {
         parent::__construct();
-        $this->before_get['default_before_get']='default_before_get';
+        $this->before_get['default_before_get'] = 'default_before_get';
     }
 
-    public function default_before_get(){
-        $this->db->select($this->_table_alias.'.*, p.code as project_code,c1.code as method_1_code,c2.code as method_2_code');
-        $this->db->join('projects as p','p.deleted=0 AND p.id=m.project_id');
+    public function default_before_get() {
+        $this->db->select($this->_table_alias . '.*, p.code as project_code,c1.code as method_1_code,c2.code as method_2_code');
+        $this->db->join('projects as p', 'p.deleted=0 AND p.id=m.project_id');
         $this->db->join('methods as c1', 'c1.deleted=0 AND c1.id=m.method_1_id');
         $this->db->join('methods as c2', 'c2.deleted=0 AND c2.id=m.method_2_id');
     }
+
 }

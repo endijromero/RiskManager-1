@@ -44,6 +44,11 @@ class Hint extends Manager_base {
         $data['project'] = $this->model->get($project_id);
         $data['risk'] = $this->risk->get_many_by('project_id', $project_id);
         $data['methods_in_risks'] = $this->_get_methods_in_risks($project_id);
+        $data['GA_POPSIZE'] = GA_POPSIZE;
+        $data['GA_MAXITER'] = GA_MAXITER;
+        $data['GA_ELITRATE'] = GA_ELITRATE;
+        $data['GA_MUTATION'] = GA_MUTATION;
+
 //        echo '<pre>';
 //        var_dump( $data['methods_in_risks']);
 //        exit();

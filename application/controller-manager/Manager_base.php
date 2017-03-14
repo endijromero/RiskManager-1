@@ -119,7 +119,7 @@ abstract class Manager_base extends Admin_layout {
             return TRUE;
         } else {
             $this->set_data_part("title", "Thêm  " . $this->name["object"], FALSE);
-            $this->show_page($form_html);
+            return $this->show_page($form_html);
         }
     }
 
@@ -186,7 +186,7 @@ abstract class Manager_base extends Admin_layout {
             $data["save_link"] = site_url($this->name["class"] . "/edit_save/" . $id);
         }
         $data_return["record_data"] = $this->model->get($id);
-        $form_html = $this->get_form_html($data, $data_return["record_data"]);
+        $form_html = $this->get_form_edit_html($data, $data_return["record_data"]);
 //        $data_return["form"] = $this->model->get_form();
         if ($this->input->is_ajax_request()) {
             $data_return["state"] = 1;
@@ -582,6 +582,28 @@ abstract class Manager_base extends Admin_layout {
         $form_html = $this->load->view($view_file, $data, TRUE);
         return $form_html;
     }
+    protected function get_form_edit_html($data = Array(), $record = NULL) {
+        $data['form_id'] = uniqid();
+        if (!isset($data['form_title'])) {
+            $data['form_title'] = "Sửa " . $this->name['object'];
+        }
+        $data['form'] = $this->model->get_form();
+        $data['is_edit'] = ($record === NULL) ? "0" : "1";
+        foreach ($data['form'] as $key => &$item) {
+            $value = NULL;
+            if (isset($record->$key)) {
+                $value = $record->$key;
+            }
+            $item['html'] = $this->render_form_item($item, $data['form_id'], $value);
+        }
+        if (isset($data['view_file'])) {
+            $view_file = $data['view_file'];
+        } else {
+            $view_file = $this->path_theme_view . "/base_manager/form";
+        }
+        $form_html = $this->load->view($view_file, $data, TRUE);
+        return $form_html;
+    }
 
     protected function render_form_item($form_item, $form_id, $value = NULL) {
         $data = [
@@ -682,8 +704,8 @@ abstract class Manager_base extends Admin_layout {
         $custom_action = "<div class='action-buttons'>";
 //        $custom_action .= "<a class='e_ajax_link blue' href='" . site_url($this->url["view"] . $record->$primary_key) . "'><i class='ace-icon fa fa-search-plus bigger-130'></i></a>";
         if ((!isset($record->disable_edit) || !$record->disable_edit)) {
-            $custom_action .= "<a class='e_ajax_link green' href='" . site_url($this->url["edit"] . $record->$primary_key) . "'><i class='ace-icon fa fa-pencil bigger-130'></i></a>";
-            $custom_action .= "<a class='e_ajax_link e_ajax_confirm red' href='" . site_url($this->url["delete"] . $record->$primary_key) . "'><i class='ace-icon fa fa-trash-o  bigger-130'></i></a>";
+            $custom_action .= "<a class='e_ajax_link green' title=\"Sửa\"href='" . site_url($this->url["edit"] . $record->$primary_key) . "'><i class='ace-icon fa fa-pencil bigger-130'></i></a>";
+            $custom_action .= "<a class='e_ajax_link e_ajax_confirm red'title=\"Xóa\" href='" . site_url($this->url["delete"] . $record->$primary_key) . "'><i class='ace-icon fa fa-trash-o  bigger-130'></i></a>";
         }
         $custom_action .= "</div>";
         return $custom_action;

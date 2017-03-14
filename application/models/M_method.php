@@ -95,7 +95,9 @@ class M_method extends Abs_child_model {
             'db_field' => 'description',
             'label'    => 'Mô tả',
             'rules'    => '',
-            'form'     => TRUE,
+            'form'     => [
+                'type' => 'textarea',
+            ],
             'table'    => TRUE,
         ],
         'createdAt'   => [
@@ -116,5 +118,37 @@ class M_method extends Abs_child_model {
                           p.id as project_id, p.name as project_name');
         $this->db->join('risks as r', 'r.deleted=0 AND r.id=m.risk_id');
         $this->db->join('projects as p', 'p.deleted=0 AND p.id=r.project_id');
+    }
+
+    function custom_dropdown($value_field, $display_field = NULL) {
+        $this->db->select($this->_table_alias . '.*, r.id as risk_id, r.code as risk_code,r.name as risk_name,
+                          p.id as project_id, p.name as project_name');
+        $this->db->join('risks as r', 'r.deleted=0 AND r.id=m.risk_id');
+        $this->db->join('projects as p', 'p.deleted=0 AND p.id=r.project_id');
+        $args = func_get_args();
+        if (count($args) == 2) {
+            list($value_field, $display_field) = $args;
+        } else {
+            $value_field = $this->primary_key;
+            $display_field = $args[0];
+        }
+        $this->trigger('before_dropdown', array($value_field, $display_field));
+
+        if ($this->soft_delete && $this->_temporary_with_deleted !== TRUE) {
+            $this->_database->where($this->_table_alias . "." . $this->soft_delete_key, FALSE);
+        }
+
+        $result = $this->_database->get($this->_table . " AS " . $this->_table_alias)
+            ->result();
+
+        $options = array();
+
+        foreach ($result as $row) {
+            $options[$row->{$value_field}] = $row->risk_code.' - '.$row->{$display_field};
+        }
+
+        $options = $this->trigger('after_dropdown', $options);
+
+        return $options;
     }
 }

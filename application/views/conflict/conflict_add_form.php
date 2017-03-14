@@ -20,15 +20,20 @@
 <!--                        </div>-->
 <!--                    </div>-->
                     <div class="form-group">
-                        <label class="col-xs-4 contact-label-title row-title">Mã xung đột</label>
-                        <textarea type="text" name="code" class="input_field" rows="1" style="height: 34px; overflow-y: hidden;resize: none;"></textarea>
+                        <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Mã xung đột</label>
+                        <div class="col-sm-8 col-xs-12">
+                        <textarea type="text" placeholder="Mã xung đột" name="code" class="input_field" rows="1" style="height: 34px; overflow-y: hidden;resize: none;"></textarea>
                     </div>
+                        </div>
                     <div class="form-group">
-                        <label class="col-xs-4 contact-label-title row-title">Tên xung đột</label>
-                        <textarea type="text" name="name" class="input_field" rows="1" style="height: 34px; overflow-y: hidden;resize: none;"></textarea>
+                        <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Tên xung đột</label>
+                        <div class="col-sm-8 col-xs-12">
+                        <textarea type="text" placeholder="Tên xung đột" name="name" class="input_field" rows="1" style="height: 34px; overflow-y: hidden;resize: none;"></textarea>
                     </div>
+                        </div>
                     <div class="form-group">
-                        <label class="col-xs-4 contact-label-title row-title">Phương pháp 1</label>
+                        <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Phương pháp 1</label>
+                        <div class="col-sm-8 col-xs-12">
                         <select name="method_1_id" class="e_select_risk"
                                 data-url="<?php echo site_url('conflict/get_method_child') ?>">
                             <option value="" selected disabled hidden>Chọn rủi ro</option>
@@ -45,8 +50,10 @@
                             } ?>
                         </select>
                     </div>
+                        </div>
                     <div class="form-group">
-                        <label class="col-xs-4 contact-label-title row-title">Phương pháp 2</label>
+                        <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Phương pháp 2</label>
+                        <div class="col-sm-8 col-xs-12">
                         <select  class="e_select_risk"
                                 data-url="<?php echo site_url('conflict/get_method_child') ?>">
                             <option value="" selected disabled hidden>Chọn rủi ro</option>
@@ -62,12 +69,14 @@
                                 <?php }
                             } ?>
                         </select>
+                            </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-xs-4 contact-label-title row-title">Mô tả</label>
-                        <textarea type="text" name="description" class="input_field" rows="1" style="height: 34px; overflow-y: hidden;resize: none;"></textarea>
+                        <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Mô tả</label>
+                        <div class="col-sm-8 col-xs-12">
+                        <textarea placeholder="Mô tả"rows="7" cols="40"style=" overflow-y: hidden;resize: none;"type="text" type="text" name="description" class="input_field" rows="1" style="height: 34px; overflow-y: hidden;resize: none;"></textarea>
                     </div>
-
+                      </div>
                 </div>
                 <div class="clearfix"></div>
             </div>

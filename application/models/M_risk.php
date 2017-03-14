@@ -13,20 +13,13 @@ class M_risk extends Abs_child_model {
         'project_id'  => [
             'field'    => 'project_id',
             'label'    => 'id dự án',
-//            'db_field' => 'project_id',
             'rules'    => 'required',
-//            'filter'   => [
-//                'type' => 'text',
-//            ],
         ],
         'project_code'      => [
             'field'    => 'project_code',
             'label'    => 'Mã dự án',
             'db_field' => 'project_code',
             'rules'    => '',
-//            'filter'   => [
-//                'type' => 'text',
-//            ],
             'table'    => TRUE,
         ],
         'risk_type_id'    => [
@@ -34,17 +27,32 @@ class M_risk extends Abs_child_model {
             'label'  => 'id loại rủi ro',
             'db_field' => 'risk_type_id',
             'rules'  => '',
-            'form'   => [
-                'type' => 'number',
+//            'form'   => [
+//                'type' => 'number',
+//            ],
+
+
+        ],
+        'risk_type_id'  => [
+            'field'    => 'risk_type_id',
+            'db_field' => 'risk_type_id',
+            'label'    => 'Mã loại rủi ro',
+            'rules'    => '',
+            'form'     => [
+                'type'            => 'select',
+                'target_model'    => 'M_risk_type',
+                'target_function' => 'custom_dropdown',
+                'target_arg'      => ['id', 'code'],
             ],
-
-
         ],
         'risk_type_code'    => [
             'field'    => 'risk_type_code',
             'label'    => 'Mã loại rủi ro',
-//            'db_field' => 'risk_type_code',
             'rules'  => 'required',
+            'db_field' => 'risk_type_code',
+//            'form'   => [
+//                'type' => 'text',
+//            ],
             'table'    => TRUE,
 
         ],
@@ -64,7 +72,6 @@ class M_risk extends Abs_child_model {
         ],
         'name'            => [
             'field'  => 'name',
-//            'db_field' => 'name',
             'label'  => 'Tên rủi ro',
             'rules'  => '',
             'form'   => [
@@ -92,8 +99,8 @@ class M_risk extends Abs_child_model {
 //            'db_field' => 'description',
             'label' => 'Mô tả',
             'rules' => '',
-            'form'  => [
-                'type' => 'text',
+            'form'     => [
+                'type' => 'textarea',
             ],
             'table' => TRUE,
         ],
@@ -108,8 +115,6 @@ class M_risk extends Abs_child_model {
     public function __construct() {
         parent::__construct();
         $this->before_get['default_before_get']='default_before_get';
-//        var_dump($this->_parent_field);
-//        exit();
     }
 
     public function default_before_get(){

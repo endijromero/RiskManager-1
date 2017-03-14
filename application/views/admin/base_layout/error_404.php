@@ -26,7 +26,7 @@
                                                     <input type="text" class="search-query"
                                                            placeholder="Give it a search..."/>
                                                 </span>
-                            <button class="btn btn-sm" type="button">Go!</button>
+                            <button class="btn" type="button">Go!</button>
                         </form>
 
                         <div class="space"></div>

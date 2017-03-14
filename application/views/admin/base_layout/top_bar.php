@@ -39,7 +39,7 @@
         <ul class="nav ace-nav">
 
             <!-- #section:basics/navbar.user_menu -->
-            <li class="light-blue">
+            <li class="light-bg">
                 <a data-toggle="dropdown" href="#" class="dropdown-toggle">
                     <i class="fa fa-user fa-2x nav-user-photo" aria-hidden="true"></i>
                     <span class="user-info">

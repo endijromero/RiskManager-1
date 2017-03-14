@@ -10,8 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * Class Risk_type
  */
-class Risk_type extends Abs_child_manager {
-    protected $_parent_field = 'project_id';
+class Risk_type extends Manager_base {
     public function __construct() {
         parent::__construct();
     }
@@ -24,10 +23,16 @@ class Risk_type extends Abs_child_manager {
             "object" => "Loại Rủi Ro",
         );
     }
-    public function create_save($parent_value, $data = Array(), $data_return = Array(), $skip_validate = FALSE) {
+    public function create($data = Array(), $data_return = Array()) {
+        if (!isset($data["save_link"])) {
+            $data["save_link"] = site_url($this->name["class"] . "/create_save/");
+        }
+        return $this->add($data, $data_return);
+    }
+
+    public function create_save($data = Array(), $data_return = Array(), $skip_validate = FALSE) {
         if (sizeof($data) == 0) {
             $data = $this->input->post();
-            $data[$this->_parent_field] = $parent_value;
         }
         if($data['code']==null ||$data['name']==null || $data['description'] ==null)
         {

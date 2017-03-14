@@ -30,6 +30,6 @@ function change_view_choice_risk(obj) {
 function create_fitness_manage_table_callback(data, obj) {
     default_data_table(data, obj);
     if (data.count_rows) {
-        obj.find('.widget-header .widget-toolbar.actions_content.e_actions_content').remove();
+        obj.find('.widget-toolbox').remove();
     }
 }

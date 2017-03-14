@@ -12,7 +12,8 @@ $(document).ready(function () {
     $(document).on("click", ".e_reverse_button", reverse_check);
     $(document).on("change", "input[name='_e_check_all']", show_delete_button);
     $(document).on("change", ".e_changer_number_record", bind_ajax_change_table);//Đổi só bản ghi trên trang
-    $(document).on("click", ".e_data_paginate li:not(.disabled):not(.active)", bind_ajax_change_table);//Click phân trang
+    $(document).on("click", ".e_data_paginate li:not(.disabled):not(.active)", bind_ajax_change_table);//Click phân
+                                                                                                       // trang
     $(document).on("submit", ".e_filter_form", bind_ajax_change_table);//Search
     $(document).on("click", ".e_data_table thead tr th:not(.disable_sort)", bind_ajax_change_table);//Sort
     $(document).on("keyup", "input[type='number'][number_format]", show_number_format);
@@ -202,7 +203,8 @@ function show_delete_button(e, source_obj) {
     } else {
         obj = $(this);
     }
-    if (obj.parents(".e_manager_table_container").find(".e_data_table tbody input[name='_e_check_all']:checked").length) {
+    if (obj.parents(".e_manager_table_container")
+            .find(".e_data_table tbody input[name='_e_check_all']:checked").length) {
         obj.parents(".e_manager_table_container").find(".e_table_header .for_select").show();
     } else {
         obj.parents(".e_manager_table_container").find(".e_table_header .for_select").hide();
@@ -210,9 +212,10 @@ function show_delete_button(e, source_obj) {
     }
 
     var temp = [];
-    obj.parents(".e_manager_table_container").find(".e_data_table tbody input[name='_e_check_all']:checked").each(function () {
-        temp.push($(this).parents("tr").attr("data-id"));
-    });
+    obj.parents(".e_manager_table_container").find(".e_data_table tbody input[name='_e_check_all']:checked")
+        .each(function () {
+            temp.push($(this).parents("tr").attr("data-id"));
+        });
     temp = {list_id: temp};
     temp = JSON.stringify(temp);
     obj.parents(".e_manager_table_container").find(".e_table_header .delete_list_button").attr("data", temp);
@@ -255,18 +258,18 @@ function creat_ajax_table(obj) {
     order = order.join(",");
     var data = {
         filter: filter,
-        limit: limit,
-        page: page,
-        order: order
+        limit : limit,
+        page  : page,
+        order : order
     };
     show_loading();
 
     $.ajax({
-        url: url,
-        type: "POST",
-        data: data,
+        url     : url,
+        type    : "POST",
+        data    : data,
         dataType: "text",
-        success: function (dataAll) {
+        success : function (dataAll) {
             var temp = dataAll.split($("body").attr("data-barrier"));
             var data = {};
             for (var i = 0; i < temp.length; i++) {
@@ -280,7 +283,7 @@ function creat_ajax_table(obj) {
                 default_data_table(data, obj);
             }
         },
-        error: function (a, b, c) {
+        error   : function (a, b, c) {
             alert(a + b + c);
             // window.location = url;
         },
@@ -317,21 +320,24 @@ function do_ajax_link(e, source_obj) {
         data = JSON.parse(obj.attr("data"));
     }
     if (obj.hasClass("e_ajax_confirm")) {
+        var label_cancel = obj.data('label-cancel') || 'Không xoá';
+        var label_submit = obj.data('label-submit') || "<i class='ace-icon fa fa-trash'></i> Ok, Xoá!";
+
         bootbox.dialog({
             message: "<span class='bigger-110'>Dữ liệu không thể khôi phục sau khi làm thao tác này! <br/>"
             + "<b>Bạn chắc chắn sẽ làm điều này chứ?</b></span>",
             buttons: {
                 "success": {
-                    "label": "Không xoá",
+                    "label"    : label_cancel,
                     "className": "btn-sm btn-success",
-                    "callback": function () {
+                    "callback" : function () {
                         //Example.show("great success");
                     }
                 },
-                "danger": {
-                    "label": "<i class='ace-icon fa fa-trash'></i> Ok, Xoá!",
+                "danger" : {
+                    "label"    : label_submit,
                     "className": "btn-sm btn-danger",
-                    "callback": function () {
+                    "callback" : function () {
                         call_ajax_link(url, data, obj);
                     }
                 }
@@ -345,11 +351,11 @@ function do_ajax_link(e, source_obj) {
 function call_ajax_link(url, data, obj) {
     show_loading();
     $.ajax({
-        url: url,
-        type: "POST",
-        data: data,
+        url     : url,
+        type    : "POST",
+        data    : data,
         dataType: "text",
-        success: function (dataAll) {
+        success : function (dataAll) {
             var temp = dataAll.split($("body").attr("data-barrier"));
             var data = {};
             for (var i = 0; i < temp.length; i++) {
@@ -363,7 +369,7 @@ function call_ajax_link(url, data, obj) {
                 default_ajax_link(data, obj);
             }
         },
-        error: function (a, b, c) {
+        error   : function (a, b, c) {
 //            alert(a + b + c);
             window.location = url;
         },
@@ -397,10 +403,10 @@ function ajax_submit_form(form) {
     btn.attr('disabled', 'disabled');
     show_loading();
     form.ajaxSubmit({
-        type: "POST",
+        type    : "POST",
         dataType: "text",
-        cache: false,
-        success: function (dataAll) {
+        cache   : false,
+        success : function (dataAll) {
             var temp = dataAll.split($("body").attr("data-barack"));
             var data = {};
             for (var i = 0; i < temp.length; i++) {
@@ -414,7 +420,7 @@ function ajax_submit_form(form) {
                 default_form_submit_respone(data, form, btn);
             }
         },
-        error: function (a, b, c) {
+        error   : function (a, b, c) {
             btn.html('Error');
             btn.removeClass('btn-success');
             btn.removeAttr('disabled');

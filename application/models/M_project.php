@@ -52,7 +52,9 @@ class M_project extends Crud_manager {
             'db_field' => 'description',
             'label'    => 'Mô tả',
             'rules'    => '',
-            'form'     => TRUE,
+            'form'     => [
+                'type' => 'textarea',
+            ],
             'table'    => TRUE,
         ],
         'createdAt'     => [
@@ -69,6 +71,8 @@ class M_project extends Crud_manager {
         ],
     ];
 
+    private $_allowed_status = '';
+
     public function __construct() {
         parent::__construct();
         $this->before_get['default_before_get'] = 'default_before_get';
@@ -79,5 +83,12 @@ class M_project extends Crud_manager {
         $this->db->group_by('m.id');
         $this->db->join('risks as r', 'r.deleted=0 AND r.project_id=m.id', 'LEFT');
         $this->db->where('user_id', $this->session->userdata('user_id'));
+        if ($this->_allowed_status) {
+            $this->db->where('finished', $this->_allowed_status == 'finished' ? '1' : '0');
+        }
+    }
+
+    public function set_allowed_status($allowed_status) {
+        $this->_allowed_status = $allowed_status;
     }
 }

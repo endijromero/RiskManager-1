@@ -22,18 +22,13 @@ abstract class Admin_layout extends Base_layout {
 
     private function _set_side_bar_left() {
         $menu[] = Array(
-            "text" => "Trang chủ",
+            "text" => "Danh sách dự án",
             "icon" => "fa-dashboard",
             "url"  => site_url('home'),
         );
 
         $project_id = $this->session->userdata('project_id');
         if ($project_id) {
-            $project_menu[] = Array(
-                "text" => "Quản lí loại rủi ro",
-                "icon" => "fa-dashboard",
-                "url"  => site_url('risk_type/manage/' . $project_id),
-            );
             $project_menu[] = Array(
                 "text" => "Quản lí rủi ro",
                 "icon" => "fa-dashboard",
@@ -61,7 +56,16 @@ abstract class Admin_layout extends Base_layout {
                 "child" => $project_menu,
             );
         }
-
+        $menu[] = Array(
+            "text" => "Quản lí loại rủi ro",
+            "icon" => "fa fa-pied-piper",
+            "url"  => site_url('risk_type'),
+        );
+        $menu[] = Array(
+            "text" => "DS Dự án đã kết thúc",
+            "icon" => "fa fa-list",
+            "url"  => site_url('finished_project '),
+        );
         $menu[] = Array(
             "text" => "Người dùng",
             "icon" => "fa-users",

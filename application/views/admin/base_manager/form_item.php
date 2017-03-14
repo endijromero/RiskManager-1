@@ -51,7 +51,7 @@
 
                 break;
             case "textarea":
-                echo "<textarea name='$form_item[field]' class='col-xs-12 $class' $form_attr>" . htmlentities($value, ENT_QUOTES) . "</textarea>";
+                echo "<textarea rows=\"7\" cols=\"40\"style=\" overflow-y: hidden;resize: none;\"name='$form_item[field]' class='col-xs-12 $class' $form_attr>" . htmlentities($value, ENT_QUOTES) . "</textarea>";
                 break;
             default:
                 echo "<input value='" . htmlentities($value, ENT_QUOTES) . "' name='$form_item[field]' type='$type' class='col-xs-12 $class' $form_attr/>";
