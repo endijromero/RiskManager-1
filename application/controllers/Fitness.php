@@ -92,7 +92,6 @@ class Fitness extends Abs_child_manager {
         } else {
             $data_return['state'] = 1;
         }
-//        $data_return['state'] = 1;
         return $data_return;
     }
 }

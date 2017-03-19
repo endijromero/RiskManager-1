@@ -58,15 +58,6 @@ class Risk extends Abs_child_manager {
         }
         return $this->add_save($data, $data_return, $skip_validate);
     }
-//    public function manage($parent_value, $data = Array()) {
-//        $data['toolbar'] = '<div class="widget-toolbar actions_content e_actions_content">
-//                <a href="' . site_url('conflict/manage/' . $parent_value) . '" class="btn btn-success btn-sm">
-//                    <i class="ace-icon fa fa-leaf"></i>
-//                    Quản lý xung đột
-//                </a>
-//            </div>';
-//        parent::manage($parent_value, $data);
-//    }
 
     public function add_link($origin_column_value, $column_name, &$record, $column_data, $caller) {
         return '<a href="' . site_url('risk/detail/' . $record->id) . '">' . $origin_column_value . '</a>';

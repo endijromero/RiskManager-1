@@ -50,13 +50,8 @@ class M_risk_type extends Crud_manager  {
 
     public function __construct() {
         parent::__construct();
-//        $this->before_get['default_before_get']='default_before_get';
     }
 
-//    public function default_before_get(){
-//        $this->db->select($this->_table_alias.'.*, p.code as project_code');
-//        $this->db->join('projects as p','p.deleted=0 AND p.id=m.project_id');
-//    }
     function custom_dropdown($value_field, $display_field = NULL) {
         $args = func_get_args();
         if (count($args) == 2) {

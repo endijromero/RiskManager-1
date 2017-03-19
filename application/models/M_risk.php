@@ -9,6 +9,7 @@
 class M_risk extends Abs_child_model {
     protected $_parent_field = 'project_id';
     protected $_table = 'risks';
+    protected $before_dropdown = array();
     public $schema = [
         'project_id'  => [
             'field'    => 'project_id',
@@ -22,37 +23,11 @@ class M_risk extends Abs_child_model {
             'rules'    => '',
             'table'    => TRUE,
         ],
-        'risk_type_id'    => [
-            'field'  => 'risk_type_id',
-            'label'  => 'id loại rủi ro',
-            'db_field' => 'risk_type_id',
-            'rules'  => '',
-//            'form'   => [
-//                'type' => 'number',
-//            ],
-
-
-        ],
-        'risk_type_id'  => [
-            'field'    => 'risk_type_id',
-            'db_field' => 'risk_type_id',
-            'label'    => 'Mã loại rủi ro',
-            'rules'    => '',
-            'form'     => [
-                'type'            => 'select',
-                'target_model'    => 'M_risk_type',
-                'target_function' => 'custom_dropdown',
-                'target_arg'      => ['id', 'code'],
-            ],
-        ],
         'risk_type_code'    => [
             'field'    => 'risk_type_code',
-            'label'    => 'Mã loại rủi ro',
-            'rules'  => 'required',
             'db_field' => 'risk_type_code',
-//            'form'   => [
-//                'type' => 'text',
-//            ],
+            'label'    => 'Mã loại rủi ro',
+            'rules'  => '',
             'table'    => TRUE,
 
         ],
@@ -103,6 +78,18 @@ class M_risk extends Abs_child_model {
                 'type' => 'textarea',
             ],
             'table' => TRUE,
+        ],
+        'risk_type_id'  => [
+            'field'    => 'risk_type_id',
+            'db_field' => 'risk_type_id',
+            'label'    => 'Mã loại rủi ro',
+            'rules'    => '',
+            'form'     => [
+                'type'            => 'select',
+                'target_model'    => 'M_risk_type',
+                'target_function' => 'custom_dropdown',
+                'target_arg'      => ['id','code'],
+            ],
         ],
         'createdAt'       => [
             'field' => 'createdAt',

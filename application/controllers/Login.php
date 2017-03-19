@@ -95,7 +95,7 @@ class Login extends Admin_login_layout {
             $groups = array();
             if ($this->ion_auth->is_admin())
             {
-                $this->data['groups'] = $this->ion_auth->groups()->result_array(); // выбираем все группы
+                $this->data['groups'] = $this->ion_auth->groups()->result_array();
                 $groups=$this->data['groups'];
             }
              $this->ion_auth->register($email, $password, $additional_data, $groups);
