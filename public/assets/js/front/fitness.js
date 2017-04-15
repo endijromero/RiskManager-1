@@ -29,7 +29,9 @@ function change_view_choice_risk(obj) {
 
 function create_fitness_manage_table_callback(data, obj) {
     default_data_table(data, obj);
+    obj.find('.filter-footer').remove();
     if (data.count_rows) {
         obj.find('.widget-toolbox').remove();
+
     }
 }

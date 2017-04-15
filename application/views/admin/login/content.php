@@ -38,7 +38,7 @@
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
                                                     <input name="password" type="password" class="form-control"
-                                                           required="required" id="admin_password"
+                                                           required="required" id="admin_password" autocomplete="new-password"
                                                            placeholder="Mật khẩu" maxlength=255 minlength=6
                                                            required=required autocomplete=off/>
                                                     <i class="ace-icon fa fa-lock"></i>

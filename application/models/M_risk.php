@@ -64,18 +64,35 @@ class M_risk extends Abs_child_model {
             'db_field' => 'method_quantity',
             'label' => 'Số phương án xử lí',
             'rules' => '',
-//            'form'   => [
-//                'type' => 'text',
-//            ],
             'table' => TRUE,
         ],
         'description'     => [
             'field' => 'description',
-//            'db_field' => 'description',
             'label' => 'Mô tả',
             'rules' => '',
             'form'     => [
                 'type' => 'textarea',
+            ],
+            'table' => TRUE,
+        ],
+        'financial_impact'     => [
+            'field' => 'financial_impact',
+            'rules'  => 'required',
+            'label' => 'Thiệt hại($)',
+            'rules' => '',
+            'form'     => [
+                'type' => 'number',
+                'placeholder'    => 'Thiệt hại khi xảy ra rủi ro (usd)',
+            ],
+            'table' => TRUE,
+        ],
+        'risk_level'  => [
+            'field'    => 'risk_level',
+            'rules'  => 'required',
+            'label'    => 'Mức độ nghiêm trọng',
+            'rules'    => '',
+            'form'     => [
+                'type'            => '',
             ],
             'table' => TRUE,
         ],

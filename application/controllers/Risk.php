@@ -47,7 +47,7 @@ class Risk extends Abs_child_manager {
             $data = $this->input->post();
             $data[$this->_parent_field] = $parent_value;
         }
-        if($data['risk_type_id']==null ||$data['code']==null ||$data['name']==null || $data['description'] ==null)
+        if($data['risk_type_id']==null ||$data['code']==null ||$data['name']==null || $data['description'] ==null||$data['financial_impact']==null || $data['risk_level'] ==null )
         {
             echo json_encode([
                 'state' => 0,

@@ -16,7 +16,7 @@
                     <i class="ace-icon fa fa-dashboard"></i>
                     Quản lí phương án xử lí rủi ro
                 </a>
-            </div>s
+            </div>
         </div>
         </br>
         <div class="widget-body" id="title-text-font">

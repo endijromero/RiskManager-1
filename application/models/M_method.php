@@ -23,6 +23,13 @@ class M_method extends Abs_child_model {
             'rules'    => '',
             'table'    => TRUE,
         ],
+        'id'     => [
+            'field'    => 'id',
+            'db_field' => 'id',
+            'label'    => 'id pp',
+            'rules'    => '',
+            'table'    => TRUE,
+        ],
         'code'        => [
             'field'  => 'code',
             'label'  => 'Mã phương pháp',
@@ -113,7 +120,7 @@ class M_method extends Abs_child_model {
     public function default_before_get() {
         $this->db->select($this->_table_alias . '.*, r.id as risk_id, r.code as risk_code,r.name as risk_name,
                           p.id as project_id, p.name as project_name');
-        $this->db->join('risks as r', 'r.deleted=0 AND r.id=m.risk_id');
+        $this->db->join('risks as r', 'r.deleted=0 AND r.id = m.risk_id');
         $this->db->join('projects as p', 'p.deleted=0 AND p.id=r.project_id');
     }
 

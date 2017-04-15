@@ -24,7 +24,7 @@ class Home extends Manager_base {
             "class"  => "home",
             "view"   => "home",
             "model"  => "m_project",
-            "object" => "Danh Sách Các Dự Án",
+            "object" => "Danh Sách Dự Án",
         );
     }
 
