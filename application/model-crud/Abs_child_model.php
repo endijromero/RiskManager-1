@@ -19,7 +19,13 @@ class Abs_child_model extends Crud_manager {
 
     public function set_parent($parent_value) {
         $this->_parent_value = $parent_value;
-        $this->schema[$this->_parent_field]['filter'] = TRUE;
+        if(isset($this->schema[$this->_parent_field]['filter'])){
+            if(!isset($this->schema[$this->_parent_field]['filter']['search_type'])){
+                $this->schema[$this->_parent_field]['filter']['search_type']='where';
+            }
+        }else{
+            $this->schema[$this->_parent_field]['filter'] = ['search_type'=>'where'];
+        }
     }
 
     public function remove_parent() {
