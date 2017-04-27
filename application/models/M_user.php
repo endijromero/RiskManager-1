@@ -13,7 +13,7 @@ class M_user extends Crud_manager {
             'label'  => 'Email',
             'rules'  => 'required|valid_email|is_unique[users.email,deleted=0]|min_length[6]',
             'errors' => Array(
-                'is_unique' => "Địa chỉ email đã được sử dụng.",
+                'is_unique' => "Email address is Already used.",
             ),
             'form'   => [
                 'type' => 'email',
@@ -28,7 +28,7 @@ class M_user extends Crud_manager {
         ],
         'name'          => [
             'field'  => 'name',
-            'label'  => 'Tên hiển thị',
+            'label'  => 'Username',
             'rules'  => 'required',
             'form'   => [
                 'type' => 'text',
@@ -39,13 +39,13 @@ class M_user extends Crud_manager {
                 'attr'        => 'data-test="filter"',
             ],
             'table'  => [
-                'label' => 'Tên',
+                'label' => 'Name',
             ],
         ],
         'role_id'       => [
             'field'    => 'role_id',
             'db_field' => 'g.id',
-            'label'    => 'Quyền',
+            'label'    => 'Rule ID',
             'rules'    => 'required',
             'form'     => [
                 'type'            => 'select',
@@ -60,13 +60,13 @@ class M_user extends Crud_manager {
         'role_name'     => [
             'field'    => 'role_name',
             'db_field' => 'g.description',
-            'label'    => 'Quyền',
+            'label'    => 'Rule name',
             'rules'    => 'required',
             'table'    => TRUE,
         ],
         'active'        => [
             'field'  => 'active',
-            'label'  => 'Trạng thái',
+            'label'  => 'Status',
             'rules'  => ['required'],
             'form'   => [
                 'type'            => 'select',
@@ -84,7 +84,7 @@ class M_user extends Crud_manager {
         ],
         'password'      => [
             'field' => 'password',
-            'label' => 'Mật khẩu',
+            'label' => 'Password',
             'rules' => 'required|min_length[6]',
             'form'  => [
                 'type'                 => 'password',
@@ -93,7 +93,7 @@ class M_user extends Crud_manager {
         ],
         'password_conf' => [
             'field' => 'password_conf',
-            'label' => 'Nhập lại mật khẩu',
+            'label' => 'Password confirm',
             'rules' => 'required|matches[password]',
             'form'  => [
                 'type' => 'password',
@@ -101,7 +101,7 @@ class M_user extends Crud_manager {
         ],
         'created_on'    => [
             'field' => 'created_on',
-            'label' => 'Ngày tạo',
+            'label' => 'Created on',
             'rules' => 'readonly',
             'table' => [
                 'callback_render_data' => "timestamp_to_date",

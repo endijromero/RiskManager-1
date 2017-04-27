@@ -50,7 +50,7 @@ class Login extends Admin_login_layout {
             if ($login) {
                 $this->set_more_session();
                 $dataReturn["state"] = 1;
-                $dataReturn["msg"] = "Đăng nhập thành công";
+                $dataReturn["msg"] = "Login successful!";
                 $url = $this->session->userdata('redirect_login');
                 $id = $this->session->userdata('user_id');
                 $url = $url ? $url : site_url( );
@@ -58,7 +58,7 @@ class Login extends Admin_login_layout {
                 $dataReturn["redirect"] = $url;
             } else {
                 $dataReturn["state"] = 0;
-                $dataReturn["msg"] = "Tên đăng nhập hoặc mật khẩu không chính xác";
+                $dataReturn["msg"] = "Wrong username or password !";
             }
             echo json_encode($dataReturn);
         } else {

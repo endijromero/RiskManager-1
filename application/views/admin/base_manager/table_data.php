@@ -58,16 +58,16 @@
         <?php } ?>
     </table>
     <?php if (!sizeof($record)) { ?>
-        <p class="no_record">Không có bản ghi nào thỏa mãn yêu cầu</p>
+        <p class="no_record">No records</p>
     <?php } else { ?>
         <div class="row no-magin">
             <div class="col-xs-4 margin-top-5">
                 <?php if ($to) { ?>
-                    <div class="dataTables_info" id="dataTable_info">Hiển thị
-                        từ <?php echo $from . " tới " . $to . " trên tổng số " . $total; ?> bản ghi
+                    <div class="dataTables_info" id="dataTable_info">Display
+                        from <?php echo $from . " to " . $to . " of " . $total; ?> records
                     </div>
                 <?php } else { ?>
-                    <div class="dataTables_info" id="dataTable_info">Hiển thị tất cả <?php echo $total; ?> bản ghi</div>
+                    <div class="dataTables_info" id="dataTable_info">Show all <?php echo $total; ?> records</div>
                 <?php } ?>
 
             </div>

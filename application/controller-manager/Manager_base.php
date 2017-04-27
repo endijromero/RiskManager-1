@@ -118,7 +118,7 @@ abstract class Manager_base extends Admin_layout {
             echo json_encode($data_return);
             return TRUE;
         } else {
-            $this->set_data_part("title", "Thêm  " . $this->name["object"], FALSE);
+            $this->set_data_part("title", "Add  " . $this->name["object"], FALSE);
             return $this->show_page($form_html);
         }
     }
@@ -146,16 +146,16 @@ abstract class Manager_base extends Admin_layout {
             $data_return["key_name"] = $key_field;
             $data_return["record"] = $data_validated;
             $data_return["state"] = 1; /* state = 1 : insert success*/
-            $data_return["msg"] = "Thêm bản ghi thành công";
+            $data_return["msg"] = "New records created successfully";
 //            $data_return["redirect"] = $this->url["manager"];
             echo json_encode($data_return);
             return $insert_id;
         } else {
             $data_return["state"] = 0; /* state = 2 : server error */
             if ($insert_id === FALSE) {
-                $data_return["msg"] = "Dữ liệu gửi lên không hợp lệ!";
+                $data_return["msg"] = "Invalid Data!";
             } else {
-                $data_return["msg"] = "Thêm bản ghi thất bại do lỗi server, vui lòng thử lại hoặc liên hệ quản lý hệ thống!";
+                $data_return["msg"] = "Add record failed due to server error, Please try again or contact system administrator for more information!";
             }
             $data_return["data"] = $data;
             $data_return["error"] = $this->model->get_validate_error();
@@ -178,7 +178,7 @@ abstract class Manager_base extends Admin_layout {
         }
         if (!$id) {
             $data_return["state"] = 0;
-            $data_return["msg"] = "Id không tồn tại";
+            $data_return["msg"] = "Id not exits";
             echo json_encode($data_return);
             return FALSE;
         }
@@ -194,7 +194,7 @@ abstract class Manager_base extends Admin_layout {
             echo json_encode($data_return);
             return TRUE;
         } else {
-            $this->set_data_part("title", "Sửa " . $this->name["object"], FALSE);
+            $this->set_data_part("title", "Edit " . $this->name["object"], FALSE);
             $this->show_page($form_html);
         }
     }
@@ -219,7 +219,7 @@ abstract class Manager_base extends Admin_layout {
         $id = intval($id);
         if (!$id) {
             $data_return["state"] = 0; /* state = 0 : invalid id */
-            $data_return["msg"] = "Bản ghi không tồn tại";
+            $data_return["msg"] = "Record not exits";
             echo json_encode($data_return);
             return FALSE;
         }
@@ -228,7 +228,7 @@ abstract class Manager_base extends Admin_layout {
             $data_return["key_name"] = $this->model->get_primary_key();
             $data_return["record"] = $this->standard_record_data($this->model->get($id));
             $data_return["state"] = 1; /* state = 1 : insert success */
-            $data_return["msg"] = "Sửa bản ghi thành công.";
+            $data_return["msg"] = " The record has been successfully edited.";
 //            $data_return["redirect"] = $this->url["manager"];
             echo json_encode($data_return);
             return TRUE;
@@ -236,9 +236,9 @@ abstract class Manager_base extends Admin_layout {
             $data_return["data"] = $data;
             $data_return["state"] = 0; /* state = 0 : invalid data */
             if ($update === FALSE) {
-                $data_return["msg"] = "Dữ liệu gửi lên không hợp lệ";
+                $data_return["msg"] = "Invalid data";
             } elseif ($update === 0) {
-                $data_return["msg"] = "Bạn chưa thay đổi dữ liệu!";
+                $data_return["msg"] = "The data has not changed !";
             }
             $data_return["error"] = $this->model->get_validate_error();
             echo json_encode($data_return);
@@ -274,17 +274,17 @@ abstract class Manager_base extends Admin_layout {
             if ($affected_row) {
                 $data_return["list_id"] = $list_id;
                 $data_return["state"] = 1;
-                $data_return["msg"] = "Xóa bản ghi thành công";
+                $data_return["msg"] = "Record has been successfully deleted";
             } else {
                 $data_return["list_id"] = $list_id;
                 $data_return["state"] = 0;
-                $data_return["msg"] = "Bản ghi đã được xóa từ trước hoặc không thể bị xóa. Vui lòng tải lại trang!";
+                $data_return["msg"] = "Record has been deleted before or can not be deleted. Please reload the page!";
             }
             echo json_encode($data_return);
             return TRUE;
         } else {
             $data_return["state"] = 0;
-            $data_return["msg"] = "Id không tồn tại";
+            $data_return["msg"] = "Id not exits";
             echo json_encode($data_return);
             return FALSE;
         }
@@ -314,7 +314,7 @@ abstract class Manager_base extends Admin_layout {
             $default_data["add_link"] = $this->url["add"];
             $default_data["delete_list_link"] = site_url($this->url["delete"]);
             $default_data["ajax_data_link"] = site_url($this->name["class"] . "/ajax_list_data");
-            $default_data["title"] = "Quản Lý " . $this->name["object"];
+            $default_data["title"] =  $this->name["object"] ." Management ";
             $default_data["view_file"] = $this->path_theme_view . "base_manager/manager_container";
             $data = array_merge($default_data, $data);
             $view_file = $data["view_file"];
@@ -322,7 +322,7 @@ abstract class Manager_base extends Admin_layout {
             $data['filter_html'] = $this->get_filter_html($data);
             $data['table_header'] = $this->get_table_header($data);
             $content = $this->load->view($view_file, $data, TRUE);
-            $this->set_html_part('title', "Quản lý " . $this->name["object"]);
+            $this->set_html_part('title', "Management " . $this->name["object"]);
             $this->show_page($content);
         } else  redirect(site_url("login"));
     }
@@ -563,7 +563,7 @@ abstract class Manager_base extends Admin_layout {
     protected function get_form_html($data = Array(), $record = NULL) {
         $data['form_id'] = uniqid();
         if (!isset($data['form_title'])) {
-            $data['form_title'] = "Thêm " . $this->name['object'];
+            $data['form_title'] = "Add " . $this->name['object'];
         }
         $data['form'] = $this->model->get_form();
         $data['is_edit'] = ($record === NULL) ? "0" : "1";
@@ -585,7 +585,7 @@ abstract class Manager_base extends Admin_layout {
     protected function get_form_edit_html($data = Array(), $record = NULL) {
         $data['form_id'] = uniqid();
         if (!isset($data['form_title'])) {
-            $data['form_title'] = "Sửa " . $this->name['object'];
+            $data['form_title'] = "Edit " . $this->name['object'];
         }
         $data['form'] = $this->model->get_form();
         $data['is_edit'] = ($record === NULL) ? "0" : "1";
@@ -704,8 +704,8 @@ abstract class Manager_base extends Admin_layout {
         $custom_action = "<div class='action-buttons'>";
 //        $custom_action .= "<a class='e_ajax_link blue' href='" . site_url($this->url["view"] . $record->$primary_key) . "'><i class='ace-icon fa fa-search-plus bigger-130'></i></a>";
         if ((!isset($record->disable_edit) || !$record->disable_edit)) {
-            $custom_action .= "<a class='e_ajax_link green' title=\"Sửa\"href='" . site_url($this->url["edit"] . $record->$primary_key) . "'><i class='ace-icon fa fa-pencil bigger-130'></i></a>";
-            $custom_action .= "<a class='e_ajax_link e_ajax_confirm red'title=\"Xóa\" href='" . site_url($this->url["delete"] . $record->$primary_key) . "'><i class='ace-icon fa fa-trash-o  bigger-130'></i></a>";
+            $custom_action .= "<a class='e_ajax_link green' title=\"Edit\"href='" . site_url($this->url["edit"] . $record->$primary_key) . "'><i class='ace-icon fa fa-pencil bigger-130'></i></a>";
+            $custom_action .= "<a class='e_ajax_link e_ajax_confirm red'title=\"Delete\" href='" . site_url($this->url["delete"] . $record->$primary_key) . "'><i class='ace-icon fa fa-trash-o  bigger-130'></i></a>";
         }
         $custom_action .= "</div>";
         return $custom_action;

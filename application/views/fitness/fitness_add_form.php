@@ -14,30 +14,30 @@
             <div class="modal-body bgwhite">
                 <div class="widget-body">
                     <div class="form-group">
-                        <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Trọng số chi phí</label>
+                        <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Cost weighting</label>
                         <div class="col-sm-8 col-xs-12">
-                        <textarea placeholder="Trọng số chi phí" name="cost" type="number"  class="input_field" rows="1" style="height: 34px; overflow-y: hidden;resize: none;"></textarea>
+                        <textarea placeholder="Cost weighting" name="cost" type="number"  class="input_field" rows="1" style="height: 34px; overflow-y: hidden;resize: none;"></textarea>
                     </div>
                         </div>
                     <div class="form-group">
-                        <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Trọng số độ khó</label>
+                        <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Difficulty weighting</label>
                         <div class="col-sm-8 col-xs-12">
-                        <textarea placeholder="Trọng số độ khó"name="diff" type="number"  class="input_field" rows="1" style="height: 34px; overflow-y: hidden;resize: none;"></textarea>
+                        <textarea placeholder="Difficulty weighting"name="diff" type="number"  class="input_field" rows="1" style="height: 34px; overflow-y: hidden;resize: none;"></textarea>
                     </div>
                         </div>
                     <div class="form-group">
-                        <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Trọng số độ ưu tiên</label>
+                        <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Priority weighting</label>
                         <div class="col-sm-8 col-xs-12">
-                        <textarea placeholder="Trọng số độ ưu tiên"name="priority" type="number"  class="input_field" rows="1" style="height: 34px; overflow-y: hidden;resize: none;"></textarea>
+                        <textarea placeholder="Priority weighting"name="priority" type="number"  class="input_field" rows="1" style="height: 34px; overflow-y: hidden;resize: none;"></textarea>
                     </div>
                         </div>
                     <div class="form-group">
-                        <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Trọng số thời gian</label>
+                        <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Time weighting</label>
                         <div class="col-sm-8 col-xs-12">
-                        <textarea placeholder="Trọng số thời gian"name="time" type="number"  class="input_field" rows="1" style="height: 34px; overflow-y: hidden;resize: none;"></textarea>
+                        <textarea placeholder="Time weighting"name="time" type="number"  class="input_field" rows="1" style="height: 34px; overflow-y: hidden;resize: none;"></textarea>
                     </div>
                         </div>
-                    <h5 style="color: cornflowerblue">Chú ý : Tổng giá trị các trọng số phải bằng 100</h5>
+                    <h5 style="color: cornflowerblue">Notice: Sum of weights must be 100.</h5>
                     </div>
 
 
@@ -45,10 +45,10 @@
 
             <div class="modal-footer">
                 <button type="submit" class="b_add b_edit btn btn-success">
-                    <i class="ace-icon fa fa-save "></i> Lưu
+                    <i class="ace-icon fa fa-save "></i> Save
                 </button>
-                <button type="reset" class="b_add btn">Nhập lại</button>
-                <button type="button" class="b_view b_add b_edit btn" data-dismiss="modal">Hủy</button>
+                <button type="reset" class="b_add btn">Reset</button>
+                <button type="button" class="b_view b_add b_edit btn" data-dismiss="modal">Cancle</button>
             </div>
         </form>
     </div>

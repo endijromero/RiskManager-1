@@ -3,18 +3,18 @@
         <button href="<?php echo $delete_list_link; ?>"
                 class="btn btn-danger btn-sm  e_ajax_link e_ajax_confirm delete_list_button for_select"
                 style="display: none;"><i class="ace-icon fa fa-trash"></i>
-            Xóa
+            Delete
         </button>
         <button href="# " class="btn btn-sm e_reverse_button for_select "
                 style="display: none;"><i class="ace-icon fa fa-refresh"></i>
-            Đảo ngược
+            Reverse
         </button>
         <label>
             <span>
-            Hiển thị
+            Display
                 <input name="post" type="text"
                        class="input-sm changer_number_record e_changer_number_record"
-                       value="20"> bản ghi trên 1 trang
+                       value="20"> records per page.
             </span>
         </label>
     </div>

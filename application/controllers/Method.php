@@ -20,7 +20,7 @@ class Method extends Abs_child_manager {
             "class"  => "method",
             "view"   => "method",
             "model"  => "m_method",
-            "object" => "Phương pháp xử lí Rủi Ro",
+            "object" => "Risk Response",
         );
     }
     public function create_save($parent_value, $data = Array(), $data_return = Array(), $skip_validate = FALSE) {
@@ -32,8 +32,8 @@ class Method extends Abs_child_manager {
         {
             echo json_encode([
                 'state' => 0,
-                'msg' => 'Dữ liệu không hợp lệ!
-                Cần nhập đầy đủ thông tin các trường.',
+                'msg' => 'Invalid data!
+                Don\'t leave the inputs empty.',
             ]);;
             return 0;
         }

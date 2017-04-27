@@ -13,26 +13,23 @@ class M_method extends Abs_child_model {
         'risk_id'     => [
             'field'    => 'risk_id',
             'db_field' => 'risk_id',
-            'label'    => 'id rủi ro',
+            'label'    => 'Risk ID',
             'rules'    => '',
+            'filter' =>[
+                'search_type'=>'where',
+            ],
+//            'table'    => TRUE,
         ],
         'risk_code'   => [
             'field'    => 'risk_code',
             'db_field' => 'risk_code',
-            'label'    => 'Mã rủi ro',
-            'rules'    => '',
-            'table'    => TRUE,
-        ],
-        'id'     => [
-            'field'    => 'id',
-            'db_field' => 'id',
-            'label'    => 'id pp',
+            'label'    => 'Risk code',
             'rules'    => '',
             'table'    => TRUE,
         ],
         'code'        => [
             'field'  => 'code',
-            'label'  => 'Mã phương pháp',
+            'label'  => 'Risk Response code',
             'rules'  => 'required',
             'form'   => TRUE,
             'filter' => [
@@ -42,7 +39,7 @@ class M_method extends Abs_child_model {
         ],
         'name'        => [
             'field'    => 'name',
-            'label'    => 'Tên phương pháp',
+            'label'    => 'Risk Response name',
             'rules'    => '',
             'form'     => TRUE,
             'filter'   => [
@@ -53,62 +50,56 @@ class M_method extends Abs_child_model {
         'cost'        => [
             'field'    => 'cost',
             'db_field' => 'cost',
-            'label'    => 'Chi phí tiền',
+            'label'    => 'Cost',
             'rules'    => '',
             'form'     => [
                 'type' => 'number',
-                'placeholder'    => 'Chi phí tiền (usd)',
+                'placeholder'    => 'Cost (usd)',
             ],
             'table'    => TRUE,
         ],
         'diff'        => [
             'field'    => 'diff',
             'db_field' => 'diff',
-            'label'    => 'Độ khó',
+            'label'    => 'Difficulty',
             'rules'    => '',
             'form'     => [
                 'type' => 'number',
-                'placeholder' => "Độ khó tăng dần từ 1->5"
+                'placeholder' => "Difficulty level increases"
             ],
             'table'    => TRUE,
         ],
         'priority'    => [
             'field'    => 'priority',
             'db_field' => 'priority',
-            'label'    => 'Độ ưu tiên',
+            'label'    => 'Priority',
             'rules'    => '',
             'form'     => [
                 'type' => 'number',
-                'placeholder' => "Độ ưu tiên tăng dần từ 1->5"
+                'placeholder' => "Priority level increases"
             ],
             'table'    => TRUE,
         ],
         'time'        => [
             'field'    => 'time',
             'db_field' => 'time',
-            'label'    => 'Thời gian xử lí',
+            'label'    => 'Time',
             'rules'    => '',
             'form'     => [
                 'type' => 'number',
-                'placeholder' => "Thời gian xử lí (giờ)"
+                'placeholder' => "time (hour)"
             ],
             'table'    => TRUE,
         ],
         'description' => [
             'field'    => 'description',
             'db_field' => 'description',
-            'label'    => 'Mô tả',
+            'label'    => 'Description',
             'rules'    => '',
             'form'     => [
                 'type' => 'textarea',
             ],
             'table'    => TRUE,
-        ],
-        'createdAt'   => [
-            'field' => 'createdAt',
-            'label' => 'Ngày tạo',
-            'rules' => '',
-            'table' => FALSE,
         ],
     ];
 

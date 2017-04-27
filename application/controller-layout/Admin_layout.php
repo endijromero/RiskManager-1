@@ -22,7 +22,7 @@ abstract class Admin_layout extends Base_layout {
 
     private function _set_side_bar_left() {
         $menu[] = Array(
-            "text" => "Danh sách dự án",
+            "text" => "List of Projects",
             "icon" => "fa-dashboard",
             "url"  => site_url('home'),
         );
@@ -30,44 +30,44 @@ abstract class Admin_layout extends Base_layout {
         $project_id = $this->session->userdata('project_id');
         if ($project_id) {
             $project_menu[] = Array(
-                "text" => "Quản lí rủi ro",
+                "text" => "Risk Management",
                 "icon" => "fa-dashboard",
                 "url"  => site_url('risk/manage/' . $project_id),
             );
             $project_menu[] = Array(
-                "text" => "Quản lí xung đột",
+                "text" => "Conflict Management",
                 "icon" => "fa-dashboard",
                 "url"  => site_url('conflict/manage/' . $project_id),
             );
             $project_menu[] = Array(
-                "text" => "Quản lí trọng số hàm thích nghi",
+                "text" => "Weighted fitness function Management",
                 "icon" => "fa-dashboard",
                 "url"  => site_url('fitness/manage/' . $project_id),
             );
             $project_menu[] = Array(
-                "text" => "Yêu cầu trợ giúp ra quyết định",
+                "text" => "Request for help make decisions",
                 "icon" => "fa-dashboard",
                 "url"  => site_url('hint/manage/' . $project_id),
             );
             $menu[] = Array(
-                "text"  => "Quản lí dự án",
+                "text"  => "Project Management",
                 "icon"  => "fa-table",
                 "url"   => site_url('hint/manage/' . $project_id),
                 "child" => $project_menu,
             );
         }
         $menu[] = Array(
-            "text" => "Quản lí loại rủi ro",
+            "text" => "Risk Category ",
             "icon" => "fa fa-pied-piper",
             "url"  => site_url('risk_type'),
         );
         $menu[] = Array(
-            "text" => "DS Dự án đã kết thúc",
+            "text" => "Finished projects",
             "icon" => "fa fa-list",
             "url"  => site_url('finished_project '),
         );
         $menu[] = Array(
-            "text" => "Người dùng",
+            "text" => "User",
             "icon" => "fa-users",
             "url"  => site_url('user'),
         );

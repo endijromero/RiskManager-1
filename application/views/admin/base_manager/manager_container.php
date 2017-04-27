@@ -26,7 +26,7 @@
             <div class="widget-toolbox padding-8 clearfix text-right">
                 <button href="<?php echo $add_link; ?>" class="btn btn-success e_ajax_link add_button">
                     <i class="ace-icon fa fa-plus-circle"></i>
-                    Thêm
+                    Add
                 </button>
             </div>
         </div>

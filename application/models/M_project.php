@@ -11,12 +11,12 @@ class M_project extends Crud_manager {
     public $schema = [
         'user_id'       => [
             'field' => 'user_id',
-            'label' => 'id người dùng',
+            'label' => 'User ID',
 
         ],
         'code'          => [
             'field'  => 'code',
-            'label'  => 'Mã dự án',
+            'label'  => 'Project code',
             'rules'  => 'required',
             'form'   => TRUE,
             'filter' => [
@@ -29,7 +29,7 @@ class M_project extends Crud_manager {
         ],
         'name'          => [
             'field'  => 'name',
-            'label'  => 'Tên dự án',
+            'label'  => 'Project name',
             'rules'  => 'required',
             'form'   => TRUE,
             'filter' => [
@@ -42,7 +42,7 @@ class M_project extends Crud_manager {
         'risk_quantity' => [
             'field'    => 'risk_quantity',
             'db_field' => 'risk_quantity',
-            'label'    => 'Số lượng rủi ro',
+            'label'    => 'Quantity of risk',
             'rules'    => '',
 //            'form'     => TRUE,
             'table'    => TRUE,
@@ -50,23 +50,18 @@ class M_project extends Crud_manager {
         'description'   => [
             'field'    => 'description',
             'db_field' => 'description',
-            'label'    => 'Mô tả',
+            'label'    => 'Description',
             'rules'    => '',
             'form'     => [
                 'type' => 'textarea',
             ],
             'table'    => TRUE,
         ],
-        'createdAt'     => [
-            'field' => 'createdAt',
-            'label' => 'Ngày tạo',
-            'rules' => '',
-            'table' => FALSE,
-        ],
+
         'project_id'    => [
             'field'    => 'project_id',
             'db_field' => 'r.id',
-            'label'    => 'id dự án',
+            'label'    => 'Project ID',
             'rules'    => '',
         ],
     ];

@@ -13,12 +13,12 @@ class M_risk extends Abs_child_model {
     public $schema = [
         'project_id'  => [
             'field'    => 'project_id',
-            'label'    => 'id dự án',
+            'label'    => 'Project ID',
             'rules'    => 'required',
         ],
         'project_code'      => [
             'field'    => 'project_code',
-            'label'    => 'Mã dự án',
+            'label'    => 'Project code',
             'db_field' => 'project_code',
             'rules'    => '',
             'table'    => TRUE,
@@ -26,14 +26,14 @@ class M_risk extends Abs_child_model {
         'risk_type_code'    => [
             'field'    => 'risk_type_code',
             'db_field' => 'risk_type_code',
-            'label'    => 'Mã loại rủi ro',
+            'label'    => 'Risk category code',
             'rules'  => '',
             'table'    => TRUE,
 
         ],
         'code'            => [
             'field'  => 'code',
-            'label'  => 'Mã rủi ro',
+            'label'  => 'Risk code',
             'rules'  => 'required',
             'form'   => [
                 'type' => 'text',
@@ -47,7 +47,7 @@ class M_risk extends Abs_child_model {
         ],
         'name'            => [
             'field'  => 'name',
-            'label'  => 'Tên rủi ro',
+            'label'  => 'Risk name',
             'rules'  => '',
             'form'   => [
                 'type' => 'text',
@@ -62,13 +62,13 @@ class M_risk extends Abs_child_model {
         'method_quantity' => [
             'field' => 'method_quantity',
             'db_field' => 'method_quantity',
-            'label' => 'Số phương án xử lí',
+            'label' => 'Quantity of Risk Response',
             'rules' => '',
             'table' => TRUE,
         ],
         'description'     => [
             'field' => 'description',
-            'label' => 'Mô tả',
+            'label' => 'Description',
             'rules' => '',
             'form'     => [
                 'type' => 'textarea',
@@ -78,28 +78,34 @@ class M_risk extends Abs_child_model {
         'financial_impact'     => [
             'field' => 'financial_impact',
             'rules'  => 'required',
-            'label' => 'Thiệt hại($)',
+            'label' => 'Financial impact($)',
             'rules' => '',
             'form'     => [
                 'type' => 'number',
-                'placeholder'    => 'Thiệt hại khi xảy ra rủi ro (usd)',
+                'placeholder'    => 'Financial_impact (usd)',
             ],
             'table' => TRUE,
         ],
         'risk_level'  => [
             'field'    => 'risk_level',
             'rules'  => 'required',
-            'label'    => 'Mức độ nghiêm trọng',
+            'label'    => 'Risk level',
             'rules'    => '',
-            'form'     => [
-                'type'            => '',
-            ],
+            'form'     => Array(
+                'type'            => 'select',
+                'target_model'    => 'this',
+                'target_function' => 'get_role',
+                'class'           => '',
+            ),
+            'table'    => Array(
+                'callback_render_data' => "get_risk_level",
+            ),
             'table' => TRUE,
         ],
         'risk_type_id'  => [
             'field'    => 'risk_type_id',
             'db_field' => 'risk_type_id',
-            'label'    => 'Mã loại rủi ro',
+            'label'    => 'Risk category ID',
             'rules'    => '',
             'form'     => [
                 'type'            => 'select',
@@ -107,13 +113,9 @@ class M_risk extends Abs_child_model {
                 'target_function' => 'custom_dropdown',
                 'target_arg'      => ['id','code'],
             ],
+
         ],
-        'createdAt'       => [
-            'field' => 'createdAt',
-            'label' => 'Ngày tạo',
-            'rules' => '',
-            'table' => FALSE,
-        ],
+
     ];
 
     public function __construct() {
@@ -129,4 +131,22 @@ class M_risk extends Abs_child_model {
         $this->db->join('methods as me', 'me.deleted=0 AND me.risk_id=m.id', 'LEFT');
     }
 
+    public function get_role() {
+        return [
+            'Low' => 'Low',
+            'Medium' => 'Medium',
+            'High' => 'High',
+            'Extreme' => 'Extreme',
+        ];
+    }
+
+
+    public function get_risk_level($id) {
+        $status = $this->get_role();
+        if (isset($status[$id])) {
+            return $status[$id];
+        } else {
+            return $id;
+        }
+    }
 }

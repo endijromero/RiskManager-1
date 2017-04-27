@@ -320,12 +320,12 @@ function do_ajax_link(e, source_obj) {
         data = JSON.parse(obj.attr("data"));
     }
     if (obj.hasClass("e_ajax_confirm")) {
-        var label_cancel = obj.data('label-cancel') || 'Không xoá';
-        var label_submit = obj.data('label-submit') || "<i class='ace-icon fa fa-trash'></i> Ok, Xoá!";
+        var label_cancel = obj.data('label-cancel') || 'Cancel';
+        var label_submit = obj.data('label-submit') || "<i class='ace-icon fa fa-trash'></i> Ok, Delete!";
 
         bootbox.dialog({
-            message: "<span class='bigger-110'>Dữ liệu không thể khôi phục sau khi làm thao tác này! <br/>"
-            + "<b>Bạn chắc chắn sẽ làm điều này chứ?</b></span>",
+            message: "<span class='bigger-110'>Warning: Once you've done this, you won't be able to undo it! <br/>"
+            + "<b> Are you sure?</b></span>",
             buttons: {
                 "success": {
                     "label"    : label_cancel,
@@ -449,7 +449,7 @@ function check_value(e, source_obj) {
         if (value.length != 0) {
             if (!(!isNaN(parseFloat(value)) && isFinite(value))) {
                 change_error_state(obj, false);
-                parent.find("label.help-block").html("Dữ liệu nhập vào là số");
+                parent.find("label.help-block").html("This field must be numberics");
                 return false;
             } else {
                 change_error_state(obj, true);
@@ -459,7 +459,7 @@ function check_value(e, source_obj) {
     if (obj.attr("required") != undefined && obj.attr("required") != "0") {
         if (value.length == 0) {
             change_error_state(obj, false);
-            parent.find("label.help-block").html("Trường này là bắt buộc");
+            parent.find("label.help-block").html("Required field");
             return false;
         } else {
             change_error_state(obj, true);
@@ -468,7 +468,7 @@ function check_value(e, source_obj) {
     if (obj.attr("minlength") != undefined && obj.attr("minlength") > 1) {
         if (value.length < obj.attr("minlength")) {
             change_error_state(obj, false);
-            parent.find("label.help-block").html("Độ dài tối thiểu là " + obj.attr("minlength") + " ký tự");
+            parent.find("label.help-block").html("Min length is " + obj.attr("minlength") + " characters");
             return false;
         } else {
             change_error_state(obj, true);
@@ -477,7 +477,7 @@ function check_value(e, source_obj) {
     if (obj.attr("maxlength") != undefined && obj.attr("maxlength") > 1) {
         if (value.length > obj.attr("maxlength")) {
             change_error_state(obj, false);
-            parent.find("label.help-block").html("Độ dài tối đa là " + obj.attr("maxlength") + " ký tự");
+            parent.find("label.help-block").html("Max length is " + obj.attr("maxlength") + " characters");
             return false;
         } else {
             change_error_state(obj, true);
@@ -490,7 +490,7 @@ function check_value(e, source_obj) {
         } else {
             if (!is_email(value)) {
                 change_error_state(obj, false);
-                parent.find("label.help-block").html("Trường này yêu cầu là email!");
+                parent.find("label.help-block").html("Email format not matches!");
                 return false;
             } else {
                 change_error_state(obj, true);
@@ -501,7 +501,7 @@ function check_value(e, source_obj) {
         var selector = creat_input_selector("[name='" + obj.attr("recheck") + "']");
         if (value != $(selector).val()) {
             change_error_state(obj, false);
-            parent.find("label.help-block").html("Dữ liệu nhập lại không đúng");
+            parent.find("label.help-block").html("Retype password not matches");
             return false;
         } else {
             change_error_state(obj, true);
@@ -511,7 +511,7 @@ function check_value(e, source_obj) {
     if (obj.attr("allow_null") == undefined && obj.prop("tagName") == "SELECT") {
         if (value == 0) {
             change_error_state(obj, false);
-            parent.find("label.help-block").html("Trường này không được bỏ trống");
+            parent.find("label.help-block").html("Required field");
             return false;
         } else {
             change_error_state(obj, true);

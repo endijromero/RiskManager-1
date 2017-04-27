@@ -11,7 +11,7 @@ class M_risk_type extends Crud_manager  {
     public $schema = [
         'code' => [
             'field'  => 'code',
-            'label'  => 'Mã loại rủi ro',
+            'label'  => 'Risk category code',
             'rules'  => 'required',
             'form'   => TRUE,
             'filter' => [
@@ -21,7 +21,7 @@ class M_risk_type extends Crud_manager  {
         ],
         'name' => [
             'field'    => 'name',
-            'label'    => 'Tên loại rủi ro',
+            'label'    => 'Risk category name',
             'rules'    => 'required',
             'form'     => TRUE,
             'filter'   => [
@@ -33,18 +33,12 @@ class M_risk_type extends Crud_manager  {
         'description' => [
             'field'    => 'description',
             'db_field' => 'description',
-            'label'    => 'Mô tả',
+            'label'    => 'Description',
             'rules'    => '',
             'form'     => [
                 'type' => 'textarea',
             ],
             'table'    => TRUE,
-        ],
-        'createdAt'   => [
-            'field' => 'createdAt',
-            'label' => 'Ngày tạo',
-            'rules' => '',
-            'table' => FALSE,
         ],
     ];
 

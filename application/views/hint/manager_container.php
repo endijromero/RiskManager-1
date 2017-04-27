@@ -3,7 +3,7 @@
         <div class="widget-header">
             <h5 class="widget-title bigger-125">
                 <i class="ace-icon fa fa-table"></i>
-                Thông tin dự án <?php echo $project->name ?>
+                Project Information <?php echo $project->name ?>
             </h5>
             <div class="widget-toolbar">
                 <a href="#" data-action="collapse">
@@ -14,25 +14,25 @@
                 <a href="<?php echo site_url('hint/manage/' . $project->id) ?>"
                    class="btn btn-success add_button">
                     <i class="ace-icon fa fa-plus-circle"></i>
-                    Gợi ý lại
+                    Hint back
                 </a>
             </div>
         </div>
         <div class="widget-body bgwhite padding-10">
             <div class="form-group">
-                <label class="col-xs-4 contact-label-title row-title">Mã dự án</label>
+                <label class="col-xs-4 contact-label-title row-title">Project code</label>
                 <span><?php echo $project->code; ?></span>
             </div>
             <div class="form-group">
-                <label class="col-xs-4 contact-label-title row-title">Tên dự án</label>
+                <label class="col-xs-4 contact-label-title row-title">Project name</label>
                 <span><?php echo $project->name; ?></span>
             </div>
             <div class="form-group">
-                <label class="col-xs-4 ">Số lượng rủi ro</label>
+                <label class="col-xs-4 ">Quantity of risk</label>
                 <span><?php echo $project->risk_quantity == NULL ? 0 : $project->risk_quantity; ?></span>
             </div>
             <div class="form-group">
-                <label class="col-xs-4 contact-label-title row-title">Mô tả</label>
+                <label class="col-xs-4 contact-label-title row-title">Description</label>
                 <span><?php echo $project->description; ?></span>
             </div>
         </div>
@@ -42,7 +42,7 @@
         <div class="widget-header">
             <h5 class="widget-title bigger-125">
                 <i class="ace-icon fa fa-table"></i>
-                Thông tin các rủi ro của dự án
+                Risk Information
             </h5>
             <div class="widget-toolbar">
                 <a href="#" data-action="collapse">
@@ -55,10 +55,10 @@
                    border="0">
                 <thead>
                 <tr>
-                    <th>Mã Rủi Ro</th>
-                    <th>Tên Rủi Ro</th>
-                    <th>Số phương án xử lí</th>
-                    <th>Mô tả</th>
+                    <th>Risk code</th>
+                    <th>Risk name</th>
+                    <th>Quantity of Risk Response</th>
+                    <th>Description</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -79,7 +79,7 @@
         <div class="widget-header">
             <h5 class="widget-title bigger-125">
                 <i class="ace-icon fa fa-table"></i>
-                Thông tin các phương pháp giải quyết rủi ro của dự án
+                Risk Response Information
             </h5>
             <div class="widget-toolbar">
                 <a href="#" data-action="collapse">
@@ -94,13 +94,13 @@
                     <table class='table table-bordered table-hover no-footer'>
                         <thead>
                         <tr>
-                            <th>Mã phương pháp</th>
-                            <th>Tên phương pháp</th>
-                            <th>Chi phí</th>
-                            <th>Độ khó</th>
-                            <th>Độ ưu tiên</th>
-                            <th>Thời gian</th>
-                            <th>Mô tả</th>
+                            <th>Risk Response code</th>
+                            <th>Risk Response name</th>
+                            <th>Cost</th>
+                            <th>Difficulty</th>
+                            <th>Priority</th>
+                            <th>Time</th>
+                            <th>Description</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -125,7 +125,7 @@
         <div class="widget-header">
             <h5 class="widget-title bigger-125">
                 <i class="ace-icon fa fa-table"></i>
-                Các thông số của giái thuật di truyền
+                The values of the GA parameters
             </h5>
             <div class="widget-toolbar">
                 <a href="#" data-action="collapse">
@@ -138,10 +138,10 @@
                 <tbody>
                 <?php {
                     echo "<tr>";
-                    echo "<td>Kích thước quần thể: {$GA_POPSIZE} </td>";
-                    echo "<td>Số vòng lặp tối đa: {$GA_MAXITER} </td>";
-                    echo "<td>Xác suất lai ghép: {$GA_ELITRATE} </td>";
-                    echo "<td>Xác suất đột biến: {$GA_MUTATION} </td>";
+                    echo "<td>GA_POPSIZE: {$GA_POPSIZE} </td>";
+                    echo "<td>GA_MAXITER: {$GA_MAXITER} </td>";
+                    echo "<td>GA_ELITRATE: {$GA_ELITRATE} </td>";
+                    echo "<td>GA_MUTATION: {$GA_MUTATION} </td>";
                     echo "</tr>";
                 }
               ?>
@@ -153,7 +153,7 @@
         <div class="widget-header">
             <h5 class="widget-title bigger-125">
                 <i class="ace-icon fa fa-table"></i>
-                Gợi ý phương pháp ứng với rủi ro
+                Hint
             </h5>
             <div class="widget-toolbar">
                 <a href="#" data-action="collapse">
@@ -166,11 +166,11 @@
                 <tbody>
                 <?php foreach ($results['recommend'] as $recommend_item) {
                     echo "<tr>";
-                    echo "<td>Tên rủi ro: {$recommend_item['risk']->name} (Mã rủi ro: {$recommend_item['risk']->code})</td>";
-                    echo "<td>Tên phương pháp: {$recommend_item['method']->name} (Mã phương pháp: {$recommend_item['method']->code })</td>";
+                    echo "<td>Risk name: {$recommend_item['risk']->name} (Risk code: {$recommend_item['risk']->code})</td>";
+                    echo "<td>Risk Response name: {$recommend_item['method']->name} (Risk Response code: {$recommend_item['method']->code })</td>";
                     echo "</tr>";
                 }
-                echo "<tr><td colspan='2'>Giá trị thích nghi: {$results['fit']}</td></tr>"; ?>
+                echo "<tr><td colspan='2'>Fitness value: {$results['fit']}</td></tr>"; ?>
                 </tbody>
             </table>
         </div>

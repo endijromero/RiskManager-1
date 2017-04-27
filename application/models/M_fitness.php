@@ -12,64 +12,64 @@ class M_fitness extends Abs_child_model {
     public $schema = [
         'project_id'  => [
             'field'    => 'project_id',
-            'label'    => 'id dự án',
+            'label'    => 'Project ID',
             'db_field' => 'project_id',
             'rules'    => 'required',
 
         ],
         'project_code'      => [
             'field'    => 'project_code',
-            'label'    => 'Mã dự án',
+            'label'    => 'Project code',
             'db_field' => 'project_code',
             'rules'    => '',
             'table'    => TRUE,
         ],
         'cost'    => [
             'field'  => 'cost',
-            'label'  => 'trọng số chi phí',
+            'label'  => 'Cost weighting',
             'rules'  => '',
             'form'   => [
                 'type' => 'number',
-                'placeholder'    => 'Chi phí tiền (usd)',
+                'placeholder'    => 'Cost weighting(number)',
             ],
             'table' => TRUE,
         ],
         'diff'    => [
             'field'  => 'diff',
-            'label'  => 'trọng số độ khó',
+            'label'  => 'Difficulty weighting',
             'rules'  => '',
             'form'   => [
                 'type' => 'number',
-                'placeholder' => "Độ khó tăng dần từ 1->5"
+                'placeholder' => "Difficulty weighting(number)"
             ],
             'table' => TRUE,
         ],
         'priority'    => [
             'field'  => 'priority',
-            'label'  => 'trọng số độ ưu tiên',
+            'label'  => 'Priority weighting',
             'rules'  => '',
             'form'   => [
                 'type' => 'number',
-                'placeholder' => "Độ ưu tiên tăng dần từ 1->5"
+                'placeholder' => "Priority weighting(number)"
             ],
             'table' => TRUE,
         ],
         'time'    => [
             'field'  => 'time',
-            'label'  => 'trọng số thời gian',
+            'label'  => 'Time weighting',
             'rules'  => '',
             'form'   => [
                 'type' => 'number',
-                'placeholder' => "Thời gian xử lí (giờ)"
+                'placeholder' => "Time weighting(number)"
             ],
             'table' => TRUE,
         ],
-        'createdAt'       => [
-            'field' => 'createdAt',
-            'label' => 'Ngày tạo',
-            'rules' => '',
-            'table' => FALSE,
-        ],
+//        'createdAt'       => [
+//            'field' => 'createdAt',
+//            'label' => 'Ngày tạo',
+//            'rules' => '',
+//            'table' => FALSE,
+//        ],
     ];
 
     public function __construct() {

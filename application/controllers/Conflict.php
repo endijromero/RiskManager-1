@@ -30,7 +30,7 @@ class Conflict extends Abs_child_manager {
             "class"  => "conflict",
             "view"   => "conflict",
             "model"  => "m_conflict",
-            "object" => "Xung Đột",
+            "object" => "Conflict",
         );
     }
 
@@ -46,11 +46,12 @@ class Conflict extends Abs_child_manager {
             $data = $this->input->post();
             $data[$this->_parent_field] = $parent_value;
         }
-        if ($data['code'] == NULL || $data['name'] == NULL || $data['method_1_id'] == NULL || $data['method_2_id'] == NULL || $data['description'] == NULL) {
+//        if ($data['code'] == NULL  || $data['method_1_id'] == NULL || $data['method_2_id'] == NULL ) {
+        if ( $data['method_1_id'] == NULL || $data['method_2_id'] == NULL ) {
             echo json_encode([
                 'state' => 0,
-                'msg'   => 'Dữ liệu không hợp lệ!
-                Cần nhập đầy đủ thông tin các trường.',
+                'msg'   => 'Invalid data!
+                Don\'t leave the inputs empty.',
             ]);;
             return 0;
         }
@@ -61,8 +62,8 @@ class Conflict extends Abs_child_manager {
         if (($data['method_2_id'] == $data['method_1_id']) || $risk_id_1 == $risk_id_2) {
             echo json_encode([
                 'state' => 0,
-                'msg'   => 'Dữ liệu không hợp lệ!
-                Bạn phải chọn 2 phương thức của 2 rủi ro khác nhau.',
+                'msg'   => 'Invalid data!
+                You must choose two RiskResponce of two different Risks.',
             ]);;
             return 0;
         }
@@ -95,8 +96,8 @@ class Conflict extends Abs_child_manager {
     private function _precheck_post_data($data, $data_return = Array()) {
         if (($data['method_2_id'] == $data['method_1_id'])) {
             $data_return['state'] = 0;
-            $data_return['msg'] = 'Dữ liệu không hợp lệ!
-                Bạn phải chọn 2 phương thức của 2 rủi ro khác nhau.';
+            $data_return['msg'] = 'Invalid data!
+                You must choose two RiskResponce of two different Risks.';
         } else {
             $data_return['state'] = 1;
         }

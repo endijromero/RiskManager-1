@@ -20,10 +20,10 @@
 
             <div class="modal-footer">
                 <button type="submit" class="b_add b_edit btn btn-success">
-                    <i class="ace-icon fa fa-save "></i> Lưu
+                    <i class="ace-icon fa fa-save "></i> Save
                 </button>
-                <button type="reset" class="b_add btn">Nhập lại</button>
-                <button type="button" class="b_view b_add b_edit btn" data-dismiss="modal">Hủy</button>
+                <button type="reset" class="b_add btn">Reset</button>
+                <button type="button" class="b_view b_add b_edit btn" data-dismiss="modal">Cancle</button>
             </div>
         </form>
     </div>

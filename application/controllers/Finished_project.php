@@ -19,7 +19,7 @@ class Finished_project extends Manager_base {
             "class"  => "finished_project",
             "view"   => "finished_project",
             "model"  => "m_project",
-            "object" => "dự án kết thúc",
+            "object" => "Finished projects",
         );
     }
 
@@ -43,7 +43,7 @@ class Finished_project extends Manager_base {
         $primary_key = $this->model->get_primary_key();
         $custom_action = "<div class='action-buttons'>";
         if ((!isset($record->disable_edit) || !$record->disable_edit)) {
-            $custom_action .= "<a class='e_ajax_link e_ajax_confirm red'title=\"Xóa\" href='" . site_url($this->url["delete"] . $record->$primary_key) . "'><i class='ace-icon fa fa-trash-o  bigger-130'></i></a>";
+            $custom_action .= "<a class='e_ajax_link e_ajax_confirm red'title=\"Delete\" href='" . site_url($this->url["delete"] . $record->$primary_key) . "'><i class='ace-icon fa fa-trash-o  bigger-130'></i></a>";
         }
         $custom_action .= "</div>";
         return $custom_action;

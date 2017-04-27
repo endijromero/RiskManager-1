@@ -24,7 +24,7 @@ class Home extends Manager_base {
             "class"  => "home",
             "view"   => "home",
             "model"  => "m_project",
-            "object" => "Danh Sách Dự Án",
+            "object" => "Project list",
         );
     }
 
@@ -63,8 +63,8 @@ class Home extends Manager_base {
         if ($data['code'] == NULL || $data['name'] == NULL || $data['description'] == NULL) {
             echo json_encode([
                 'state' => 0,
-                'msg'   => 'Dữ liệu không hợp lệ!
-                Cần nhập đầy đủ thông tin các trường.',
+                'msg'   => 'Invalid data!
+                Don\'t leave the inputs empty.',
             ]);;
             return 0;
         }
@@ -76,14 +76,14 @@ class Home extends Manager_base {
         $custom_action = "<div class='action-buttons'>";
 //        $custom_action .= "<a class='e_ajax_link blue' href='" . site_url($this->url["view"] . $record->$primary_key) . "'><i class='ace-icon fa fa-search-plus bigger-130'></i></a>";
         if ((!isset($record->disable_edit) || !$record->disable_edit)) {
-            $custom_action .= "<a class='e_ajax_link green' title=\"Sửa\"href='" .
+            $custom_action .= "<a class='e_ajax_link green' title=\"Edit\"href='" .
                 site_url($this->url["edit"] . $record->$primary_key) .
                 "'><i class='ace-icon fa fa-pencil bigger-130'></i></a>";
             $custom_action .= "<a class='e_ajax_link e_ajax_confirm blue' data-label-cancel='Hủy' 
-                data-label-submit='Kết thúc' title=\"Kết thúc dự án\"href='" .
+                data-label-submit='Kết thúc' title=\"Finish project\"href='" .
                 site_url($this->name["class"] . '/finish/' . $record->$primary_key) .
                 "'><i class='fa fa-check-square-o bigger-130'></i></a>";
-            $custom_action .= "<a class='e_ajax_link e_ajax_confirm red'title=\"Xóa\" href='" .
+            $custom_action .= "<a class='e_ajax_link e_ajax_confirm red'title=\"Delete\" href='" .
                 site_url($this->url["delete"] . $record->$primary_key) .
                 "'><i class='ace-icon fa fa-trash-o bigger-130'></i></a>";
         }
@@ -98,7 +98,7 @@ class Home extends Manager_base {
         $id = intval($id);
         if (!$id) {
             $data_return["state"] = 0; /* state = 0 : invalid id */
-            $data_return["msg"] = "Dự án không tồn tại";
+            $data_return["msg"] = "Project does not exist";
             echo json_encode($data_return);
             return FALSE;
         }
@@ -131,7 +131,7 @@ class Home extends Manager_base {
             }
         }else{
             $data_return["state"] = 0;
-            $data_return["msg"] = "Dự án không tồn tại";
+            $data_return["msg"] = "Project does not exist";
             echo json_encode($data_return);
             return FALSE;
         }

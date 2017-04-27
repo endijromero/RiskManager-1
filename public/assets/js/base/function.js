@@ -168,16 +168,16 @@ function save_form_add_response(data, form, button) {
     } else if (data.state == 0) { /* invalid data */
         button.addClass('btn-danger');
         button.removeClass('btn-success');
-        button.html('Thất bại ...');
+        button.html('Failed ...');
     } else if (data.state == 2) { /* server error */
         button.addClass('btn-danger');
         button.removeClass('btn-success');
-        button.html('Thất bại ...');
+        button.html('Failed ...');
         location.reload();
     } else {
         button.addClass('btn-danger');
         button.removeClass('btn-success');
-        button.html('Không rõ kết quả');
+        button.html('Unknown result');
         location.reload();
     }
     if (data.error) {
@@ -252,7 +252,7 @@ function get_form_edit_response(data, obj) {
         });
     } else {
         if (!data.record_data) {
-            $.jGrowl("<i class='icon16 i-checkmark-3'></i> Id không tồn tại", {
+            $.jGrowl("<i class='icon16 i-checkmark-3'></i> Item not found", {
                 group: "alert-danger",
                 position: 'top-right',
                 sticky: false,
@@ -294,7 +294,7 @@ function get_data_view_response(data, obj) {
         });
     } else {
         if (!data.record_data) {
-            $.jGrowl("<i class='icon16 i-checkmark-3'></i> Id không tồn tại", {
+            $.jGrowl("<i class='icon16 i-checkmark-3'></i> Item not found", {
                 group: "alert-danger",
                 position: 'top-right',
                 sticky: false,
@@ -383,20 +383,20 @@ function default_form_submit_respone(data, form, button) {
     if (data.state == 1) { /* success */
         button.removeClass('btn-danger');
         button.addClass('btn-success');
-        button.html('Thành công ...');
+        button.html('Success ...');
         jgrow = "alert-success";
     } else if (data.state == 0) { /* Invalida data */
         button.addClass('btn-danger');
         button.removeClass('btn-success');
-        button.html('Thất bại ...');
+        button.html('Failed ...');
     } else if (data.state == 2) { /* Server error */
         button.addClass('btn-danger');
         button.removeClass('btn-success');
-        button.html('Thất bại ...');
+        button.html('Failed ...');
     } else {
         button.addClass('btn-danger');
         button.removeClass('btn-success');
-        button.html('Không rõ kết quả');
+        button.html('Unknown result');
     }
     if (data.error) {
         show_error(data.error);

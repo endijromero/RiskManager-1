@@ -26,7 +26,7 @@ class Risk extends Abs_child_manager {
             "class"  => "risk",
             "view"   => "risk",
             "model"  => "m_risk",
-            "object" => "Rủi Ro",
+            "object" => "Risk",
         );
     }
     public function create($parent_value, $data = Array(), $data_return = Array()) {
@@ -51,8 +51,8 @@ class Risk extends Abs_child_manager {
         {
             echo json_encode([
                 'state' => 0,
-                'msg' => 'Dữ liệu không hợp lệ!
-                Cần nhập đầy đủ thông tin các trường.',
+                'msg' => 'Invalid data!
+                Don\'t leave the inputs empty.',
             ]);;
             return 0;
         }

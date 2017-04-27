@@ -20,7 +20,7 @@
                                 <div class="widget-main">
                                     <h4 class="header blue lighter bigger center">
                                         <i class="ace-icon fa fa-user green"></i>
-                                        Vui lòng đăng nhập
+                                        Please log-in
                                     </h4>
 
                                     <div class="space-6"></div>
@@ -39,13 +39,12 @@
                                                 <span class="block input-icon input-icon-right">
                                                     <input name="password" type="password" class="form-control"
                                                            required="required" id="admin_password" autocomplete="new-password"
-                                                           placeholder="Mật khẩu" maxlength=255 minlength=6
+                                                           placeholder="Password" maxlength=255 minlength=6
                                                            required=required autocomplete=off/>
                                                     <i class="ace-icon fa fa-lock"></i>
                                                 </span>
                                             </label>
-                                            <label class="alert alert-danger hidden">Sai tên đăng nhập hoặc mật
-                                                khẩu!</label>
+                                            <label class="alert alert-danger hidden">Wrong username or password !</label>
                                             <div class="space"></div>
                                             <div class="clearfix">
 <!--                                                <label class="inline">-->

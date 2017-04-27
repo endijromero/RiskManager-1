@@ -16,7 +16,7 @@
         </button>
         <button type="reset" class="b_add btn">
             <i class="ace-icon fa fa-refresh "></i>
-            Nhập lại
+            Reset
         </button>
     </div>
 </form>

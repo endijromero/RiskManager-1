@@ -20,11 +20,11 @@
 <!--                        </div>-->
 <!--                    </div>-->
                     <div class="form-group">
-                        <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Mã loại rủi ro</label>
+                        <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Risk category code</label>
                         <div class="col-sm-8 col-xs-12">
                         <select  name="risk_type_id" class="e_select_risk_type"
                                  data-url="<?php echo site_url('conflict/get_method_child') ?>">
-                            <option value="" selected disabled hidden>Chọn loaị rủi ro</option>
+                            <option value="" selected disabled hidden>Choose Risk category</option>
                             <?php foreach ($list_risk_type as $item) { ?>
                                 <option value="<?php echo $item->id; ?>"><?php echo $item->name; ?></option>
                             <?php } ?>
@@ -32,37 +32,37 @@
                             </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Mã rủi ro</label>
+                        <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Risk code</label>
                         <div class="col-sm-8 col-xs-12">
-                        <textarea name="code" placeholder="Mã rủi ro" type="text"  class="input_field" rows="1" style="height: 34px; overflow-y: hidden;resize: none;"></textarea>
+                        <textarea name="code" placeholder="Risk code" type="text"  class="input_field" rows="1" style="height: 34px; overflow-y: hidden;resize: none;"></textarea>
                     </div>
                         </div>
                     <div class="form-group">
-                        <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Tên rủi ro</label>
+                        <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Risk name</label>
                         <div class="col-sm-8 col-xs-12">
-                        <textarea name="name" placeholder="Tên rủi ro" type="text"  class="input_field" rows="1" style="height: 34px; overflow-y: hidden;resize: none;"></textarea>
+                        <textarea name="name" placeholder="Risk name" type="text"  class="input_field" rows="1" style="height: 34px; overflow-y: hidden;resize: none;"></textarea>
                     </div>
                         </div>
                     <div class="form-group">
                         <label class="col-sm-3 col-xs-12 control-label  no-padding-right">
-                            Mô tả    </label>
+                            Description    </label>
                         <div class="col-sm-8 col-xs-12">
                         <textarea rows="7" cols="40" style=" overflow-y: hidden;resize: none;" name="description" class="col-xs-12 " id="description_58c7b6c5e681e" placeholder="Mô tả" rules=""></textarea>
                     </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 col-xs-12 control-label  no-padding-right">
-                            Thiệt hại khi xảy ra rủi ro (usd)   </label>
+                            Financial impact (usd)   </label>
                         <div class="col-sm-8 col-xs-12">
-                            <textarea name="financial_impact" placeholder="Thiệt hại khi xảy ra rủi ro" type="number"  class="input_field" rows="1" style="height: 34px; overflow-y: hidden;resize: none;"></textarea>
+                            <textarea name="financial_impact" placeholder="Financial impact" type="number"  class="input_field" rows="1" style="height: 34px; overflow-y: hidden;resize: none;"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 col-xs-12 control-label  no-padding-right">
-                            Mức độ nghiêm trọng   </label>
+                            Risk level   </label>
                         <div class="col-sm-8 col-xs-12">
                             <select name="risk_level">
-                                <option value="" selected disabled hidden>Chọn mức độ nghiêm trọng</option>
+                                <option value="" selected disabled hidden>Choose Risk level</option>
                                     <option value="Low">Low</option>
                                     <option value="Medium">Medium</option>
                                     <option value="High">High</option>
@@ -77,10 +77,10 @@
 
             <div class="modal-footer">
                 <button type="submit" class="b_add b_edit btn btn-success">
-                    <i class="ace-icon fa fa-save "></i> Lưu
+                    <i class="ace-icon fa fa-save "></i> Save
                 </button>
-                <button type="reset" class="b_add btn">Nhập lại</button>
-                <button type="button" class="b_view b_add b_edit btn" data-dismiss="modal">Hủy</button>
+                <button type="reset" class="b_add btn">Reset</button>
+                <button type="button" class="b_view b_add b_edit btn" data-dismiss="modal">Cancle</button>
             </div>
         </form>
     </div>

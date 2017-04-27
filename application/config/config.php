@@ -98,7 +98,7 @@ $config['url_suffix'] = '';
 |
 */
 
-$config['language'] = 'vietnamese';
+$config['language'] = 'english';
 
 
 /*

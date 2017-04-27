@@ -69,7 +69,7 @@ class Hint extends Manager_base {
             $population = $this->_sort_by_fitness($population);    // sort them
             $buffer = $this->_mate($population, $buffer, $conflict_records, $methods_in_risks);        // mate the population together
             $this->_swap($population, $buffer);        // swap buffers
-            $this->_calc_fitness($population, $methods_in_risks,$fitness_records);        // calculate fitness
+            $this->_calc_fitness($population, $methods_in_risks,$fitness_records,$project_id);        // calculate fitness
             $this->_sort_by_fitness($population);
         }
         $result = $this->_result($population[0]);
@@ -227,22 +227,26 @@ class Hint extends Manager_base {
         return 0;
     }
     // Fitness calculator
-    private function _calc_fitness($population, $methods_in_risks,$fitness_records) {
+    private function _calc_fitness($population, $methods_in_risks,$fitness_records,$project_id) {
         $group_risk = array();
         $fit = 0;
         for ($i = 0; $i < GA_POPSIZE; $i++) {
             $fit = 0;
             $group_risk = $population[$i]['ga_gen'];
             for ($j = 0; $j < count($group_risk); $j++) {
-                $fit += $this->_calcfitness($group_risk[$j], $methods_in_risks,$fitness_records);
+                $fit += $this->_calcfitness($group_risk[$j], $methods_in_risks,$fitness_records,$project_id);
             }
             $population[$i]['fit'] = $fit;
         }
         return $population;
     }
     // Fitness calculator
-    private function _calcfitness($group_risk_confs, $methods_in_risks,$fitness_records) {
+    private function _calcfitness($group_risk_confs, $methods_in_risks,$fitness_records,$project_id) {
         $fit = 0;
+        $risk = $this->risk->get_many_by('project_id', $project_id);
+//        echo"<pre>";
+//        foreach ($risk as $risk_item){
+//            var_dump($risk_item->{'financial_impact'}.'-'.$risk_item->{'risk_level'});
         for ($i = 0; $i < count($group_risk_confs); $i++) {
             $a = array_values($group_risk_confs)[$i];
             foreach ($methods_in_risks as $id => $methods_in_risk) {

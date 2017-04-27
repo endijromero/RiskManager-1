@@ -25,7 +25,7 @@ class Fitness extends Abs_child_manager {
             "class"  => "fitness",
             "view"   => "fitness",
             "model"  => "m_fitness",
-            "object" => "Trọng số hàm thích nghi",
+            "object" => " Weighted fitness function",
         );
     }
 
@@ -85,10 +85,10 @@ class Fitness extends Abs_child_manager {
     private function _precheck_post_data($data, $data_return = Array()) {
         if ($data['cost'] == NULL || $data['diff'] == NULL || $data['priority'] == NULL || $data['time'] == NULL) {
             $data_return['state'] = 0;
-            $data_return['msg'] = 'Cần nhập đầy đủ thông tin các trường.';
+            $data_return['msg'] = 'Don\'t leave the inputs empty.';
         } else if ($data['cost'] + $data['diff'] + $data['priority'] + $data['time'] != 100) {
             $data_return['state'] = 0;
-            $data_return['msg'] = 'Tổng giá trị các trọng số phải bằng 100.';
+            $data_return['msg'] = 'Sum of weights must be 100.';
         } else {
             $data_return['state'] = 1;
         }

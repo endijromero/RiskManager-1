@@ -13,50 +13,30 @@ class M_conflict extends Abs_child_model {
     public $schema = [
         'project_id'   => [
             'field' => 'project_id',
-            'label' => 'id dự án',
+            'label' => 'Project ID',
             'rules' => '',
         ],
         'project_code' => [
             'field'    => 'project_code',
-            'label'    => 'Mã dự án',
+            'label'    => 'Project code',
             'db_field' => 'project_code',
             'rules'    => '',
             'table'    => TRUE,
         ],
         'code'         => [
             'field'  => 'code',
-            'label'  => 'Mã xung đột',
-            'rules'  => 'required',
+            'label'  => 'Conflict code',
+//            'rules'  => 'required',
             'form'   => TRUE,
             'filter' => [
                 'type' => 'text',
             ],
             'table'  => TRUE,
-        ],
-        'name'         => [
-            'field'  => 'name',
-            'label'  => 'Tên xung đột',
-            'rules'  => '',
-            'form'   => TRUE,
-            'table'  => TRUE,
-            'filter' => [
-                'type' => 'text',
-            ],
-        ],
-        'description'  => [
-            'field'    => 'description',
-            'db_field' => 'description',
-            'label'    => 'Mô tả',
-            'rules'    => '',
-            'form'     => [
-                'type' => 'textarea',
-            ],
-            'table'    => TRUE,
         ],
         'method_1_id'  => [
             'field'    => 'method_1_id',
             'db_field' => 'method_1_id',
-            'label'    => 'Mã phương pháp 1',
+            'label'    => 'Risk Responce 1 id',
             'rules'    => '',
             'form'     => [
                 'type'            => 'select',
@@ -68,7 +48,7 @@ class M_conflict extends Abs_child_model {
         'method_2_id'  => [
             'field'    => 'method_2_id',
             'db_field' => 'method_2_id',
-            'label'    => 'Mã phương pháp 2',
+            'label'    => 'Risk Responce 2 id',
             'rules'    => '',
             'form'     => [
                 'type'            => 'select',
@@ -81,22 +61,16 @@ class M_conflict extends Abs_child_model {
         'method_1_code' => [
             'field'    => 'method_1_code',
             'db_field' => 'method_1_code',
-            'label'    => 'Mã phương pháp 1',
+            'label'    => 'Risk Responce 1 code',
             'rules'    => '',
             'table'    => TRUE,
         ],
         'method_2_code' => [
             'field'    => 'method_2_code',
             'db_field' => 'method_2_code',
-            'label'    => 'Mã phương pháp 2',
+            'label'    => 'Risk Responce 2 code',
             'rules'    => '',
             'table'    => TRUE,
-        ],
-        'createdAt'     => [
-            'field' => 'createdAt',
-            'label' => 'Ngày tạo',
-            'rules' => '',
-            'table' => FALSE,
         ],
     ];
 
@@ -106,7 +80,7 @@ class M_conflict extends Abs_child_model {
     }
 
     public function default_before_get() {
-        $this->db->select($this->_table_alias . '.*, p.code as project_code,c1.code as method_1_code,c2.code as method_2_code');
+        $this->db->select($this->_table_alias . '.*, p.code as project_code,CONCAT(c1.code," (","Risk",c1.risk_id,")") as method_1_code,CONCAT(c2.code," (","Risk",c2.risk_id,")") as method_2_code');
         $this->db->join('projects as p', 'p.deleted=0 AND p.id=m.project_id');
         $this->db->join('methods as c1', 'c1.deleted=0 AND c1.id=m.method_1_id');
         $this->db->join('methods as c2', 'c2.deleted=0 AND c2.id=m.method_2_id');

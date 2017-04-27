@@ -16,7 +16,7 @@ class User extends Manager_base {
             "class"  => "user",
             "view"   => "admin/user",
             "model"  => 'm_user',
-            "object" => "tài khoản",
+            "object" => "User",
         );
     }
 
