@@ -87,7 +87,7 @@ class M_method extends Abs_child_model {
             'rules'    => '',
             'form'     => [
                 'type' => 'number',
-                'placeholder' => "time (hour)"
+                'placeholder' => "Time (hour)"
             ],
             'table'    => TRUE,
         ],

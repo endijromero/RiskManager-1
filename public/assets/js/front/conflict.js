@@ -29,7 +29,7 @@ function change_view_choice_risk(obj) {
 function show_view_choice_method(obj, data) {
     var child = obj.parents('div.form-group').find('.e_select_method_child');
     if (data.length) {
-        var html = '<option value="" selected disabled hidden>Chọn phương thức</option>';
+        var html = '<option value="" selected disabled hidden>Choose Risk Responce</option>';
         for (var i = 0; i < data.length; i++) {
             html += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
         }

@@ -36,7 +36,7 @@ class M_conflict extends Abs_child_model {
         'method_1_id'  => [
             'field'    => 'method_1_id',
             'db_field' => 'method_1_id',
-            'label'    => 'Risk Responce 1 id',
+            'label'    => 'Risk Responce 1 code',
             'rules'    => '',
             'form'     => [
                 'type'            => 'select',
@@ -48,7 +48,7 @@ class M_conflict extends Abs_child_model {
         'method_2_id'  => [
             'field'    => 'method_2_id',
             'db_field' => 'method_2_id',
-            'label'    => 'Risk Responce 2 id',
+            'label'    => 'Risk Responce 2 code',
             'rules'    => '',
             'form'     => [
                 'type'            => 'select',

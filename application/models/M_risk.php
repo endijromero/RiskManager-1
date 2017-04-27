@@ -105,7 +105,7 @@ class M_risk extends Abs_child_model {
         'risk_type_id'  => [
             'field'    => 'risk_type_id',
             'db_field' => 'risk_type_id',
-            'label'    => 'Risk category ID',
+            'label'    => 'Risk category code',
             'rules'    => '',
             'form'     => [
                 'type'            => 'select',

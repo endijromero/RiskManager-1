@@ -47,7 +47,7 @@
                         <label class="col-sm-3 col-xs-12 control-label  no-padding-right">
                             Description    </label>
                         <div class="col-sm-8 col-xs-12">
-                        <textarea rows="7" cols="40" style=" overflow-y: hidden;resize: none;" name="description" class="col-xs-12 " id="description_58c7b6c5e681e" placeholder="Mô tả" rules=""></textarea>
+                        <textarea rows="7" cols="40" style=" overflow-y: hidden;resize: none;" name="description" class="col-xs-12 " id="description_58c7b6c5e681e" placeholder="Description" rules=""></textarea>
                     </div>
                     </div>
                     <div class="form-group">
