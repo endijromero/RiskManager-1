@@ -27,6 +27,19 @@ class M_method extends Abs_child_model {
             'rules'    => '',
             'table'    => TRUE,
         ],
+        'financial_impact'     => [
+            'field'    => 'financial_impact',
+            'db_field' => 'financial_impact',
+            'label'    => 'Financial_impact',
+            'rules'    => '',
+//            'table'    => TRUE,
+        ],
+        'risk_level'   => [
+            'field'    => 'risk_level',
+            'db_field' => 'risk_level',
+            'label'    => 'Risk_level',
+            'rules'    => '',
+        ],
         'code'        => [
             'field'  => 'code',
             'label'  => 'Risk Response code',
@@ -109,7 +122,7 @@ class M_method extends Abs_child_model {
     }
 
     public function default_before_get() {
-        $this->db->select($this->_table_alias . '.*, r.id as risk_id, r.code as risk_code,r.name as risk_name,
+        $this->db->select($this->_table_alias . '.*, r.id as risk_id, r.code as risk_code,r.name as risk_name,r.financial_impact as financial_impact,r.risk_level as risk_level,
                           p.id as project_id, p.name as project_name');
         $this->db->join('risks as r', 'r.deleted=0 AND r.id = m.risk_id');
         $this->db->join('projects as p', 'p.deleted=0 AND p.id=r.project_id');

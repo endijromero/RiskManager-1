@@ -119,13 +119,13 @@ class Home extends Manager_base {
                 $data_return["key_name"] = $this->model->get_primary_key();
                 $data_return["record"] = $this->standard_record_data($this->model->get($id));
                 $data_return["state"] = 1; /* state = 1 : insert success */
-                $data_return["msg"] = "Đã đánh dấu dự án hoàn thành.";
+                $data_return["msg"] = "Mark as finished.";
                 echo json_encode($data_return);
                 return TRUE;
             } else {
                 $data_return["data"] = $data;
                 $data_return["state"] = 0; /* state = 0 : invalid data */
-                $data_return["msg"] = "Dự án đã hoàn thành hoặc không đủ điều kiện để hoàn thành.";
+                $data_return["msg"] = "This project is already finished of have not enough conditions.";
                 echo json_encode($data_return);
                 return FALSE;
             }

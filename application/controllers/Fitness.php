@@ -83,12 +83,12 @@ class Fitness extends Abs_child_manager {
     }
 
     private function _precheck_post_data($data, $data_return = Array()) {
-        if ($data['cost'] == NULL || $data['diff'] == NULL || $data['priority'] == NULL || $data['time'] == NULL) {
+        if ($data['risk'] == NULL || $data['method'] == NULL || $data['financial_impact'] == NULL || $data['risk_level'] == NULL||$data['cost'] == NULL || $data['diff'] == NULL || $data['priority'] == NULL || $data['time'] == NULL) {
             $data_return['state'] = 0;
             $data_return['msg'] = 'Don\'t leave the inputs empty.';
-        } else if ($data['cost'] + $data['diff'] + $data['priority'] + $data['time'] != 100) {
+        } else if (($data['risk'] + $data['method']  != 100)||($data['financial_impact'] + $data['risk_level'] != 100)||($data['cost'] + $data['diff'] + $data['priority'] + $data['time'] != 100)) {
             $data_return['state'] = 0;
-            $data_return['msg'] = 'Sum of weights must be 100.';
+            $data_return['msg'] = 'Invalid data.';
         } else {
             $data_return['state'] = 1;
         }

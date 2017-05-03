@@ -14,6 +14,30 @@
             <div class="modal-body bgwhite">
                 <div class="widget-body">
                     <div class="form-group">
+                        <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Risk weighting</label>
+                        <div class="col-sm-8 col-xs-12">
+                            <textarea placeholder="Risk weighting" name="risk" type="number"  class="input_field" rows="1" style="height: 34px; overflow-y: hidden;resize: none;"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Method weighting</label>
+                        <div class="col-sm-8 col-xs-12">
+                            <textarea placeholder="Method weighting" name="method" type="number"  class="input_field" rows="1" style="height: 34px; overflow-y: hidden;resize: none;"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Financial_impact weighting</label>
+                        <div class="col-sm-8 col-xs-12">
+                            <textarea placeholder="Financial_impact weighting" name="financial_impact" type="number"  class="input_field" rows="1" style="height: 34px; overflow-y: hidden;resize: none;"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Risk_level weighting</label>
+                        <div class="col-sm-8 col-xs-12">
+                            <textarea placeholder="Risk_level weighting" name="risk_level" type="number"  class="input_field" rows="1" style="height: 34px; overflow-y: hidden;resize: none;"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Cost weighting</label>
                         <div class="col-sm-8 col-xs-12">
                         <textarea placeholder="Cost weighting" name="cost" type="number"  class="input_field" rows="1" style="height: 34px; overflow-y: hidden;resize: none;"></textarea>
@@ -37,7 +61,11 @@
                         <textarea placeholder="Time weighting"name="time" type="number"  class="input_field" rows="1" style="height: 34px; overflow-y: hidden;resize: none;"></textarea>
                     </div>
                         </div>
-                    <h5 style="color: cornflowerblue">Notice: Sum of weights must be 100.</h5>
+                    <h5 style="color: cornflowerblue">Notice:</h5>
+                    <h5 style="color: cornflowerblue">Sum of Risk weighting and Method weighting must be 100.</h5>
+                    <h5 style="color: cornflowerblue">Sum of Financial_impact weighting and Risk_level weighting must be 100.</h5>
+                    <h5 style="color: cornflowerblue">Sum of Cost weighting,Difficulty weighting,Priority weighting,Priority weighting and Time weighting must be 100.</h5>
+
                     </div>
 
 

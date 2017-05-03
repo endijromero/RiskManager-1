@@ -24,6 +24,46 @@ class M_fitness extends Abs_child_model {
             'rules'    => '',
             'table'    => TRUE,
         ],
+        'risk'    => [
+            'field'  => 'risk',
+            'label'  => 'Risk weighting',
+            'rules'  => '',
+            'form'   => [
+                'type' => 'number',
+                'placeholder'    => 'Risk weighting(number)',
+            ],
+            'table' => TRUE,
+        ],
+        'method'    => [
+            'field'  => 'method',
+            'label'  => 'Method weighting',
+            'rules'  => '',
+            'form'   => [
+                'type' => 'number',
+                'placeholder'    => 'Method weighting(number)',
+            ],
+            'table' => TRUE,
+        ],
+        'financial_impact'    => [
+            'field'  => 'financial_impact',
+            'label'  => 'Financial_impact weighting',
+            'rules'  => '',
+            'form'   => [
+                'type' => 'number',
+                'placeholder'    => 'Financial_impact weighting(number)',
+            ],
+            'table' => TRUE,
+        ],
+        'risk_level'    => [
+            'field'  => 'risk_level',
+            'label'  => 'Risk_level weighting',
+            'rules'  => '',
+            'form'   => [
+                'type' => 'number',
+                'placeholder'    => 'Risk_level weighting(number)',
+            ],
+            'table' => TRUE,
+        ],
         'cost'    => [
             'field'  => 'cost',
             'label'  => 'Cost weighting',

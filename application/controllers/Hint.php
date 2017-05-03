@@ -50,6 +50,16 @@ class Hint extends Manager_base {
         $content = $this->load->view("hint/manager_container", $data, TRUE);
         $this->load_more_css("assets/css/font/detail.css");
         $this->show_page($content);
+        $methods_in_risks = $this->_get_methods_in_risks($project_id);
+//        echo"<pre>";
+//        var_dump($methods_in_risks);
+//        $financial_impact = $methods_in_risks[1]['financial_impact'];
+//        $risk_level = $methods_in_risks[1]['risk_level'];
+//        var_dump($financial_impact);
+//        var_dump($risk_level);
+//        $fitness_records = $this->fitness->get_many_by('project_id', $project_id);
+//        echo"<pre>";
+//        var_dump($fitness_records);
     }
 
     private function _get_table_data($project_id) {
@@ -59,9 +69,13 @@ class Hint extends Manager_base {
         $pop_gama = array();
         $methods_in_risks = $this->_get_methods_in_risks($project_id);
         $conflict_records = $this->conflict->get_many_by('project_id', $project_id);
+//                echo"<pre>";
+//        var_dump($conflict_records);
         $fitness_records = $this->fitness->get_many_by('project_id', $project_id);
         $conflict_risks = $this->_define_risk_conf($methods_in_risks, $conflict_records);
         $group_conflict = $this->_group_conflict($conflict_risks);
+//        echo"<pre>";
+//        var_dump($group_conflict);
         $population = $this->_init_population($pop_beta, $pop_gama, $group_conflict, $methods_in_risks, $conflict_records);
         $buffer = $pop_gama;
         for ($i = 0; $i < GA_MAXITER; $i++) {
@@ -189,8 +203,11 @@ class Hint extends Manager_base {
                         }
                         array_push($group_risk_confss, $c);
                     }
+//                    echo"<pre>";
+//                    var_dump($group_risk_confss);
                 } while ($this->_conflict($group_risk_confss, $conflict_records) == 1);
                 array_push($group_risk, array_values($group_risk_confss));
+
             }
             $k++;
             $buffer = array();
@@ -206,6 +223,9 @@ class Hint extends Manager_base {
 
     // has conflict of array : yes or no ??
     private function _conflict($group_risk_confss, $conflict_records) {
+//                            echo"<pre>";
+//                    var_dump($group_risk_confss);
+
         for ($i = 0; $i < count($group_risk_confss); $i++) {
             for ($j = $i + 1; $j < count($group_risk_confss); $j++) {
                 if ($this->_has_conflict(array_values($group_risk_confss)[$j], array_values($group_risk_confss)[$i], $conflict_records)) {
@@ -243,21 +263,19 @@ class Hint extends Manager_base {
     // Fitness calculator
     private function _calcfitness($group_risk_confs, $methods_in_risks,$fitness_records,$project_id) {
         $fit = 0;
-        $risk = $this->risk->get_many_by('project_id', $project_id);
-//        echo"<pre>";
-//        foreach ($risk as $risk_item){
-//            var_dump($risk_item->{'financial_impact'}.'-'.$risk_item->{'risk_level'});
         for ($i = 0; $i < count($group_risk_confs); $i++) {
             $a = array_values($group_risk_confs)[$i];
             foreach ($methods_in_risks as $id => $methods_in_risk) {
                 $pop_alpha = $methods_in_risk['methods'];
+                $financial_impact = $methods_in_risk['financial_impact'];
+                $risk_level = $methods_in_risk['risk_level'];
                 foreach ($pop_alpha as $id => $pop_al) {
                     if ($pop_al->{'id'} == $a)
                         if(count($fitness_records)==0){
-                            $fit += $pop_al->{'cost'}+$pop_al->{'diff'}+$pop_al->{'priority'}+$pop_al->{'time'};
+                            $fit += $financial_impact + $risk_level + $pop_al->{'cost'} + $pop_al->{'diff'}+$pop_al->{'priority'}+$pop_al->{'time'};
                         }
                         else if(count($fitness_records)>0)
-                        $fit += $pop_al->{'cost'}*$fitness_records[0]->{'cost'}+$pop_al->{'diff'}*$fitness_records[0]->{'diff'}+$pop_al->{'priority'}*$fitness_records[0]->{'priority'}+$pop_al->{'time'}*$fitness_records[0]->{'time'};
+                        $fit += ($financial_impact*$fitness_records[0]->{'financial_impact'}+$risk_level*$fitness_records[0]->{'risk_level'})*$fitness_records[0]->{'risk'}+($pop_al->{'diff'}*$fitness_records[0]->{'diff'}+$pop_al->{'priority'}*$fitness_records[0]->{'priority'}+$pop_al->{'time'}*$fitness_records[0]->{'time'})*$fitness_records[0]->{'method'};
                        else
                            $fit += $pop_al->{'cost'};
                 }
@@ -440,6 +458,8 @@ class Hint extends Manager_base {
                     'id'      => $record->risk_id,
                     'code'    => $record->risk_code,
                     'name'    => $record->risk_name,
+                    'financial_impact' =>$record->financial_impact,
+                    'risk_level' =>$record->risk_level,
                     'methods' => [],
                 ];
             }

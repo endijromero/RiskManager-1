@@ -63,7 +63,7 @@ class Conflict extends Abs_child_manager {
             echo json_encode([
                 'state' => 0,
                 'msg'   => 'Invalid data!
-                You must choose two RiskResponce of two different Risks.',
+                Methods must be in different risks.',
             ]);;
             return 0;
         }
