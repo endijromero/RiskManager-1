@@ -17,8 +17,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Hint extends Manager_base {
 
     public function __construct() {
-        define('GA_POPSIZE', 50);        // ga population size
-        define('GA_MAXITER', 100);       // maximum iterations
+        define('GA_POPSIZE', 100);        // ga population size
+        define('GA_MAXITER', 20);       // maximum iterations
         define('GA_ELITRATE', 0.10);     // elitism rate
         define('GA_MUTATIONRATE', 0.25); // mutation rate
         define('GA_MUTATION', getrandmax() * GA_MUTATIONRATE);
@@ -51,15 +51,6 @@ class Hint extends Manager_base {
         $this->load_more_css("assets/css/font/detail.css");
         $this->show_page($content);
         $methods_in_risks = $this->_get_methods_in_risks($project_id);
-//        echo"<pre>";
-//        var_dump($methods_in_risks);
-//        $financial_impact = $methods_in_risks[1]['financial_impact'];
-//        $risk_level = $methods_in_risks[1]['risk_level'];
-//        var_dump($financial_impact);
-//        var_dump($risk_level);
-//        $fitness_records = $this->fitness->get_many_by('project_id', $project_id);
-//        echo"<pre>";
-//        var_dump($fitness_records);
     }
 
     private function _get_table_data($project_id) {
@@ -69,26 +60,23 @@ class Hint extends Manager_base {
         $pop_gama = array();
         $methods_in_risks = $this->_get_methods_in_risks($project_id);
         $conflict_records = $this->conflict->get_many_by('project_id', $project_id);
-//                echo"<pre>";
-//        var_dump($conflict_records);
         $fitness_records = $this->fitness->get_many_by('project_id', $project_id);
         $conflict_risks = $this->_define_risk_conf($methods_in_risks, $conflict_records);
         $group_conflict = $this->_group_conflict($conflict_risks);
-//        echo"<pre>";
-//        var_dump($group_conflict);
         $population = $this->_init_population($pop_beta, $pop_gama, $group_conflict, $methods_in_risks, $conflict_records);
         $buffer = $pop_gama;
         for ($i = 0; $i < GA_MAXITER; $i++) {
-            $population = $this->_calc_fitness($population, $methods_in_risks,$fitness_records);        // calculate fitness
+            $population = $this->_calc_fitness($population, $methods_in_risks, $fitness_records, $project_id);        // calculate fitness
             $population = $this->_sort_by_fitness($population);    // sort them
             $buffer = $this->_mate($population, $buffer, $conflict_records, $methods_in_risks);        // mate the population together
             $this->_swap($population, $buffer);        // swap buffers
-            $this->_calc_fitness($population, $methods_in_risks,$fitness_records,$project_id);        // calculate fitness
+            $this->_calc_fitness($population, $methods_in_risks, $fitness_records, $project_id);        // calculate fitness
             $this->_sort_by_fitness($population);
         }
         $result = $this->_result($population[0]);
         return $result;
     }
+
     // update key off array after delete item of array
     private function _unset_and_change_key($conflict_risks, $i) {
         foreach ($conflict_risks as $key => $value) {
@@ -102,6 +90,7 @@ class Hint extends Manager_base {
         }
         return $conflict_risks;
     }
+
     // from conflict array => define risk of conflict array
     private function _define_risk_conf($methods_in_risks, $conflict_records) {
         $result = Array();
@@ -119,7 +108,8 @@ class Hint extends Manager_base {
         }
         return $result;
     }
-   // from risk of conflict array => define group risk of conflict array
+
+    // from risk of conflict array => define group risk of conflict array
     private function _group_conflict($conflict_risks) {
         $nosame = TRUE;
         $eoa = FALSE;
@@ -145,6 +135,7 @@ class Hint extends Manager_base {
         }
         return $conflict_risks;
     }
+
     // has same element between two array : yes or no ??
     private function _has_same_element($conflict_risks1, $conflict_risks2) {
         for ($i = 0; $i < count($conflict_risks1); $i++) {
@@ -157,6 +148,7 @@ class Hint extends Manager_base {
         }
         return 0;
     }
+
     // merge two array => one array only
     private function _merge($conflict_risks1, $conflict_risks2) {
         for ($i = 0; $i < count($conflict_risks1); $i++) {
@@ -173,116 +165,110 @@ class Hint extends Manager_base {
         }
         return $conflict_risks1;
     }
+
     // init population
     private function _init_population($pop_beta, $pop_gama, $group_conflict, $methods_in_risks, $conflict_records) {
-        $group_risk_confs = array();
-        $group_risk_confss = array();
         $k = 0;
         do {
-            $group_risk = array();;
-            for ($i = 0; $i < count($group_conflict); $i++) {
-                $group_risk_confs = $group_conflict[$i];
-                do {
-                    $group_risk_confss = array();
-                    for ($j = 0; $j < count($group_risk_confs); $j++) {
-                        $a = array_values($group_risk_confs)[$j];
-                        foreach ($methods_in_risks as $id => $methods_in_risk) {
-                            if ($id == $a) {
-                                $pop_alpha = $methods_in_risk;
-                                break;
-                            }
-                        }
-                        $methods = $pop_alpha['methods'];
-                        $b = rand(0, count($methods) - 1);
-                        $key = array_keys($methods)[$b];
-                        foreach ($methods as $id => $method) {
-                            if ($id == $key) {
-                                $c = $method->{'id'};
-                                break;
-                            }
-                        }
-                        array_push($group_risk_confss, $c);
-                    }
-//                    echo"<pre>";
-//                    var_dump($group_risk_confss);
-                } while ($this->_conflict($group_risk_confss, $conflict_records) == 1);
-                array_push($group_risk, array_values($group_risk_confss));
-
-            }
-            $k++;
-            $buffer = array();
+            $i = 0;
+            $group_risk = array();
             $buffer = [
-                'ga_gen' => $group_risk,
+                'ga_gen' => [],
                 'fit'    => 0,
             ];
-            array_push($pop_beta, $buffer);
+            foreach ($group_conflict as $group_risk_confs) {
+                //$group_risk_confs ~ list rick_id
+                //lấy id đầu tiên của list risk_id => lấy list method của risk_id
+                //lấy 1 method random
+                //=>lấy được 1 mảng các method random của list risk_id
+                //check conflict , if true thì lấy lại, if false thì kết thúc
+                $i++;
+                do {
+                    $group_risk_confss = [];
+
+                    foreach ($group_risk_confs as $key => $item) {
+                        if (isset($methods_in_risks[$item])) {
+                            $pop_alpha = $methods_in_risks[$item];
+                        }
+                        $methods = isset($pop_alpha['methods']) ? $pop_alpha['methods'] : [];
+                        $key = array_rand($methods, 1);
+                        $c = !empty($methods[$key]->id) ? $methods[$key]->id : '';
+                        $group_risk_confss[] = $c;
+                    }
+                } while ($this->_conflict($group_risk_confss, $conflict_records) == 1);
+                $group_risk[] = $group_risk_confss;
+            }
+
+            $buffer['ga_gen'] = $group_risk;
+            $pop_beta[] = $buffer;
+            $k++;
         } while ($k < GA_POPSIZE);
         $pop_gama = array(GA_POPSIZE);
         return $pop_beta;
     }
 
-    // has conflict of array : yes or no ??
     private function _conflict($group_risk_confss, $conflict_records) {
-//                            echo"<pre>";
-//                    var_dump($group_risk_confss);
-
-        for ($i = 0; $i < count($group_risk_confss); $i++) {
-            for ($j = $i + 1; $j < count($group_risk_confss); $j++) {
-                if ($this->_has_conflict(array_values($group_risk_confss)[$j], array_values($group_risk_confss)[$i], $conflict_records)) {
-                    return 1;
-                    break;
-                }
+        $data = array_flip($group_risk_confss);
+        foreach ($conflict_records as $item) {
+            $number = 0;
+            if (isset($data[$item->method_1_id])) {
+                $number++;
             }
-        }
-        return 0;
-    }
-    // has conflict between two element of array : yes or no ??
-    private function _has_conflict($group_risk_confss1, $group_risk_confss2, $conflict_records) {
-        foreach ($conflict_records as $id => $conflict_record) {
-            if ((($conflict_record->{'method_1_id'} == ($group_risk_confss1)) && ($conflict_record->{'method_2_id'} == ($group_risk_confss2))) || (($conflict_record->{'method_2_id'} == ($group_risk_confss1)) && ($conflict_record->{'method_1_id'} == ($group_risk_confss2)))) {
+            if (isset($data[$item->method_2_id])) {
+                $number++;
+            }
+            if ($number == 2) {
                 return 1;
                 break;
             }
         }
         return 0;
     }
+
     // Fitness calculator
-    private function _calc_fitness($population, $methods_in_risks,$fitness_records,$project_id) {
-        $group_risk = array();
-        $fit = 0;
+    private function _calc_fitness($population, $methods_in_risks, $fitness_records, $project_id) {
         for ($i = 0; $i < GA_POPSIZE; $i++) {
             $fit = 0;
             $group_risk = $population[$i]['ga_gen'];
             for ($j = 0; $j < count($group_risk); $j++) {
-                $fit += $this->_calcfitness($group_risk[$j], $methods_in_risks,$fitness_records,$project_id);
+                $fit += $this->_calcfitness($group_risk[$j], $methods_in_risks, $fitness_records, $project_id);
             }
+
             $population[$i]['fit'] = $fit;
         }
         return $population;
     }
+
     // Fitness calculator
-    private function _calcfitness($group_risk_confs, $methods_in_risks,$fitness_records,$project_id) {
+    private function _calcfitness($group_risk_confs, $methods_in_risks, $fitness_records, $project_id) {
         $fit = 0;
-        for ($i = 0; $i < count($group_risk_confs); $i++) {
-            $a = array_values($group_risk_confs)[$i];
+        $k =0;
+        foreach ($group_risk_confs as $a){
             foreach ($methods_in_risks as $id => $methods_in_risk) {
                 $pop_alpha = $methods_in_risk['methods'];
-                $financial_impact = $methods_in_risk['financial_impact'];
-                $risk_level = $methods_in_risk['risk_level'];
                 foreach ($pop_alpha as $id => $pop_al) {
-                    if ($pop_al->{'id'} == $a)
-                        if(count($fitness_records)==0){
-                            $fit += $financial_impact + $risk_level + $pop_al->{'cost'} + $pop_al->{'diff'}+$pop_al->{'priority'}+$pop_al->{'time'};
-                        }
-                        else if(count($fitness_records)>0)
-                        $fit += ($financial_impact*$fitness_records[0]->{'financial_impact'}+$risk_level*$fitness_records[0]->{'risk_level'})*$fitness_records[0]->{'risk'}+($pop_al->{'diff'}*$fitness_records[0]->{'diff'}+$pop_al->{'priority'}*$fitness_records[0]->{'priority'}+$pop_al->{'time'}*$fitness_records[0]->{'time'})*$fitness_records[0]->{'method'};
-                       else
-                           $fit += $pop_al->{'cost'};
+                    if($pop_al->{'id'} == $a){
+                        $financial_impact = $methods_in_risk['financial_impact'];
+                        $risk_levels = $methods_in_risk['risk_level'];
+                        if($risk_levels=='Extreme') $risk_level = 4;
+                        else if($risk_levels=='High') $risk_level = 3;
+                        else if($risk_levels=='Medium') $risk_level = 2;
+                        else $risk_level = 1;
+                        if (count($fitness_records) == 0) {
+                            $fit += $financial_impact + $risk_level + $pop_al->{'cost'} + $pop_al->{'diff'} + $pop_al->{'priority'} + $pop_al->{'time'};
+                        } else if (count($fitness_records) > 0)
+                            $fit += ($financial_impact * $fitness_records[0]->{'financial_impact'} + $risk_level * $fitness_records[0]->{'risk_level'}) * $fitness_records[0]->{'risk'} + ($pop_al->{'cost'} * $fitness_records[0]->{'cost'}+ $pop_al->{'diff'} * $fitness_records[0]->{'diff'} + $pop_al->{'priority'} * $fitness_records[0]->{'priority'} + $pop_al->{'time'} * $fitness_records[0]->{'time'}) * $fitness_records[0]->{'method'};
+                        else
+                            $fit += $pop_al->{'cost'};
+                            $k++;
+                            break;
+                    }
                 }
             }
         }
         return $fit;
     }
+
     // sort array by fitness value
     private function _sort_by_fitness($population) {
         for ($i = 0; $i < count($population); $i++) {
@@ -297,6 +283,7 @@ class Hint extends Manager_base {
         }
         return $population;
     }
+
     // mate population
     private function _mate($population, $buffer, $conflict_records, $methods_in_risks) {
         $esize = GA_POPSIZE * GA_ELITRATE;
@@ -335,10 +322,11 @@ class Hint extends Manager_base {
                         array_push($a, $x2[$x]);
                     }
                     $o = $a;
-                } while ($this->_conflict($o, $conflict_records) == 1);
-                do {
                     if (rand() < GA_MUTATION) $o = $this->_mutate($o, $methods_in_risks);
                 } while ($this->_conflict($o, $conflict_records) == 1);
+//                do {
+//                    if (rand() < GA_MUTATION) $o = $this->_mutate($o, $methods_in_risks);
+//                } while ($this->_conflict($o, $conflict_records) == 1);
                 array_push($group_risk_confss, $o);
             }
         }
@@ -389,6 +377,7 @@ class Hint extends Manager_base {
 
         return $buffer;
     }
+
     // mutate population
     private function _mutate($member, $methods_in_risks) {
         $tsize = count($member);
@@ -407,20 +396,23 @@ class Hint extends Manager_base {
         }
         return $member;
     }
+
     // print best fitness of population
     private function _print_best($gav) {
-        echo'<pre>';
+        echo '<pre>';
         var_dump($gav[0]['ga_gen']);
         echo("Best Fitness:");
         var_dump($gav[0]['fit']);
         return $gav[0]['fit'];
     }
+
     // swap to array
     private function _swap($population, $buffer) {
         $temp = $population;
         $population = $buffer;
         $buffer = $temp;
     }
+
     //  elitism population
     private function _elitism($population, $buffer, $esize) {
         for ($i = 0; $i < $esize; $i++) {
@@ -428,7 +420,8 @@ class Hint extends Manager_base {
         }
         return $buffer;
     }
-   // return result of GA
+
+    // return result of GA
     private function _result($population) {
         $recommend = Array();
         foreach ($population['ga_gen'] as $ge_gen_item) {
@@ -447,6 +440,7 @@ class Hint extends Manager_base {
         $population['recommend'] = $recommend;
         return $population;
     }
+
     // get method array by risk in project
     private function _get_methods_in_risks($project_id) {
         $this->db->where('p.id', $project_id);
@@ -455,12 +449,12 @@ class Hint extends Manager_base {
         foreach ($method_records as $record) {
             if (!isset($methods_in_risks[$record->risk_id])) {
                 $methods_in_risks[$record->risk_id] = [
-                    'id'      => $record->risk_id,
-                    'code'    => $record->risk_code,
-                    'name'    => $record->risk_name,
-                    'financial_impact' =>$record->financial_impact,
-                    'risk_level' =>$record->risk_level,
-                    'methods' => [],
+                    'id'               => $record->risk_id,
+                    'code'             => $record->risk_code,
+                    'name'             => $record->risk_name,
+                    'financial_impact' => $record->financial_impact,
+                    'risk_level'       => $record->risk_level,
+                    'methods'          => [],
                 ];
             }
             $methods_in_risks[$record->risk_id]['methods'][$record->id] = $record;
