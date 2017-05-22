@@ -45,6 +45,7 @@ class Home extends Manager_base {
     function detail($id) {
         $data['detail_project'] = $this->model->get($id);
         $content = $this->load->view("admin/font/project_detail", $data, TRUE);
+        $this->load_more_js("assets/js/front/front_util.js", TRUE);
         $this->load_more_css("assets/css/font/detail.css");
         $this->show_page($content);
     }
@@ -129,7 +130,7 @@ class Home extends Manager_base {
                 echo json_encode($data_return);
                 return FALSE;
             }
-        }else{
+        } else {
             $data_return["state"] = 0;
             $data_return["msg"] = "Project does not exist";
             echo json_encode($data_return);

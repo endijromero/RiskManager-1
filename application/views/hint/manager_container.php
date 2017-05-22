@@ -12,7 +12,7 @@
             </div>
             <div class="widget-toolbar actions_content e_actions_content">
                 <a href="<?php echo site_url('hint/manage/' . $project->id) ?>"
-                   class="btn btn-success add_button">
+                   class="btn btn-success add_button e_loading">
                     <i class="ace-icon fa fa-plus-circle"></i>
                     Hint back
                 </a>

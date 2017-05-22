@@ -46,6 +46,8 @@
     </a>
 </div>
 <div class="message-loading-overlay customer-overlay" id="loading-overlay" style="display: none;">
-    <i class="fa-spin ace-icon fa fa-refresh big-spin"></i>
+    <div class="spin-wrap">
+        <i class="fa-spin ace-icon fa fa-refresh big-spin"></i>
+    </div>
 </div>
 <!-- /container -->

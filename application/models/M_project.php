@@ -11,6 +11,7 @@ class M_project extends Crud_manager {
     public $schema = [
         'user_id'       => [
             'field' => 'user_id',
+            'db_field' => 'user_id',
             'label' => 'User ID',
 
         ],

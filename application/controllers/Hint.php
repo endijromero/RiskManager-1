@@ -17,12 +17,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Hint extends Manager_base {
 
     public function __construct() {
+        parent::__construct();
         define('GA_POPSIZE', 100);        // ga population size
-        define('GA_MAXITER', 20);       // maximum iterations
+        define('GA_MAXITER', 100);       // maximum iterations
         define('GA_ELITRATE', 0.10);     // elitism rate
         define('GA_MUTATIONRATE', 0.25); // mutation rate
         define('GA_MUTATION', getrandmax() * GA_MUTATIONRATE);
-        parent::__construct();
+        $this->load_more_js("assets/js/front/front_util.js", TRUE);
         $this->load->model('M_risk', 'risk');  // load model m_risk
         $this->load->model('m_method', 'method');  // load model m_method
         $this->load->model('M_conflict', 'conflict');  // load model m_conflict
@@ -64,15 +65,23 @@ class Hint extends Manager_base {
         $conflict_risks = $this->_define_risk_conf($methods_in_risks, $conflict_records);
         $group_conflict = $this->_group_conflict($conflict_risks);
         $population = $this->_init_population($pop_beta, $pop_gama, $group_conflict, $methods_in_risks, $conflict_records);
+//        echo'<pre>';
+//        var_dump($population);
+//        exit();
         $buffer = $pop_gama;
-        for ($i = 0; $i < GA_MAXITER; $i++) {
+        for ($i = 0; $i <= GA_MAXITER; $i++) {
             $population = $this->_calc_fitness($population, $methods_in_risks, $fitness_records, $project_id);        // calculate fitness
             $population = $this->_sort_by_fitness($population);    // sort them
+            if($i==GA_MAXITER) break;
             $buffer = $this->_mate($population, $buffer, $conflict_records, $methods_in_risks);        // mate the population together
             $this->_swap($population, $buffer);        // swap buffers
-            $this->_calc_fitness($population, $methods_in_risks, $fitness_records, $project_id);        // calculate fitness
-            $this->_sort_by_fitness($population);
+//                    echo'<pre>';
+//        var_dump($population[0]['fit']);
+
         }
+//        exit();
+//        $this->_calc_fitness($population, $methods_in_risks, $fitness_records, $project_id);        // calculate fitness
+//        $this->_sort_by_fitness($population);
         $result = $this->_result($population[0]);
         return $result;
     }
@@ -242,26 +251,26 @@ class Hint extends Manager_base {
     // Fitness calculator
     private function _calcfitness($group_risk_confs, $methods_in_risks, $fitness_records, $project_id) {
         $fit = 0;
-        $k =0;
-        foreach ($group_risk_confs as $a){
+        $k = 0;
+        foreach ($group_risk_confs as $a) {
             foreach ($methods_in_risks as $id => $methods_in_risk) {
                 $pop_alpha = $methods_in_risk['methods'];
                 foreach ($pop_alpha as $id => $pop_al) {
-                    if($pop_al->{'id'} == $a){
+                    if ($pop_al->{'id'} == $a) {
                         $financial_impact = $methods_in_risk['financial_impact'];
                         $risk_levels = $methods_in_risk['risk_level'];
-                        if($risk_levels=='Extreme') $risk_level = 4;
-                        else if($risk_levels=='High') $risk_level = 3;
-                        else if($risk_levels=='Medium') $risk_level = 2;
+                        if ($risk_levels == 'Extreme') $risk_level = 4;
+                        else if ($risk_levels == 'High') $risk_level = 3;
+                        else if ($risk_levels == 'Medium') $risk_level = 2;
                         else $risk_level = 1;
                         if (count($fitness_records) == 0) {
                             $fit += $financial_impact + $risk_level + $pop_al->{'cost'} + $pop_al->{'diff'} + $pop_al->{'priority'} + $pop_al->{'time'};
                         } else if (count($fitness_records) > 0)
-                            $fit += ($financial_impact * $fitness_records[0]->{'financial_impact'} + $risk_level * $fitness_records[0]->{'risk_level'}) * $fitness_records[0]->{'risk'} + ($pop_al->{'cost'} * $fitness_records[0]->{'cost'}+ $pop_al->{'diff'} * $fitness_records[0]->{'diff'} + $pop_al->{'priority'} * $fitness_records[0]->{'priority'} + $pop_al->{'time'} * $fitness_records[0]->{'time'}) * $fitness_records[0]->{'method'};
+                            $fit += ($financial_impact * $fitness_records[0]->{'financial_impact'} + $risk_level * $fitness_records[0]->{'risk_level'}) * $fitness_records[0]->{'risk'} + ($pop_al->{'cost'} * $fitness_records[0]->{'cost'} + $pop_al->{'diff'} * $fitness_records[0]->{'diff'} + $pop_al->{'priority'} * $fitness_records[0]->{'priority'} + $pop_al->{'time'} * $fitness_records[0]->{'time'}) * $fitness_records[0]->{'method'};
                         else
                             $fit += $pop_al->{'cost'};
-                            $k++;
-                            break;
+                        $k++;
+                        break;
                     }
                 }
             }

@@ -1,4 +1,4 @@
-<div class="padding-10">
+<div class="padding-10 home_detail">
     <div class="widget-box e_widget e_manager_table_container" data-url="">
         <div class="widget-header">
             <h5 class="widget-title bigger-125">
@@ -46,7 +46,7 @@
                     Weighted fitness function Management
                 </a>
                 <a href="<?php echo site_url('hint/manage/' . $detail_project->id) ?>"
-                   class="btn btn-success">
+                   class="btn btn-success e_loading">
                     <i class="fa fa-lightbulb-o"></i>
                     Request for help make decisions
                 </a>
