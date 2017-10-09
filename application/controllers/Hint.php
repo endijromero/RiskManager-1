@@ -68,13 +68,14 @@ class Hint extends Manager_base {
 //        echo'<pre>';
 //        var_dump($population);
 //        exit();
-        $buffer = $pop_gama;
+
         for ($i = 0; $i <= GA_MAXITER; $i++) {
+            $buffer = $pop_gama;
             $population = $this->_calc_fitness($population, $methods_in_risks, $fitness_records, $project_id);        // calculate fitness
             $population = $this->_sort_by_fitness($population);    // sort them
             if($i==GA_MAXITER) break;
             $buffer = $this->_mate($population, $buffer, $conflict_records, $methods_in_risks);        // mate the population together
-            $this->_swap($population, $buffer);        // swap buffers
+            $population = $this->_swap($population, $buffer);        // swap buffers
 //                    echo'<pre>';
 //        var_dump($population[0]['fit']);
 

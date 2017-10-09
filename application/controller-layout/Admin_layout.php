@@ -29,10 +29,37 @@ abstract class Admin_layout extends Base_layout {
 
         $project_id = $this->session->userdata('project_id');
         if ($project_id) {
+            //TODO:
+            $project_menu[] = Array(
+                "text" => "Goal Management",
+                "icon" => "fa-dashboard",
+                "url"  => site_url('goal/manage/' . $project_id),
+            );
+            $project_menu[] = Array(
+                "text" => "Risk factor Management",
+                "icon" => "fa-dashboard",
+                "url"  => site_url('risk_factor/manage/' . $project_id),
+            );
             $project_menu[] = Array(
                 "text" => "Risk Management",
                 "icon" => "fa-dashboard",
                 "url"  => site_url('risk/manage/' . $project_id),
+            );
+
+            $project_menu[] = Array(
+                "text" => "Risk Factor-Risk event Management",
+                "icon" => "fa-dashboard",
+                "url"  => site_url('riskfactor_riskevent/manage/' . $project_id),
+            );
+            $project_menu[] = Array(
+                "text" => "Risk-Goal Management",
+                "icon" => "fa-dashboard",
+                "url"  => site_url('risk-goal/manage/' . $project_id),
+            );
+            $project_menu[] = Array(
+                "text" => "Method Management",
+                "icon" => "fa-dashboard",
+                "url"  => site_url('method/manage/' . $project_id),
             );
             $project_menu[] = Array(
                 "text" => "Conflict Management",
@@ -56,6 +83,16 @@ abstract class Admin_layout extends Base_layout {
                 "child" => $project_menu,
             );
         }
+        $menu[] = Array(
+            "text" => "Agent Manager ",
+            "icon" => "fa fa-pied-piper",
+            "url"  => site_url('agent_manager'),
+        );
+        $menu[] = Array(
+            "text" => "Goal Category ",
+            "icon" => "fa fa-pied-piper",
+            "url"  => site_url('goal_type'),
+        );
         $menu[] = Array(
             "text" => "Risk Category ",
             "icon" => "fa fa-pied-piper",

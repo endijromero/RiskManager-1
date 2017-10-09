@@ -102,7 +102,7 @@ abstract class Manager_base extends Admin_layout {
      *
      * @param array $data More data pass to view, using on override or call from other function
      *
-     * @return string return view and state to clien (json if request is ajax call, html instead of)
+     * @return string return view and state to client (json if request is ajax call, html instead of)
      */
     public function add($data = Array(), $data_return = Array()) {
         if (!isset($data["save_link"])) {

@@ -8,6 +8,7 @@
  */
 class M_project extends Crud_manager {
     protected $_table = 'projects';
+//    protected $soft_delete = FALSE;
     public $schema = [
         'user_id'       => [
             'field' => 'user_id',

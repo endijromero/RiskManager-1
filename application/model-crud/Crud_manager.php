@@ -455,4 +455,28 @@ class Crud_manager extends Crud_model {
         return $this->primary_key;
     }
 
+    function custom_dropdown($value_field, $display_field = NULL) {
+        $args = func_get_args();
+        if (count($args) == 2) {
+            list($value_field, $display_field) = $args;
+        } else {
+            $value_field = $this->primary_key;
+            $display_field = $args[0];
+        }
+        $this->trigger('before_dropdown', array($value_field, $display_field));
+
+        if ($this->soft_delete && $this->_temporary_with_deleted !== TRUE) {
+            $this->_database->where($this->_table_alias . "." . $this->soft_delete_key, FALSE);
+        }
+
+        $result = $this->_database->get($this->_table . " AS " . $this->_table_alias)
+            ->result();
+        $options = array();
+
+        foreach ($result as $row) {
+            $options[$row->{$value_field}] = $row->{$display_field};
+        }
+
+        return $options;
+    }
 }
