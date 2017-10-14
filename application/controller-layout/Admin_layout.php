@@ -54,12 +54,7 @@ abstract class Admin_layout extends Base_layout {
             $project_menu[] = Array(
                 "text" => "Risk-Goal Management",
                 "icon" => "fa-dashboard",
-                "url"  => site_url('risk-goal/manage/' . $project_id),
-            );
-            $project_menu[] = Array(
-                "text" => "Method Management",
-                "icon" => "fa-dashboard",
-                "url"  => site_url('method/manage/' . $project_id),
+                "url"  => site_url('risk_goal/manage/' . $project_id),
             );
             $project_menu[] = Array(
                 "text" => "Conflict Management",

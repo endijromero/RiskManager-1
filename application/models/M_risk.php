@@ -99,8 +99,7 @@ class M_risk extends Abs_child_model {
             ),
             'table'    => Array(
                 'callback_render_data' => "get_risk_level",
-            ),
-            'table' => TRUE,
+            )
         ],
         'risk_type_id'  => [
             'field'    => 'risk_type_id',

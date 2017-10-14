@@ -12,7 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * @property M_risk     risk
  * @property M_method   method
- * @property M_conflict conflict
+ * @property M_conflict conflict  
  */
 class Hint extends Manager_base {
 

@@ -26,3 +26,4 @@ public/upload
 application/config/database.php
 
 public/assets/plugins-bower
+db

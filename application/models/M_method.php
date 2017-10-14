@@ -104,6 +104,49 @@ class M_method extends Abs_child_model {
             ],
             'table'    => TRUE,
         ],
+        'responsible_agent_name' => [
+            'field'    => 'responsible_agent_name',
+            'db_field' => 'responsible_agent_name',
+            'label'    => 'Responsible Agent',
+            'rules'    => '',
+            'form'     => [
+                'type'            => 'select',
+                'target_model'    => 'M_agent',
+                'target_function' => 'custom_dropdown',
+                'target_arg'      => ['id','name'],
+            ],
+            'table'    => TRUE,
+        ],
+        'action_status' => [
+            'field'    => 'action_status',
+            'db_field' => 'action_status',
+            'label'    => 'Action Status',
+            'rules'    => '',
+            'form'     => Array(
+                'type'            => 'select',
+                'target_model'    => 'this',
+                'target_function' => 'get_action_status_role',
+                'class'           => '',
+            ),
+            'table'    => Array(
+                'callback_render_data' => "get_action_status",
+            )
+        ],
+        'risk_status' => [
+            'field'    => 'risk_status',
+            'db_field' => 'risk_status',
+            'label'    => 'Risk Status',
+            'rules'    => '',
+            'form'     => Array(
+                'type'            => 'select',
+                'target_model'    => 'this',
+                'target_function' => 'get_risk_status_role',
+                'class'           => '',
+            ),
+            'table'    => Array(
+                'callback_render_data' => "get_risk_status",
+            )
+        ],
         'description' => [
             'field'    => 'description',
             'db_field' => 'description',
@@ -123,9 +166,10 @@ class M_method extends Abs_child_model {
 
     public function default_before_get() {
         $this->db->select($this->_table_alias . '.*, r.id as risk_id, r.code as risk_code,r.name as risk_name,r.financial_impact as financial_impact,r.risk_level as risk_level,
-                          p.id as project_id, p.name as project_name');
+                          p.id as project_id, p.name as project_name, a.name as responsible_agent_name');
         $this->db->join('risks as r', 'r.deleted=0 AND r.id = m.risk_id');
         $this->db->join('projects as p', 'p.deleted=0 AND p.id=r.project_id');
+        $this->db->join('agents as a', 'a.deleted=0 AND a.id = m.responsible_agent_id');
     }
 
     function custom_dropdown($value_field, $display_field = NULL) {
@@ -158,5 +202,39 @@ class M_method extends Abs_child_model {
         $options = $this->trigger('after_dropdown', $options);
 
         return $options;
+    }
+    public function get_risk_status_role() {
+        return [
+            'Zero' => 'Zero',
+            'Giam' => 'Giam',
+            'Tang' => 'Tang',
+            'Hoan_thanh' => 'Hoan_thanh',
+        ];
+    }
+    public function get_action_status_role() {
+        return [
+            'Chua_bat_dau' => 'Chua_bat_dau',
+            'Dang_tien_hanh' => 'Dang_tien_hanh',
+            'Da_xong' => 'Da_xong',
+            'Huy_bo' => 'Huy_bo',
+        ];
+    }
+
+
+    public function get_risk_status($id) {
+        $status = $this->get_risk_status_role();
+        if (isset($status[$id])) {
+            return $status[$id];
+        } else {
+            return $id;
+        }
+    }
+    public function get_action_status($id) {
+        $status = $this->get_action_status_role();
+        if (isset($status[$id])) {
+            return $status[$id];
+        } else {
+            return $id;
+        }
     }
 }
