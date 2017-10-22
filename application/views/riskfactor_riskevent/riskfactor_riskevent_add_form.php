@@ -23,7 +23,7 @@
             <div class="form-group">
                 <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Code</label>
                 <div class="col-sm-8 col-xs-12">
-                    <textarea name="code" placeholder="Goal code" type="text"  class="input_field" rows="1" style="height: 34px; overflow-y: hidden;resize: none;"></textarea>
+                    <textarea name="code" placeholder="Code" type="text"  class="input_field" rows="1" style="height: 34px; overflow-y: hidden;resize: none;"></textarea>
                 </div>
             </div>
             <div class="modal-body bgwhite">
@@ -32,13 +32,13 @@
                     if($list_risk_factor) {
                         ?>
                         <div class="form-group">
-                            <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Risk factor code</label>
+                            <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Risk factor</label>
                             <div class="col-sm-8 col-xs-12">
                                 <select name="risk_factor_id" class="e_select_risk_factor"
                                         data-url="<?php echo site_url('conflict/get_method_child') ?>">
                                     <option value="" selected disabled hidden>Choose Goal category</option>
                                     <?php foreach ($list_risk_factor as $item) { ?>
-                                        <option value="<?php echo $item->id; ?>"><?php echo $item->code; ?></option>
+                                        <option value="<?php echo $item->id; ?>"><?php echo $item->code.'-'.$item->name; ?></option>
                                     <?php } ?>
                                 </select>
                             </div>
@@ -50,13 +50,12 @@
                     if($list_risk) {
                         ?>
                         <div class="form-group">
-                            <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Risk
-                                code</label>
+                            <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Risk</label>
                             <div class="col-sm-8 col-xs-12">
-                                <select name="risk_id" class="e_select_risk" ?>">
+                                <select name="risk_id" class="" ?>">
                                     <option value="" selected disabled hidden>Choose risk</option>
                                     <?php foreach ($list_risk as $item) { ?>
-                                        <option value="<?php echo $item->id; ?>"><?php echo $item->code; ?></option>
+                                        <option value="<?php echo $item->id; ?>"><?php echo $item->code.'-'.$item->name; ?></option>
                                     <?php } ?>
                                 </select>
                             </div>

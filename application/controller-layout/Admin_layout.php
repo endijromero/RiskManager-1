@@ -83,16 +83,16 @@ abstract class Admin_layout extends Base_layout {
             "icon" => "fa fa-pied-piper",
             "url"  => site_url('agent_manager'),
         );
-        $menu[] = Array(
+      /*   $menu[] = Array(
             "text" => "Goal Category ",
             "icon" => "fa fa-pied-piper",
             "url"  => site_url('goal_type'),
-        );
-        $menu[] = Array(
+        ); */
+        /* $menu[] = Array(
             "text" => "Risk Category ",
             "icon" => "fa fa-pied-piper",
             "url"  => site_url('risk_type'),
-        );
+        ); */
         $menu[] = Array(
             "text" => "Finished projects",
             "icon" => "fa fa-list",

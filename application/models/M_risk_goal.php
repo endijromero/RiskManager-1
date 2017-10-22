@@ -23,38 +23,29 @@ class M_risk_goal extends Abs_child_model  {
         'code'      => [
             'field'    => 'code',
             'label'    => 'Code',
-            'db_field' => 'code',
-            'rules'    => '',
+            'rules'    => 'required',
             'filter' => [
                 'type' => 'text',
             ],
             'form'   => [
                 'type' => 'text',
             ],
-            'table'    => TRUE,
-        ],
-        'description'      => [
-            'field'    => 'description',
-            'label'    => 'Description',
-            'db_field' => 'description',
-            'rules'    => '',
-            'filter' => [
-                'type' => 'text',
+            'table'  => [
+                'callback_render_data' => "add_link",
             ],
-            'form'   => [
-                'type' => 'text',
-            ],
-            'table'    => TRUE,
         ],
+
         'risk_code'      => [
             'field'    => 'risk_code',
             'label'    => 'Risk Code',
-            'db_field' => 'risk_code',
+            'db_field' => 'r.code',
             'rules'    => '',
             'filter' => [
                 'type' => 'text',
             ],
-            'table'    => TRUE,
+            'table'  => [
+                'callback_render_data' => "add_link",
+            ],
         ],
         'risk_id'  => [
             'field'    => 'risk_id',
@@ -69,9 +60,22 @@ class M_risk_goal extends Abs_child_model  {
         'goal_code'      => [
             'field'    => 'goal_code',
             'label'    => 'Goal Code',
-            'db_field' => 'goal_code',
+            'db_field' => 'g.code',
             'rules'    => '',
             'filter' => [
+                'type' => 'text',
+            ],'table'  => [
+                'callback_render_data' => "add_link",
+            ]
+        ],
+        'description'      => [
+            'field'    => 'description',
+            'label'    => 'Description',
+            'rules'    => '',
+            'filter' => [
+                'type' => 'text',
+            ],
+            'form'   => [
                 'type' => 'text',
             ],
             'table'    => TRUE,
@@ -84,11 +88,11 @@ class M_risk_goal extends Abs_child_model  {
     }
 
     public function default_before_get(){
-        $this->db->select($this->_table_alias.'.*, p.code as project_code, g.code as goal_code, r.code as risk_code, g.id as goal_id, r.id as risk_id');
+        $this->db->select($this->_table_alias.'.*, p.code as project_code, g.code as goal_code, r.code as risk_code');
         $this->db->join('projects as p','p.deleted=0 AND p.id=m.project_id');
         $this->db->join('goals as g','g.deleted=0 AND g.id=m.goal_id');
         $this->db->join('risks as r','r.deleted=0 AND r.id=m.risk_id');
-//        $this->db->group_by('m.id');
+        $this->db->group_by('m.id');
     }
 
 }

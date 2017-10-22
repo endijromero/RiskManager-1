@@ -52,7 +52,8 @@ class Goal extends Abs_child_manager {
             $data = $this->input->post();
             $data[$this->_parent_field] = $parent_value;
         }
-        if($data['goal_type_id']==null ||$data['code']==null ||$data['name']==null || $data['description'] ==null||$data['goal_level'] ==null )
+        $data['goal_type_id'] = '2';
+        if($data['code']==null ||$data['name']==null || $data['description'] ==null || $data['goal_level'] ==null )
         {
             echo json_encode([
                 'state' => 0,
@@ -61,12 +62,9 @@ class Goal extends Abs_child_manager {
             ]);;
             return 0;
         }
-        return $this->add_save($data, $data_return, $skip_validate);
+        return $this->add_save($data, $data_return, TRUE);
     }
 
-    public function add_link($origin_column_value, $column_name, &$record, $column_data, $caller) {
-        return '<a href="' . site_url('goal/detail/' . $record->id) . '">' . $origin_column_value . '</a>';
-    }
 
     function detail($id) {
         $data['detail_goal'] = $this->model->get($id);

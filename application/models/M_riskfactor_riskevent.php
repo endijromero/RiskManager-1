@@ -17,7 +17,6 @@ class M_riskfactor_riskevent extends Abs_child_model  {
         'code'      => [
             'field'    => 'code',
             'label'    => 'Code',
-            'db_field' => 'code',
             'rules'    => '',
             'filter' => [
                 'type' => 'text',
@@ -25,27 +24,22 @@ class M_riskfactor_riskevent extends Abs_child_model  {
             'form'   => [
                 'type' => 'text',
             ],
-            'table'    => TRUE,
-        ],
-        'description'      => [
-            'field'    => 'description',
-            'label'    => 'Description',
-            'db_field' => 'description',
-            'rules'    => '',
-            'form'   => [
-                'type' => 'text',
+            'table'  => [
+                'callback_render_data' => "add_link",
             ],
-            'table'    => TRUE,
         ],
+
         'risk_code'      => [
             'field'    => 'risk_code',
             'label'    => 'Risk Code',
-            'db_field' => 'risk_code',
+            'db_field' => 'r.code',
             'rules'    => '',
             'filter' => [
                 'type' => 'text',
             ],
-            'table'    => TRUE,
+            'table'  => [
+                'callback_render_data' => "add_link",
+            ],
         ],
         'risk_id'  => [
             'field'    => 'risk_id',
@@ -60,9 +54,21 @@ class M_riskfactor_riskevent extends Abs_child_model  {
         'risk_factor_code'      => [
             'field'    => 'risk_factor_code',
             'label'    => 'Risk Factor Code',
-            'db_field' => 'risk_factor_code',
+            'db_field' => 'rf.code',
             'rules'    => '',
             'filter' => [
+                'type' => 'text',
+            ],
+            'table'  => [
+                'callback_render_data' => "add_link",
+            ],
+        ],
+        'description'      => [
+            'field'    => 'description',
+            'label'    => 'Description',
+            'db_field' => 'description',
+            'rules'    => '',
+            'form'   => [
                 'type' => 'text',
             ],
             'table'    => TRUE,
@@ -81,11 +87,11 @@ class M_riskfactor_riskevent extends Abs_child_model  {
         return TRUE;
     }*/
     public function default_before_get(){
-        $this->db->select($this->_table_alias.'.*, p.code as project_code, rf.code as risk_factor_code, r.code as risk_code, rf.id as risk_factor_id, r.id as risk_id');
+        $this->db->select($this->_table_alias.'.*, p.code as project_code, rf.code as risk_factor_code, r.code as risk_code');
         $this->db->join('projects as p','p.deleted=0 AND p.id=m.project_id');
         $this->db->join('risk_factors as rf','rf.deleted=0 AND rf.id=m.risk_factor_id');
         $this->db->join('risks as r','r.deleted=0 AND r.id=m.risk_id');
-//        $this->db->group_by('m.risk_id');
+        $this->db->group_by('m.risk_id');
     }
 
 }

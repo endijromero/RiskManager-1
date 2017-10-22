@@ -521,7 +521,7 @@ class Crud_model extends CI_Model {
     public function count_all_results() {
         $this->trigger('before_get');
         if ($this->soft_delete && $this->_temporary_with_deleted !== TRUE) {
-            $this->_database->where($this->_table_alias . "." . $this->soft_delete_key, (bool)$this->_temporary_only_deleted);
+        $this->_database->where($this->_table_alias . "." . $this->soft_delete_key, (bool)$this->_temporary_only_deleted);
         }
 
         return $this->_database->count_all_results($this->_table . " AS " . $this->_table_alias);

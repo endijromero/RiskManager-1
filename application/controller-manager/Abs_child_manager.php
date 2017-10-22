@@ -52,4 +52,8 @@ abstract class Abs_child_manager extends Manager_base {
         $this->model->remove_parent();
         return $result;
     }
+    public function add_link($origin_column_value, $column_name, &$record, $column_data, $caller) {
+        return '<a href="#">' . $origin_column_value . '</a>';
+    }
+
 }

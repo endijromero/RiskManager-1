@@ -12,8 +12,7 @@ class M_risk_factor extends Abs_child_model  {
             'field'    => 'project_code',
             'label'    => 'Project code',
             'db_field' => 'project_code',
-            'rules'    => '',
-            'table'    => TRUE,
+            'rules'    => ''
         ],
         'code' => [
             'field'  => 'code',
@@ -23,7 +22,9 @@ class M_risk_factor extends Abs_child_model  {
             'filter' => [
                 'type' => 'text',
             ],
-            'table'  => TRUE,
+            'table'  => [
+                'callback_render_data' => "add_link",
+            ],
         ],
         'name' => [
             'field'    => 'name',
@@ -33,7 +34,9 @@ class M_risk_factor extends Abs_child_model  {
             'filter'   => [
                 'type' => 'text',
             ],
-            'table'    => TRUE,
+            'table'  => [
+                'callback_render_data' => "add_link",
+            ],
         ],
         'description' => [
             'field'    => 'description',

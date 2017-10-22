@@ -35,28 +35,26 @@ class M_goal extends Abs_child_model {
             'field'    => 'project_code',
             'label'    => 'Project code',
             'db_field' => 'project_code',
-            'rules'    => '',
-            'table'    => TRUE,
+            'rules'    => ''
         ],
         'goal_type_id'  => [
             'field'    => 'goal_type_id',
             'db_field' => 'goal_type_id',
             'label'    => 'Goal type id',
-            'rules'    => '',
-            'form'     => [
-                'type'            => 'select',
-                'target_model'    => 'M_goal_type',
-                'target_function' => 'custom_dropdown',
-                'target_arg'      => ['id','code'],
-            ]
+//            'rules'    => '',
+//            'form'     => [
+//                'type'            => 'select',
+//                'target_model'    => 'M_goal_type',
+//                'target_function' => 'custom_dropdown',
+//                'target_arg'      => ['id','code'],
+//            ]
 
         ],
         'goal_type_code'    => [
             'field'    => 'goal_type_code',
             'db_field' => 'goal_type_code',
             'label'    => 'Goal category code',
-            'rules'  => '',
-            'table'    => TRUE,
+            'rules'  => ''
 
         ],
         'name'            => [
@@ -87,12 +85,12 @@ class M_goal extends Abs_child_model {
             'rules'  => 'required',
             'label'    => 'Goal level',
             'rules'    => '',
-            'form'     => Array(
-                'type'            => 'select',
-                'target_model'    => 'this',
-                'target_function' => 'get_role',
-                'class'           => '',
-            ),
+//            'form'     => Array(
+//                'type'            => 'select',
+//                'target_model'    => 'this',
+//                'target_function' => 'get_role',
+//                'class'           => '',
+//            ),
             'table'    => Array(
                 'callback_render_data' => "get_goal_level",
             ),
@@ -103,19 +101,18 @@ class M_goal extends Abs_child_model {
             'db_field' => 'parent_goal_id',
             'label'    => 'Parent goal code',
             'rules'    => '',
-            'form'     => [
-                'type'            => 'select',
-                'target_model'    => 'M_goal',
-                'target_function' => 'custom_dropdown',
-                'target_arg'      => ['id','code'],
-            ]
+//            'form'     => [
+//                'type'            => 'select',
+//                'target_model'    => 'M_goal',
+//                'target_function' => 'custom_dropdown',
+//                'target_arg'      => ['id','code'],
+//            ]
         ],
         'parent_goal_code'    => [
             'field'    => 'parent_goal_code',
             'db_field' => 'parent_goal_code',
             'label'    => 'Parent goal code',
-            'rules'  => '',
-            'table'    => TRUE,
+            'rules'  => ''
 
         ],
     ];

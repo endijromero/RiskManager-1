@@ -20,14 +20,14 @@
                     <!--                            <textarea type="text" name="project_id" class="input_field" rows="1" display="none" style="height: 34px; overflow-y: hidden;resize: none;"></textarea>-->
                     <!--                        </div>-->
                     <!--                    </div>-->
-                    <div class="form-group">
+                    <div class="form-group hide">
                         <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Goal category code</label>
                         <div class="col-sm-8 col-xs-12">
                             <select  name="goal_type_id" class="e_select_goal_type"
                                      data-url="<?php echo site_url('conflict/get_method_child') ?>">
                                 <option value="" selected disabled hidden>Choose Goal category</option>
                                 <?php foreach ($list_goal_type as $item) { ?>
-                                    <option value="<?php echo $item->id; ?>"><?php echo $item->name; ?></option>
+                                    <option value="<?php echo $item->id; ?>"><?php echo $item->name.'-'.$item->name; ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -35,7 +35,7 @@
                     <?php
                         if($list_goal) {
                             ?>
-                            <div class="form-group">
+                            <div class="form-group hide">
                                 <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Parent goal
                                     code</label>
                                 <div class="col-sm-8 col-xs-12">
@@ -43,7 +43,7 @@
                                         <option value="" selected disabled hidden>Choose parent goal</option>
                                         <option value="">None</option>
                                         <?php foreach ($list_goal as $item) { ?>
-                                            <option value="<?php echo $item->id; ?>"><?php echo $item->name; ?></option>
+                                            <option value="<?php echo $item->id; ?>"><?php echo $item->name.'-'.$item->name; ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>

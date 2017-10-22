@@ -20,16 +20,7 @@ class M_risk extends Abs_child_model {
             'field'    => 'project_code',
             'label'    => 'Project code',
             'db_field' => 'project_code',
-            'rules'    => '',
-            'table'    => TRUE,
-        ],
-        'risk_type_code'    => [
-            'field'    => 'risk_type_code',
-            'db_field' => 'risk_type_code',
-            'label'    => 'Risk category code',
-            'rules'  => '',
-            'table'    => TRUE,
-
+            'rules'    => ''
         ],
         'code'            => [
             'field'  => 'code',
@@ -58,6 +49,14 @@ class M_risk extends Abs_child_model {
             'table'  => [
                 'callback_render_data' => "add_link",
             ],
+        ],
+        'risk_type_code'    => [
+            'field'    => 'risk_type_code',
+            'db_field' => 'risk_type_code',
+            'label'    => 'Risk category code',
+            'rules'  => '',
+            'table'    => TRUE,
+
         ],
         'method_quantity' => [
             'field' => 'method_quantity',

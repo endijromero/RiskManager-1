@@ -27,7 +27,7 @@
                                  data-url="<?php echo site_url('conflict/get_method_child') ?>">
                             <option value="" selected disabled hidden>Choose Risk category</option>
                             <?php foreach ($list_risk_type as $item) { ?>
-                                <option value="<?php echo $item->id; ?>"><?php echo $item->name; ?></option>
+                                <option value="<?php echo $item->id; ?>"><?php echo $item->name.'-'.$item->name; ?></option>
                             <?php } ?>
                         </select>
                             </div>
