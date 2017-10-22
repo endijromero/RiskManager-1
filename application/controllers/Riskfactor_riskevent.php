@@ -32,8 +32,8 @@ class Riskfactor_riskevent extends Abs_child_manager {
     }
     public function create($parent_value, $data = Array(), $data_return = Array())
     {
-        $data['list_risk_factor'] = $this->m_risk_factor->get_all();
-        $data['list_risk'] = $this->m_risk->get_all();
+        $data['list_risk_factor'] = $this->m_risk_factor->get_all_by_parent($parent_value);
+        $data['list_risk'] = $this->m_risk->get_all_by_parent($parent_value);
         $data["view_file"] = $this->name['view'] . '/riskfactor_riskevent_add_form';
         return parent::create($parent_value, $data, $data_return);
     }

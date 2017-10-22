@@ -32,8 +32,12 @@ class Abs_child_model extends Crud_manager {
         $this->_parent_value = 0;
         unset($this->schema[$this->_parent_field]['filter']);
     }
-
     public function get_parent_value() {
         return $this->_parent_value;
+    }
+    public function get_all_by_parent($parent_value){
+        $this->_database->where_in($this->_table_alias.'.'.$this->_parent_field, $parent_value);
+
+        return $this->get_all();
     }
 }

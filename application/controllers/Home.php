@@ -54,6 +54,7 @@ class Home extends Manager_base {
         if (!isset($data["save_link"])) {
             $data["save_link"] = site_url($this->name["class"] . "/create_save/");
         }
+
         return $this->add($data, $data_return);
     }
 
@@ -61,6 +62,7 @@ class Home extends Manager_base {
         if (sizeof($data) == 0) {
             $data = $this->input->post();
         }
+        $data['user_id'] = $this->session->userdata('user_id');
         if ($data['code'] == NULL || $data['name'] == NULL || $data['description'] == NULL) {
             echo json_encode([
                 'state' => 0,
