@@ -32,9 +32,6 @@ class M_riskfactor_riskevent extends Abs_child_model  {
             'label'    => 'Description',
             'db_field' => 'description',
             'rules'    => '',
-            'filter' => [
-                'type' => 'text',
-            ],
             'form'   => [
                 'type' => 'text',
             ],

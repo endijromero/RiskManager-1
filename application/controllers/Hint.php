@@ -12,14 +12,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * @property M_risk     risk
  * @property M_method   method
- * @property M_conflict conflict  
+ * @property M_conflict conflict
  */
 class Hint extends Manager_base {
 
     public function __construct() {
         parent::__construct();
-        define('GA_POPSIZE', 100);        // ga population size
-        define('GA_MAXITER', 100);       // maximum iterations
+        define('GA_POPSIZE', 10);        // ga population size
+        define('GA_MAXITER', 10);       // maximum iterations
         define('GA_ELITRATE', 0.10);     // elitism rate
         define('GA_MUTATIONRATE', 0.25); // mutation rate
         define('GA_MUTATION', getrandmax() * GA_MUTATIONRATE);
@@ -67,7 +67,7 @@ class Hint extends Manager_base {
         $population = $this->_init_population($pop_beta, $pop_gama, $group_conflict, $methods_in_risks, $conflict_records);
 //        echo'<pre>';
 //        var_dump($population);
-//        exit();
+//        exit(); TODO:
 
         for ($i = 0; $i <= GA_MAXITER; $i++) {
             $buffer = $pop_gama;
@@ -119,7 +119,7 @@ class Hint extends Manager_base {
         return $result;
     }
 
-    // from risk of conflict array => define group risk of conflict array
+    // from risk of conflict array => define group risk of conflict array TODO: vong lap vo han
     private function _group_conflict($conflict_risks) {
         $nosame = TRUE;
         $eoa = FALSE;

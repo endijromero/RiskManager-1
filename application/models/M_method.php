@@ -104,9 +104,9 @@ class M_method extends Abs_child_model {
             ],
             'table'    => TRUE,
         ],
-        'responsible_agent_name' => [
-            'field'    => 'responsible_agent_name',
-            'db_field' => 'responsible_agent_name',
+        'responsible_agent_id' => [
+            'field'    => 'responsible_agent_id',
+            'db_field' => 'responsible_agent_id',
             'label'    => 'Responsible Agent',
             'rules'    => '',
             'form'     => [
@@ -205,19 +205,30 @@ class M_method extends Abs_child_model {
     }
     public function get_risk_status_role() {
         return [
-            'Zero' => 'Zero',
-            'Giam' => 'Giam',
-            'Tang' => 'Tang',
-            'Hoan_thanh' => 'Hoan_thanh',
+            "Identified" => "Identified", 
+            "Assessed" => "Assessed",
+            "Planned"=>"Planned",
+            "In-Process"=>"In-Process", 
+            "Closed"=>"Closed",
+            "Not occurred"=>"Not occurred",
+            "Rejected"=>"Rejected"
         ];
     }
     public function get_action_status_role() {
         return [
-            'Chua_bat_dau' => 'Chua_bat_dau',
-            'Dang_tien_hanh' => 'Dang_tien_hanh',
-            'Da_xong' => 'Da_xong',
-            'Huy_bo' => 'Huy_bo',
-        ];
+            "Created"=>"Created" ,
+            "Requested"=>"Requested" ,
+            "Approved"=>"Approved" ,
+            "Rejected"=>"Rejected" ,
+            "Scheduled"=>"Scheduled" ,
+            "Cancelled"=>"Cancelled" ,
+            "In Progress"=>"In Progress" ,
+            "In Progress - On Hold"=>"In Progress - On Hold" ,
+            "Stopped"=>"Stopped" ,
+            "Completed"=>"Completed" ,
+            "Completed - Verifies"=>"Completed - Verifies" ,
+            "Closed"=> "Closed"
+            ];
     }
 
 

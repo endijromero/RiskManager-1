@@ -50,11 +50,11 @@
                     if($list_risk) {
                         ?>
                         <div class="form-group">
-                            <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Parent goal
+                            <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Risk
                                 code</label>
                             <div class="col-sm-8 col-xs-12">
                                 <select name="risk_id" class="e_select_risk" ?>">
-                                    <option value="" selected disabled hidden>Choose parent goal</option>
+                                    <option value="" selected disabled hidden>Choose risk</option>
                                     <?php foreach ($list_risk as $item) { ?>
                                         <option value="<?php echo $item->id; ?>"><?php echo $item->code; ?></option>
                                     <?php } ?>

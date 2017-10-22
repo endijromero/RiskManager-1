@@ -1,10 +1,10 @@
 <div class="footer">
     <div class="footer-inner">
         <div class="footer-content">
-            <span class="bigger-120">
+            <!-- <span class="bigger-120">
                 <span class="blue bolder">Nguyenthuy20694</span>
                 Application &copy; 2012-2017
-            </span>
+            </span> -->
 
             &nbsp; &nbsp;
             <span class="action-buttons">
