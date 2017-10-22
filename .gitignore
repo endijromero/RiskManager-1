@@ -23,7 +23,7 @@ public/upload
 !public/upload/index.html
 !public/upload/.htaccess
 !public/upload/demo
-application/config/database.php
+#application/config/database.php
 
 public/assets/plugins-bower
 db
