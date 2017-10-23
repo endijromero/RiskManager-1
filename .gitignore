@@ -9,6 +9,7 @@ nbproject
 .settings
 cache.properties
 composer.phar
+composer.lock
 build
 vendor/
 application/logs/*

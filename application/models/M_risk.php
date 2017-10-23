@@ -55,7 +55,6 @@ class M_risk extends Abs_child_model {
             'db_field' => 'risk_type_code',
             'label'    => 'Risk category code',
             'rules'  => '',
-            'table'    => TRUE,
 
         ],
         'method_quantity' => [

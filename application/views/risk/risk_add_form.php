@@ -21,21 +21,21 @@
 <!--                        </div>-->
 <!--                    </div>-->
                     <div class="form-group">
+                        <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Risk code</label>
+                        <div class="col-sm-8 col-xs-12">
+                        <textarea name="code" placeholder="Risk code" type="text"  class="input_field" rows="1" style="height: 34px; overflow-y: hidden;resize: none;"></textarea>
+                    </div>
+                    <div class="form-group hide">
                         <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Risk category code</label>
                         <div class="col-sm-8 col-xs-12">
                         <select  name="risk_type_id" class="e_select_risk_type"
                                  data-url="<?php echo site_url('conflict/get_method_child') ?>">
                             <option value="" selected disabled hidden>Choose Risk category</option>
-                            <?php foreach ($list_risk_type as $item) { ?>
-                                <option value="<?php echo $item->id; ?>"><?php echo $item->code.'-'.$item->name; ?></option>
+                            <?php foreach ($list_risk_type as $key=>$item) { ?>
+                                <option value="<?php echo $item->id;?>" <?php if($key==0) echo "selected" ?>><?php echo $item->code.'-'.$item->name; ?></option>
                             <?php } ?>
                         </select>
                             </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 col-xs-12 control-label  no-padding-right">Risk code</label>
-                        <div class="col-sm-8 col-xs-12">
-                        <textarea name="code" placeholder="Risk code" type="text"  class="input_field" rows="1" style="height: 34px; overflow-y: hidden;resize: none;"></textarea>
                     </div>
                         </div>
                     <div class="form-group">
